@@ -130,13 +130,10 @@
     <Resource Include="Assets\Images\UI WOTB Assistant.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Views\UI WOTB Assistant.png" />
+    <Resource Include="Assets\Images\09072020.mali.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Views\09072020.mali.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Views\Triangle0.mali.png" />
+    <Resource Include="Assets\Images\Triangle0.mali.png" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="iconWOTB.ico" />

@@ -1,17 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 using System.Windows.Threading;
 using WpfAppDPO.Models;
 
@@ -34,9 +22,6 @@ namespace WpfAppDPO.Views
             ME.GetProcessByName();
         }
 
-        int curretnDamage = 0;
-        int currentBlocked = 0;
-
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
             ME.RegisterHandler(new MemoryEditor.MemoryEditorStateHandler(Damage));
@@ -52,14 +37,28 @@ namespace WpfAppDPO.Views
 
         private void Damage(int damage, int blocked)
         {
-            curretnDamage = damage;
-            DamageLabel.Content = (curretnDamage == 0) ? " 0" : $"{curretnDamage:# ### ###}";
+            int currentDamage = 0;
+
+            if (damage != 0)
+            {
+                currentDamage += damage;
+            }
+            
+            Label1.Content = "currentDamage: " + currentDamage;
+            DamageLabel.Content = (damage == 0) ? " 0" : $"{damage:# ### ###}";
         }
 
         private void Blocked(int damage, int blocked)
         {
-            currentBlocked = blocked;
-            BlockedLabel.Content = (currentBlocked == 0) ? " 0" : $"{currentBlocked:# ### ###}";
+            int currentBlocked = 0
+                ;
+            if (blocked != 0)
+            {
+                currentBlocked += blocked;
+            }
+
+            Label2.Content = "currentBlocked: " + currentBlocked;
+            BlockedLabel.Content = (blocked == 0) ? " 0" : $"{blocked:# ### ###}";
         }
     }
 }
