@@ -110,16 +110,16 @@ namespace WpfAppDPO.Models
 
         public void DamageDone(object sender, EventArgs e)
         {
-            Int32 Addr = BA + 0x02AB7090; // 1 базовый адрес 2 смещение
-            Int32[] offsets = { 0x90, 0x0, 0x10, 0xBC, 0x64, 0x114, 0x24 };
+            Int32 Addr = BA + 0x02B2E5A0; // 1 базовый адрес 2 смещение
+            Int32[] offsets = { 0x94, 0x0, 0x10, 0xBC, 0x64, 0x114, 0x24 };
             Damage = BitConverter.ToInt32(ReadMemory((IntPtr)ReadPointer(Addr, offsets), (uint)4), 0);
         }
 
         public void DamageBlocked(object sender, EventArgs e)
         {
-            Int32 Addr = BA + 0x02AB7090; // 1 базовый адрес 2 смещение
+            Int32 Addr = BA + 0x02B2E5A0; // 1 базовый адрес 2 смещение
             //Int32 baseAddr = 0x03797090;
-            Int32[] offsets = { 0x90, 0x0, 0x10, 0xBC, 0x64, 0x114, 0x28 };
+            Int32[] offsets = { 0x94, 0x0, 0x10, 0xBC, 0x64, 0x114, 0x28 };
             Blocked = BitConverter.ToInt32(ReadMemory((IntPtr)ReadPointer(Addr, offsets), (uint)4), 0);
         }
 

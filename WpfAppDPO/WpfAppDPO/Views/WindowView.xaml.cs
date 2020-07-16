@@ -39,25 +39,16 @@ namespace WpfAppDPO.Views
         {
             int currentDamage = 0;
 
-            if (damage != 0)
+            if (currentDamage < damage)
             {
-                currentDamage += damage;
+                currentDamage = damage;
             }
-            
-            Label1.Content = "currentDamage: " + currentDamage;
-            DamageLabel.Content = (damage == 0) ? " 0" : $"{damage:# ### ###}";
+
+            DamageLabel.Content = (currentDamage == 0) ? " 0" : $"{currentDamage:# ### ###}";
         }
 
         private void Blocked(int damage, int blocked)
         {
-            int currentBlocked = 0
-                ;
-            if (blocked != 0)
-            {
-                currentBlocked += blocked;
-            }
-
-            Label2.Content = "currentBlocked: " + currentBlocked;
             BlockedLabel.Content = (blocked == 0) ? " 0" : $"{blocked:# ### ###}";
         }
     }
