@@ -12,7 +12,7 @@ namespace WpfAppDPO
         bool forbidden;
 
         Int32 Time = (Int32)(DateTime.UtcNow.Subtract(new DateTime(1970, 1, 1, 0, 0, 0, 0))).TotalSeconds;
-        Int32 currentTime = 1595515722; // WeekTime 604800 OneWeek
+        Int32 currentTime = 1595203200; // WeekTime 604800 OneWeek
         string userName;
 
         public MainWindowView()
@@ -21,7 +21,7 @@ namespace WpfAppDPO
             MinimizeButton.Click += (s, e) => WindowState = WindowState.Minimized;
             MaximizeButton.Click += (s, e) => WindowState = WindowState == WindowState.Maximized ? WindowState.Normal : WindowState.Maximized;
             CloseButton.Click += (s, e) => Close();
-            userName = "Фолловер: nikdrozd_off";
+            userName = "ScritFIll";
             LabelCurrentTime.Content = $"Пользователь: {userName}, действительно до " + new DateTime(1970, 1, 1, 0, 0, 0, 0).AddSeconds(currentTime) + " (+7 GTM)";
         }
 

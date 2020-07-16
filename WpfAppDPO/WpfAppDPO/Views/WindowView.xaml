@@ -30,8 +30,6 @@
 
         <Label x:Name="DamageLabel" Grid.Column="1" Grid.Row="1" Content="NULL"  FontSize="17" Foreground="White" Margin="27,16,0,43" FontFamily="Arial" RenderTransformOrigin="0.586,-0.361" FontWeight="Bold" Grid.ColumnSpan="2" />
         <Label x:Name="BlockedLabel" Grid.Column="1" Grid.Row="1" Content="NULL"  FontSize="17" Foreground="White" Margin="27,45,0,15" FontFamily="Arial" FontWeight="Bold" Grid.ColumnSpan="2" />
-        <Label x:Name="Label1" Grid.Row="1" Content="NULL"  FontSize="17" Foreground="White" Margin="5,83,32,19" FontFamily="Arial" FontWeight="Bold" Grid.ColumnSpan="3" Grid.RowSpan="2" />
-        <Label x:Name="Label2" Grid.Row="2" Content="NULL"  FontSize="17" Foreground="White" Margin="5,8,32,4" FontFamily="Arial" FontWeight="Bold" Grid.ColumnSpan="3" />
 
         <Button Grid.Row="1" BorderThickness="0" Margin="0,82,142,0" Name="MaximizeButton" RenderTransformOrigin="0.5,0.5" Grid.Column="1">
             <Button.Background>

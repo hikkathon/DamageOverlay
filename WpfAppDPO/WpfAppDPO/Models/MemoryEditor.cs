@@ -26,31 +26,9 @@ namespace WpfAppDPO.Models
 
         public int GetBaseAddress()
         {
-            using (Process myProcess = new Process())
-            {
-                // Get the process start information of notepad.
-                ProcessStartInfo myProcessStartInfo = new ProcessStartInfo(pName);
-                // Assign 'StartInfo' of notepad to 'StartInfo' of 'myProcess' object.
-                myProcess.StartInfo = myProcessStartInfo;
-                // Create a notepad.
-                myProcess.Start();
-                System.Threading.Thread.Sleep(1000);
-                ProcessModule myProcessModule;
-                // Get all the modules associated with 'myProcess'.
-                ProcessModuleCollection myProcessModuleCollection = myProcess.Modules;
-                //Console.WriteLine("Base addresses of the modules associated "
-                //    + "with 'notepad' are:");
-                // Display the 'BaseAddress' of each of the modules.
-                myProcessModule = myProcessModuleCollection[0];
-                // Get the main module associated with 'myProcess'.
-                myProcessModule = myProcess.MainModule;
-                // Display the 'BaseAddress' of the main module.
-                //Console.WriteLine("The process's main module's base address is: "
-                //    + myProcessModule.BaseAddress);
-                myProcess.CloseMainWindow();
-                BA = (int)myProcessModule.BaseAddress;
-                return this.BA;
-            }
+            Process process = Process.GetProcessesByName("wotblitz")[0];
+            BA = (int)process.MainModule.BaseAddress;
+            return this.BA;
         }
 
         public int GetProcessByName()
@@ -118,7 +96,6 @@ namespace WpfAppDPO.Models
         public void DamageBlocked(object sender, EventArgs e)
         {
             Int32 Addr = BA + 0x02B2E5A0; // 1 базовый адрес 2 смещение
-            //Int32 baseAddr = 0x03797090;
             Int32[] offsets = { 0x94, 0x0, 0x10, 0xBC, 0x64, 0x114, 0x28 };
             Blocked = BitConverter.ToInt32(ReadMemory((IntPtr)ReadPointer(Addr, offsets), (uint)4), 0);
         }
