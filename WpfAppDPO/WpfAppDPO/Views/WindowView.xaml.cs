@@ -36,7 +36,6 @@ namespace WpfAppDPO.Views
 
             DispatcherTimer dt = new DispatcherTimer();
             dt.Interval = TimeSpan.FromSeconds(1);
-            dt.Tick += ME.DamageDone;
             dt.Tick += ME.DamageBlocked;
             dt.Start();
         }

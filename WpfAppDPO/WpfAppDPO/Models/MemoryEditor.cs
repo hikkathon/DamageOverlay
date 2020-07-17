@@ -86,20 +86,20 @@ namespace WpfAppDPO.Models
             return addr;
         }
 
-        public void DamageDone(object sender, EventArgs e)
-        {
-            Int32 Addr = BA + 0x02B2E5A0; // 1 базовый адрес 2 смещение
-            Int32[] offsets = { 0x94, 0x0, 0x10, 0xBC, 0x64, 0x114, 0x24 };
-            Damage = BitConverter.ToInt32(ReadMemory((IntPtr)ReadPointer(Addr, offsets), (uint)4), 0);
-        }
-
         public void DamageBlocked(object sender, EventArgs e)
         {
-            Int32 Addr = BA + 0x02B2E5A0; // 1 базовый адрес 2 смещение
-            Int32[] offsets = { 0x94, 0x0, 0x10, 0xBC, 0x64, 0x114, 0x28 };
-            Blocked = BitConverter.ToInt32(ReadMemory((IntPtr)ReadPointer(Addr, offsets), (uint)4), 0);
+            // Damage
+            Int32 dmgAddr = BA + 0x02B2E5A0; // 1 базовый адрес 2 смещение
+            Int32[] dmgOffsets = { 0x94, 0x0, 0x10, 0xBC, 0x64, 0x114, 0x24 };
+            Damage = BitConverter.ToInt32(ReadMemory((IntPtr)ReadPointer(dmgAddr, dmgOffsets), (uint)4), 0);
+            
+            // Blocked
+            Int32 blckAddr = BA + 0x02B2E5A0; // 1 базовый адрес 2 смещение
+            Int32[] blckOffsets = { 0x94, 0x0, 0x10, 0xBC, 0x64, 0x114, 0x28 };
+            Blocked = BitConverter.ToInt32(ReadMemory((IntPtr)ReadPointer(blckAddr, blckOffsets), (uint)4), 0);
         }
 
+        // Нанесенный урон
         public int Damage 
         {
             get
@@ -113,6 +113,7 @@ namespace WpfAppDPO.Models
             }
         }
 
+        // Заблокированный урон
         public int Blocked
         {
             get
@@ -133,6 +134,7 @@ namespace WpfAppDPO.Models
         private string pName;
         public int pID;
 
+        #region Библиотеки
         [Flags]
         private enum SnapshotFlags : uint
         {
@@ -199,5 +201,6 @@ namespace WpfAppDPO.Models
 
         [DllImport("kernel32.dll", SetLastError = true)]
         static extern Int32 ReadProcessMemory(IntPtr hProcess, IntPtr lpBaseAddress, [Out]byte[] buffer, UInt32 size, out IntPtr lpNumberofBytesRead);
+        #endregion
     }
 }
