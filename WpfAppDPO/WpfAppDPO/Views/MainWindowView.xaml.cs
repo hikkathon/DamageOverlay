@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Windows;
+using WpfAppDPO.Models;
 using WpfAppDPO.Views;
 
 namespace WpfAppDPO
@@ -10,6 +11,7 @@ namespace WpfAppDPO
     public partial class MainWindowView : Window
     {
         bool forbidden;
+        MemoryEditor ME = new MemoryEditor("wotblitz.exe");
 
         Int32 Time = (Int32)(DateTime.UtcNow.Subtract(new DateTime(1970, 1, 1, 0, 0, 0, 0))).TotalSeconds;
         Int32 currentTime = 1595203200; // WeekTime 604800 OneWeek
@@ -18,11 +20,11 @@ namespace WpfAppDPO
         public MainWindowView()
         {
             InitializeComponent();
-            MinimizeButton.Click += (s, e) => WindowState = WindowState.Minimized;
-            MaximizeButton.Click += (s, e) => WindowState = WindowState == WindowState.Maximized ? WindowState.Normal : WindowState.Maximized;
-            CloseButton.Click += (s, e) => Close();
-            userName = "ScritFIll";
-            LabelCurrentTime.Content = $"Пользователь: {userName}, действительно до " + new DateTime(1970, 1, 1, 0, 0, 0, 0).AddSeconds(currentTime) + " (+7 GTM)";
+            //MinimizeButton.Click += (s, e) => WindowState = WindowState.Minimized;
+            //MaximizeButton.Click += (s, e) => WindowState = WindowState == WindowState.Maximized ? WindowState.Normal : WindowState.Maximized;
+            //CloseButton.Click += (s, e) => Close();
+            //userName = "ScritFIll";
+            //LabelCurrentTime.Content = $"Пользователь: {userName}, действительно до " + new DateTime(1970, 1, 1, 0, 0, 0, 0).AddSeconds(currentTime) + " (+7 GTM)";
         }
 
         private void btnOpen_Click(object sender, RoutedEventArgs e)
@@ -30,9 +32,17 @@ namespace WpfAppDPO
             forbidden = (Time < currentTime) ? true : false;
             if (forbidden)
             {
-                WindowView taskWindow = new WindowView();
-                taskWindow.Owner = this;
-                taskWindow.Show();
+                try
+                {
+                    ME.GetBaseAddress();
+                    WindowView taskWindow = new WindowView();
+                    taskWindow.Owner = this;
+                    taskWindow.Show();
+                }
+                catch (Exception exc)
+                {
+                    MessageBox.Show("Игру запусти а потом оверлей", $"{exc.Message}", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
             }
             else
             {

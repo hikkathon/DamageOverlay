@@ -17,16 +17,16 @@ namespace WpfAppDPO.Views
             InitializeComponent();
 
             MaximizeButton.Click += (s, e) => WindowState = WindowState == WindowState.Maximized ? WindowState.Normal : WindowState.Maximized;
-            
+
             try
             {
                 ME.GetBaseAddress();
             }
-            catch(Exception exc)
+            catch (Exception exc)
             {
                 MessageBox.Show("Игру запусти а потом оверлей", $"{exc.Message}", MessageBoxButton.OK, MessageBoxImage.Error);
             }
-            
+
             ME.GetProcessByName();
         }
 

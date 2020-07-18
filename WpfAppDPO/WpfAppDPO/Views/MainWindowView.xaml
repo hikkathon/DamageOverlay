@@ -3,117 +3,47 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         xmlns:local="clr-namespace:WpfAppDPO"
         mc:Ignorable="d"
-        Title="MainWindowView - Damage Panel Overlay v0.0.1" MinHeight="200" MinWidth="550" Height="200" Width="550" AllowsTransparency="True" WindowStyle="None" Topmost="False" WindowStartupLocation="CenterScreen">
+        Title="Damage Overlay v1.1.12.1" MaxHeight="250" MaxWidth="350" MinHeight="250" MinWidth="350" Height="250" Width="350" AllowsTransparency="False" WindowStyle="SingleBorderWindow" Topmost="False" WindowStartupLocation="CenterScreen">
 
-    <WindowChrome.WindowChrome>
+    <!--<WindowChrome.WindowChrome>
         <WindowChrome CaptionHeight="35"/>
-    </WindowChrome.WindowChrome>
+    </WindowChrome.WindowChrome>-->
 
-    <Window.Background>
-        <!--<SolidColorBrush Opacity="0.0" Color="White"/>-->
-        <!--<ImageBrush ImageSource="/Assets/Images/BG_WOTB.png"/>-->
+    <!--<Window.Background>
+        <SolidColorBrush Opacity="0.0" Color="White"/>
+        <ImageBrush ImageSource="/Assets/Images/BG_WOTB.png"/>
         <ImageBrush ImageSource="/Assets/Images/BG_WOTB.png" TileMode="Tile" ViewportUnits="Absolute" Viewport="0, 0 32, 32"></ImageBrush>
-    </Window.Background>
-
-    <Border Padding="1" Background="#017ACC">
-
-        <DockPanel LastChildFill="True" Background="#2D2D30">
-
-            <Grid WindowChrome.IsHitTestVisibleInChrome="True" ShowGridLines="False">
-
-                <!-- Столбец -->
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="*"/>
-                    <!-- 0 -->
-                    <ColumnDefinition Width="*"/>
-                    <!-- 1 -->
-                    <ColumnDefinition Width="*"/>
-                    <!-- 2 -->
-
-                    <ColumnDefinition Width="*"/>
-                    <!-- 3 -->
-                    <ColumnDefinition Width="*"/>
-                    <!-- 4 -->
-                    <ColumnDefinition Width="*"/>
-                    <!-- 5 -->
-
-                    <ColumnDefinition Width="*"/>
-                    <!-- 6 -->
-                    <ColumnDefinition Width="*"/>
-                    <!-- 7 -->
-                    <ColumnDefinition Width="*"/>
-                    <!-- 8 -->
-                </Grid.ColumnDefinitions>
-
-                <!-- Строка -->
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="auto"/>
-                    <!-- 0 -->
-                    <RowDefinition Height="*"/>
-                    <!-- 1 -->
-                    <RowDefinition Height="*"/>
-                    <!-- 2 -->
-
-                    <RowDefinition Height="*"/>
-                    <!-- 3 -->
-                    <RowDefinition Height="*"/>
-                    <!-- 4 -->
-                    <RowDefinition Height="*"/>
-                    <!-- 5 -->
-
-                    <RowDefinition Height="*"/>
-                    <!-- 6 -->
-                    <RowDefinition Height="*"/>
-                    <!-- 7 -->
-                    <RowDefinition Height="*"/>
-                    <!-- 8 -->
-                </Grid.RowDefinitions>
-
-                <!-- Кнопки уплавления окном -->
-                <StackPanel HorizontalAlignment="Right" Orientation="Horizontal" Grid.Column="7" Grid.Row="0" Grid.ColumnSpan="2">
-                    <Button Style="{StaticResource MaximizeButton}" Name="MinimizeButton" Height="auto" Width="34" Content="-">
-                        <Button.ToolTip>
-                            <StackPanel>
-                                <TextBlock>Свернуть</TextBlock>
-                            </StackPanel>
-                        </Button.ToolTip>
-                    </Button>
-                    <Button Style="{StaticResource MinimizeButton}" Name="MaximizeButton" Height="auto" Width="34" Content="[ ]">
-                        <Button.ToolTip>
-                            <StackPanel>
-                                <TextBlock>Развернуть</TextBlock>
-                            </StackPanel>
-                        </Button.ToolTip>
-                    </Button>
-                    <Button Style="{StaticResource CloseButton}" Name="CloseButton" Height="auto" Width="34" Content="X">
-                        <Button.ToolTip>
-                            <StackPanel>
-                                <TextBlock>Закрыть</TextBlock>
-                            </StackPanel>
-                        </Button.ToolTip>
-                    </Button>
-                </StackPanel>
-
-                <!-- Заголовок и Системный значок-->
-                <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center" Grid.Column="2" Grid.Row="0" Grid.ColumnSpan="5">
-                    <StackPanel Margin="0 4 0 0" VerticalAlignment="Center" HorizontalAlignment="Left" Orientation="Horizontal">
-                        <Image Width="22"  Source="/Assets/Images/iconWOTB.png"/>
-                        <Label Foreground="#B1C1CE" FontWeight="Bold" Content="Damage Overlay"/>
+    </Window.Background>-->
+    <Grid Background="#2D2D30">
+        <materialDesign:DialogHost BorderBrush="{DynamicResource MaterialDesignDivider}">
+            <materialDesign:DialogHost.DialogContent>
+                <Grid Width="300" Height="150" HorizontalAlignment="Center">
+                    <StackPanel Orientation="Horizontal" Margin="15">
+                        <materialDesign:PackIcon Kind="Information" Foreground="{StaticResource PrimaryHueMidBrush}" Width="50" Height="50"/>
+                        <TextBlock Foreground="Gray" Width="200" Margin="15 5" TextWrapping="Wrap">
+                                Вы используете мод на свой страх и риск.
+                        </TextBlock>
                     </StackPanel>
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="15">
+                        <Button x:Name="btnOpen" Click="btnOpen_Click"  Command="{x:Static materialDesign:DialogHost.CloseDialogCommand}" Style="{DynamicResource MaterialDesignFlatButton}" Margin="4" VerticalAlignment="Center">
+                            Да
+                        </Button>
+                        <Button  Command="{x:Static materialDesign:DialogHost.CloseDialogCommand}" Style="{DynamicResource MaterialDesignFlatButton}" Margin="4" VerticalAlignment="Center">
+                            Нет
+                        </Button>
+                    </StackPanel>
+                </Grid>
+            </materialDesign:DialogHost.DialogContent>
+            <Grid>
+                <StackPanel Width="150" VerticalAlignment="Center" HorizontalAlignment="Center" Background="#2D2D30">
+                    <Button Height="30" Width="120" Command="{x:Static materialDesign:DialogHost.OpenDialogCommand}">
+                        <TextBlock Text="ВКЛЮЧИТЬ" FontSize="15" VerticalAlignment="Center"/>
+                    </Button>
                 </StackPanel>
-
-                <!-- Контент -->
-                <StackPanel Grid.Column="4" Grid.Row="4">
-                    <Button x:Name="btnOpen" Click="btnOpen_Click" Height="21">В БОЙ</Button>
-                </StackPanel>
-                <Label x:Name="LabelCurrentTime" Content="Пользователь: Noilty, 06.07.2020" FontSize="12" Foreground="White" Grid.Column="0" Grid.Row="7" Grid.ColumnSpan="9" Grid.RowSpan="9"></Label>
-
             </Grid>
-
-        </DockPanel>
-
-    </Border>
-
+        </materialDesign:DialogHost>
+    </Grid>
 </Window>
