@@ -7,10 +7,8 @@ namespace WpfAppDPO.Models
 {
     class MemoryEditor
     {
-        public delegate void MemoryEditorStateHandler(int damage, int blocked);
+        public delegate void MemoryEditorStateHandler();
         MemoryEditorStateHandler _del;
-
-        public event PropertyChangedEventHandler PropertyChanged;
 
         public void RegisterHandler(MemoryEditorStateHandler del)
         {
@@ -112,7 +110,7 @@ namespace WpfAppDPO.Models
             set
             {
                 damage = value;
-                _del?.Invoke(Damage, Blocked);
+                _del?.Invoke();
             }
         }
 
@@ -126,7 +124,7 @@ namespace WpfAppDPO.Models
             set
             {
                 blocked = value;
-                _del?.Invoke(Damage, Blocked);;
+                _del?.Invoke();;
             }
         }
 

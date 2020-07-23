@@ -6,7 +6,7 @@
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         xmlns:local="clr-namespace:WpfAppDPO"
         mc:Ignorable="d"
-        Title="Damage Overlay v1.2.14.1" MaxHeight="250" MaxWidth="350" MinHeight="250" MinWidth="350" Height="250" Width="350" AllowsTransparency="False" WindowStyle="SingleBorderWindow" Topmost="False" WindowStartupLocation="CenterScreen">
+        Title="Damage Overlay v1.2.15.1" MaxHeight="250" MaxWidth="350" MinHeight="250" MinWidth="350" Height="250" Width="350" AllowsTransparency="False" WindowStyle="SingleBorderWindow" Topmost="False" WindowStartupLocation="CenterScreen">
 
     <!--<WindowChrome.WindowChrome>
         <WindowChrome CaptionHeight="35"/>

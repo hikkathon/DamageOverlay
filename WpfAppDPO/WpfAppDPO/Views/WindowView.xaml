@@ -37,5 +37,7 @@
 
         <Label x:Name="DamageLabel" Grid.Column="1" Grid.Row="1" Content="unknown"  FontSize="17" Foreground="White" Margin="27,16,0,43" FontFamily="Arial" RenderTransformOrigin="0.586,-0.361" FontWeight="Bold" Grid.ColumnSpan="2" />
         <Label x:Name="BlockedLabel" Grid.Column="1" Grid.Row="1" Content="unknown"  FontSize="17" Foreground="White" Margin="27,45,0,15" FontFamily="Arial" FontWeight="Bold" Grid.ColumnSpan="2" />
+        <Label x:Name="Labe1" Grid.Column="1" Grid.Row="1" Content="unknown"  FontSize="17" Foreground="White" Margin="27,67,0,82" FontFamily="Arial" FontWeight="Bold" Grid.ColumnSpan="2" Grid.RowSpan="2" />
+        <Label x:Name="Labe2" Grid.Column="1" Grid.Row="1" Content="unknown"  FontSize="17" Foreground="White" Margin="27,77,0,72" FontFamily="Arial" FontWeight="Bold" Grid.ColumnSpan="2" Grid.RowSpan="2" />
     </Grid>
 </Window>
