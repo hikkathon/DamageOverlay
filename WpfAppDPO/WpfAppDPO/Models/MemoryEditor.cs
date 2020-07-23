@@ -1,4 +1,5 @@
 ﻿using System;
+using System.ComponentModel;
 using System.Diagnostics;
 using System.Runtime.InteropServices;
 
@@ -8,6 +9,8 @@ namespace WpfAppDPO.Models
     {
         public delegate void MemoryEditorStateHandler(int damage, int blocked);
         MemoryEditorStateHandler _del;
+
+        public event PropertyChangedEventHandler PropertyChanged;
 
         public void RegisterHandler(MemoryEditorStateHandler del)
         {
@@ -123,7 +126,7 @@ namespace WpfAppDPO.Models
             set
             {
                 blocked = value;
-                _del?.Invoke(Damage, Blocked);
+                _del?.Invoke(Damage, Blocked);;
             }
         }
 

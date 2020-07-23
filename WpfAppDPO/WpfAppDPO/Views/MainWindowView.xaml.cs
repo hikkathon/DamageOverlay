@@ -14,7 +14,7 @@ namespace WpfAppDPO
         MemoryEditor ME = new MemoryEditor("wotblitz.exe");
 
         Int32 Time = (Int32)(DateTime.UtcNow.Subtract(new DateTime(1970, 1, 1, 0, 0, 0, 0))).TotalSeconds;
-        Int32 currentTime = 1595203200; // WeekTime 604800 OneWeek
+        Int32 currentTime = 1597169113; // WeekTime 604800 OneWeek
         string userName;
 
         public MainWindowView()
@@ -46,7 +46,7 @@ namespace WpfAppDPO
             }
             else
             {
-                MessageBox.Show("Конец пробной версии.\rЗалетай на стрим за новой копией проги \r\rКанал Noilty\rhttps://vk.com/noiltychannel", "Время вышло",MessageBoxButton.OK, MessageBoxImage.Information);
+                MessageBox.Show("Конец пробной версии.\rЗалетай на стрим за новой копией проги \r\rКанал Noilty\rhttps://vk.com/noiltychannel\n\nГруппа Мода https://vk.com/damageoverlay", "Время вышло",MessageBoxButton.OK, MessageBoxImage.Information);
             }
         }
     }
