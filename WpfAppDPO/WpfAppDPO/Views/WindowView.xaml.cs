@@ -40,27 +40,13 @@ namespace WpfAppDPO.Views
             dt.Interval = TimeSpan.FromMilliseconds(1);
             dt.Tick += ME.DamageBlocked;
             dt.Tick += WindowSize;
-            dt.Tick += Counter;
             dt.Start();
         }
 
         int damageMax { get { return ME.Damage; } set { value = ME.Damage; } }
         int blockedMax { get { return ME.Blocked; } set { value = ME.Blocked; } }
-        int damageCurrent = 0;
-        int blockedCurrent = 0;
-        public void Counter(object sender, EventArgs e)
-        {
-            if (damageCurrent < damageMax)
-            {
-                damageCurrent++;
-                Labe1.Content = damageCurrent;
-            }
-            if (blockedCurrent < blockedMax)
-            {
-                blockedCurrent++;
-                Labe2.Content = blockedCurrent;
-            }
-        }
+        int damageIncrement = 0;
+        int blockedIncrement = 0;
 
         public void DamageBlockedShow()
         {
@@ -70,29 +56,24 @@ namespace WpfAppDPO.Views
             //string damage1 = (ME.Damage == 0) ? " 0" : $"{ME.Damage:# ### ###}";
             //string damage2 = (damageCurrent == 0) ? "0" : $"{damageCurrent:# ### ###}";
 
-            string damage = string.Empty;
-            string blocked = string.Empty;
-            if(ME.Damage == 0)
+            if (damageIncrement < damageMax)
             {
-                damage = "0";
-                DamageLabel.Content = (damageCurrent == 0) ? "0" : $"{damage:# ### ###}";
+                damageIncrement++;
+                Label1.Content = damageIncrement;
             }
-            else
+            if (blockedIncrement < blockedMax)
             {
-                damage = (damageCurrent == 0) ? "0" : $"{damageCurrent:# ### ###}";
-                DamageLabel.Content = (damageCurrent == 0) ? "0" : $"{damage:# ### ###}";
+                blockedIncrement++;
+                Label2.Content = blockedIncrement;
             }
 
-            if (ME.Blocked == 0)
-            {
-                blocked = "0";
-                BlockedLabel.Content = (blockedCurrent == 0) ? "0" : $"{blocked:# ### ###}";
-            }
-            else
-            {
-                blocked = (damageCurrent == 0) ? "0" : $"{blocked:# ### ###}";
-                BlockedLabel.Content = (blockedCurrent == 0) ? "0" : $"{blocked:# ### ###}";
-            }            
+            int damage = (damageMax == 0) ? 0 : damageIncrement;
+            int blocked = (blockedMax == 0) ? 0 : blockedIncrement;
+
+            
+            DamageLabel.Content = (damageMax == 0) ? "0" : $"{damage:# ### ###}";
+            BlockedLabel.Content = (blockedMax == 0) ? "0" : $"{blocked:# ### ###}";
+
         }
 
         // Изменение размера окна
