@@ -3,6 +3,7 @@ using System.ComponentModel;
 using System.Diagnostics;
 using System.Runtime.InteropServices;
 using System.Windows;
+using System.Windows.Media;
 using System.Windows.Threading;
 using WpfAppDPO.Models;
 
@@ -45,6 +46,7 @@ namespace WpfAppDPO.Views
 
         int damageMax { get { return ME.Damage; } set { value = ME.Damage; } }
         int blockedMax { get { return ME.Blocked; } set { value = ME.Blocked; } }
+
         int damageIncrement = 0;
         int blockedIncrement = 0;
 
@@ -59,21 +61,62 @@ namespace WpfAppDPO.Views
             if (damageIncrement < damageMax)
             {
                 damageIncrement++;
-                Label1.Content = damageIncrement;
             }
             if (blockedIncrement < blockedMax)
             {
                 blockedIncrement++;
-                Label2.Content = blockedIncrement;
             }
 
-            int damage = (damageMax == 0) ? 0 : damageIncrement;
-            int blocked = (blockedMax == 0) ? 0 : blockedIncrement;
+            int damage = (damageMax == 0) ? damageIncrement-- : damageIncrement;
+            int blocked = (blockedMax == 0) ? blockedIncrement-- : blockedIncrement;
 
-            
-            DamageLabel.Content = (damageMax == 0) ? "0" : $"{damage:# ### ###}";
-            BlockedLabel.Content = (blockedMax == 0) ? "0" : $"{blocked:# ### ###}";
 
+            DamageLabel.Content = (damageIncrement <= 0) ? " 0" : $"{damage:# ### ###}";
+            BlockedLabel.Content = (blockedIncrement <= 0) ? " 0" : $"{blocked:# ### ###}";
+
+            switch (damageIncrement)
+            {
+                case 0:
+                    DamageLabel.Foreground = new SolidColorBrush(Color.FromRgb(246, 249, 252));
+                    break;
+                case 1500:
+                    DamageLabel.Foreground = new SolidColorBrush(Color.FromRgb(246, 249, 252));
+                    break;
+                case 2000:
+                    DamageLabel.Foreground = new SolidColorBrush(Color.FromRgb(175, 241, 182));
+                    break;
+                case 2500:
+                    DamageLabel.Foreground = new SolidColorBrush(Color.FromRgb(143, 239, 251));
+                    break;
+                case 3500:
+                    DamageLabel.Foreground = new SolidColorBrush(Color.FromRgb(255, 199, 238));
+                    break;
+                case 5000:
+                    DamageLabel.Foreground = new SolidColorBrush(Color.FromRgb(255, 204, 165));
+                    break;
+            }
+
+            switch (blockedIncrement)
+            {
+                case 0:
+                    BlockedLabel.Foreground = new SolidColorBrush(Color.FromRgb(246, 249, 252));
+                    break;
+                case 1500:
+                    BlockedLabel.Foreground = new SolidColorBrush(Color.FromRgb(246, 249, 252));
+                    break;
+                case 2000:
+                    BlockedLabel.Foreground = new SolidColorBrush(Color.FromRgb(175, 241, 182));
+                    break;
+                case 2500:
+                    BlockedLabel.Foreground = new SolidColorBrush(Color.FromRgb(143, 239, 251));
+                    break;
+                case 3500:
+                    BlockedLabel.Foreground = new SolidColorBrush(Color.FromRgb(255, 199, 238));
+                    break;
+                case 5000:
+                    BlockedLabel.Foreground = new SolidColorBrush(Color.FromRgb(255, 204, 165));
+                    break;
+            }
         }
 
         // Изменение размера окна
@@ -108,11 +151,11 @@ namespace WpfAppDPO.Views
 
         public int CustomHeight
         {
-            get 
-            { 
-                return _height; 
+            get
+            {
+                return _height;
             }
-            set 
+            set
             {
                 _height = value;
                 PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("CustomHeight"));
@@ -120,36 +163,36 @@ namespace WpfAppDPO.Views
         }
         public int CustomWidth
         {
-            get 
-            { 
-                return _width; 
+            get
+            {
+                return _width;
             }
             set
-            { 
+            {
                 _width = value;
                 PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("CustomWidth"));
             }
         }
         public int CustomTop
         {
-            get 
-            { 
-                return _posX; 
+            get
+            {
+                return _posX;
             }
-            set 
-            { 
+            set
+            {
                 _posX = value;
                 PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("CustomTop"));
             }
         }
         public int CustomLeft
         {
-            get 
+            get
             {
-                return _PosY; 
+                return _PosY;
             }
-            set 
-            { 
+            set
+            {
                 _PosY = value;
                 PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("CustomLeft"));
             }
