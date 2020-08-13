@@ -4,6 +4,7 @@ using System.Diagnostics;
 using System.Runtime.InteropServices;
 using System.Windows;
 using System.Windows.Media;
+using System.Windows.Media.Imaging;
 using System.Windows.Threading;
 using WpfAppDPO.Models;
 
@@ -14,8 +15,8 @@ namespace WpfAppDPO.Views
     /// </summary>
     public partial class WindowView : Window, INotifyPropertyChanged
     {
-        MemoryEditor ME = new MemoryEditor("wotblitz.exe");
-
+        MemoryEditor ME = new MemoryEditor("wotblitz.exe");      
+        
         public WindowView()
         {
             InitializeComponent();
@@ -77,19 +78,19 @@ namespace WpfAppDPO.Views
             switch (damageIncrement)
             {
                 case 0:
-                    DamageLabel.Foreground = new SolidColorBrush(Color.FromRgb(246, 249, 252));
+                    DamageLabel.Foreground = new SolidColorBrush(Color.FromRgb(255, 235, 238));
                     break;
                 case 1500:
-                    DamageLabel.Foreground = new SolidColorBrush(Color.FromRgb(246, 249, 252));
+                    DamageLabel.Foreground = new SolidColorBrush(Color.FromRgb(255, 235, 238));
                     break;
                 case 2000:
-                    DamageLabel.Foreground = new SolidColorBrush(Color.FromRgb(175, 241, 182));
+                    DamageLabel.Foreground = new SolidColorBrush(Color.FromRgb(220, 237, 200));
                     break;
                 case 2500:
-                    DamageLabel.Foreground = new SolidColorBrush(Color.FromRgb(143, 239, 251));
+                    DamageLabel.Foreground = new SolidColorBrush(Color.FromRgb(178, 235, 242));
                     break;
                 case 3500:
-                    DamageLabel.Foreground = new SolidColorBrush(Color.FromRgb(255, 199, 238));
+                    DamageLabel.Foreground = new SolidColorBrush(Color.FromRgb(225, 190, 231));
                     break;
                 case 5000:
                     DamageLabel.Foreground = new SolidColorBrush(Color.FromRgb(255, 204, 165));
@@ -99,19 +100,19 @@ namespace WpfAppDPO.Views
             switch (blockedIncrement)
             {
                 case 0:
-                    BlockedLabel.Foreground = new SolidColorBrush(Color.FromRgb(246, 249, 252));
+                    BlockedLabel.Foreground = new SolidColorBrush(Color.FromRgb(255, 235, 238));
                     break;
                 case 1500:
-                    BlockedLabel.Foreground = new SolidColorBrush(Color.FromRgb(246, 249, 252));
+                    BlockedLabel.Foreground = new SolidColorBrush(Color.FromRgb(255, 235, 238));
                     break;
                 case 2000:
-                    BlockedLabel.Foreground = new SolidColorBrush(Color.FromRgb(175, 241, 182));
+                    BlockedLabel.Foreground = new SolidColorBrush(Color.FromRgb(220, 237, 200));
                     break;
                 case 2500:
-                    BlockedLabel.Foreground = new SolidColorBrush(Color.FromRgb(143, 239, 251));
+                    BlockedLabel.Foreground = new SolidColorBrush(Color.FromRgb(178, 235, 242));
                     break;
                 case 3500:
-                    BlockedLabel.Foreground = new SolidColorBrush(Color.FromRgb(255, 199, 238));
+                    BlockedLabel.Foreground = new SolidColorBrush(Color.FromRgb(225, 190, 231));
                     break;
                 case 5000:
                     BlockedLabel.Foreground = new SolidColorBrush(Color.FromRgb(255, 204, 165));

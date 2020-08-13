@@ -14,7 +14,7 @@ namespace WpfAppDPO
         MemoryEditor ME = new MemoryEditor("wotblitz.exe");
 
         Int32 Time = (Int32)(DateTime.UtcNow.Subtract(new DateTime(1970, 1, 1, 0, 0, 0, 0))).TotalSeconds;
-        Int32 currentTime = 1597169113; // WeekTime 604800 OneWeek
+        Int32 currentTime = 1597449600; // WeekTime 604800 OneWeek (https://freeonlinetools24.com/)
         string userName;
 
         public MainWindowView()
@@ -23,7 +23,7 @@ namespace WpfAppDPO
             //MinimizeButton.Click += (s, e) => WindowState = WindowState.Minimized;
             //MaximizeButton.Click += (s, e) => WindowState = WindowState == WindowState.Maximized ? WindowState.Normal : WindowState.Maximized;
             //CloseButton.Click += (s, e) => Close();
-            //userName = "ScritFIll";
+            //userName = "R3ViV4L";
             //LabelCurrentTime.Content = $"Пользователь: {userName}, действительно до " + new DateTime(1970, 1, 1, 0, 0, 0, 0).AddSeconds(currentTime) + " (+7 GTM)";
         }
 
@@ -46,7 +46,7 @@ namespace WpfAppDPO
             }
             else
             {
-                MessageBox.Show("Конец пробной версии.\rЗалетай на стрим за новой копией проги \r\rКанал Noilty\rhttps://vk.com/noiltychannel\n\nГруппа Мода https://vk.com/damageoverlay", "Время вышло",MessageBoxButton.OK, MessageBoxImage.Information);
+                MessageBox.Show("Конец пробной версии.\rЗалетай на стрим за новой копией проги \r\rКанал Noilty\rhttps://vk.com/noiltychannel\n\nГруппа Мода https://vk.com/bestofblitz", "Время вышло",MessageBoxButton.OK, MessageBoxImage.Information);
             }
         }
     }
