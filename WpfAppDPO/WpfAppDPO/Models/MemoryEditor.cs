@@ -93,11 +93,16 @@ namespace WpfAppDPO.Models
             Int32 dmgAddr = BA + 0x02B2E5A0; // 1 базовый адрес 2 смещение
             Int32[] dmgOffsets = { 0x94, 0x0, 0x10, 0xBC, 0x64, 0x114, 0x24 };
             Damage = BitConverter.ToInt32(ReadMemory((IntPtr)ReadPointer(dmgAddr, dmgOffsets), (uint)4), 0);
-            
+
             // Blocked
             Int32 blckAddr = BA + 0x02B2E5A0; // 1 базовый адрес 2 смещение
             Int32[] blckOffsets = { 0x94, 0x0, 0x10, 0xBC, 0x64, 0x114, 0x28 };
             Blocked = BitConverter.ToInt32(ReadMemory((IntPtr)ReadPointer(blckAddr, blckOffsets), (uint)4), 0);
+
+            // Health
+            Int32 HealthAddr = BA + 0x02AA9D80; // 1 базовый адрес 2 смещение
+            Int32[] HealthOffsets = { 0x64, 0x2C, 0xC, 0x0, 0x14, 0x10, 0x148 };
+            Health = BitConverter.ToInt32(ReadMemory((IntPtr)ReadPointer(HealthAddr, HealthOffsets), (uint)4), 0);
         }
 
         // Нанесенный урон
@@ -124,12 +129,27 @@ namespace WpfAppDPO.Models
             set
             {
                 blocked = value;
-                _del?.Invoke();;
+                _del?.Invoke();
+            }
+        }
+
+        // ХП
+        public int Health
+        {
+            get
+            {
+                return health;
+            }
+            set
+            {
+                health = value;
+                _del?.Invoke();
             }
         }
 
         private int damage;
         private int blocked;
+        private int health;
 
         public int BA;
         private string pName;

@@ -47,12 +47,14 @@ namespace WpfAppDPO.Views
 
         int damageMax { get { return ME.Damage; } set { value = ME.Damage; } }
         int blockedMax { get { return ME.Blocked; } set { value = ME.Blocked; } }
+        int healthMax { get { return ME.Health; } set { value = ME.Health; } }
 
         int damageIncrement = 0;
         int blockedIncrement = 0;
+        int healthIncrement = 0;
 
         public void DamageBlockedShow()
-        {
+        {   
             //string block1 = (ME.Blocked == 0) ? " 0" : $"{ME.Blocked:# ### ###}";
             //string block2 = (blockedCurrent == 0) ? "0" : $"{blockedCurrent:# ### ###}";
 
@@ -67,60 +69,66 @@ namespace WpfAppDPO.Views
             {
                 blockedIncrement++;
             }
+            if(healthIncrement < healthMax)
+            {
+                healthIncrement++;
+            }
 
             int damage = (damageMax == 0) ? damageIncrement-- : damageIncrement;
             int blocked = (blockedMax == 0) ? blockedIncrement-- : blockedIncrement;
+            int health = (healthMax == 0) ? healthIncrement-- : healthIncrement;
 
 
             DamageLabel.Content = (damageIncrement <= 0) ? " 0" : $"{damage:# ### ###}";
             BlockedLabel.Content = (blockedIncrement <= 0) ? " 0" : $"{blocked:# ### ###}";
+            HealthLabel.Content = (healthIncrement <= 0) ? " 0" : $"{health:# ### ###}";
 
-            switch (damageIncrement)
-            {
-                case 0:
-                    DamageLabel.Foreground = new SolidColorBrush(Color.FromRgb(255, 235, 238));
-                    break;
-                case 1500:
-                    DamageLabel.Foreground = new SolidColorBrush(Color.FromRgb(255, 235, 238));
-                    break;
-                case 2000:
-                    DamageLabel.Foreground = new SolidColorBrush(Color.FromRgb(220, 237, 200));
-                    break;
-                case 2500:
-                    DamageLabel.Foreground = new SolidColorBrush(Color.FromRgb(178, 235, 242));
-                    break;
-                case 3500:
-                    DamageLabel.Foreground = new SolidColorBrush(Color.FromRgb(225, 190, 231));
-                    break;
-                case 5000:
-                    DamageLabel.Foreground = new SolidColorBrush(Color.FromRgb(255, 204, 165));
-                    break;
-            }
+            //switch (damageIncrement)
+            //{
+            //    case 0:
+            //        DamageLabel.Foreground = new SolidColorBrush(Color.FromRgb(255, 235, 238));
+            //        break;
+            //    case 1500:
+            //        DamageLabel.Foreground = new SolidColorBrush(Color.FromRgb(255, 235, 238));
+            //        break;
+            //    case 2000:
+            //        DamageLabel.Foreground = new SolidColorBrush(Color.FromRgb(220, 237, 200));
+            //        break;
+            //    case 2500:
+            //        DamageLabel.Foreground = new SolidColorBrush(Color.FromRgb(178, 235, 242));
+            //        break;
+            //    case 3500:
+            //        DamageLabel.Foreground = new SolidColorBrush(Color.FromRgb(225, 190, 231));
+            //        break;
+            //    case 5000:
+            //        DamageLabel.Foreground = new SolidColorBrush(Color.FromRgb(255, 204, 165));
+            //        break;
+            //}
 
-            switch (blockedIncrement)
-            {
-                case 0:
-                    BlockedLabel.Foreground = new SolidColorBrush(Color.FromRgb(255, 235, 238));
-                    break;
-                case 1500:
-                    BlockedLabel.Foreground = new SolidColorBrush(Color.FromRgb(255, 235, 238));
-                    break;
-                case 2000:
-                    BlockedLabel.Foreground = new SolidColorBrush(Color.FromRgb(220, 237, 200));
-                    break;
-                case 2500:
-                    BlockedLabel.Foreground = new SolidColorBrush(Color.FromRgb(178, 235, 242));
-                    break;
-                case 3500:
-                    BlockedLabel.Foreground = new SolidColorBrush(Color.FromRgb(225, 190, 231));
-                    break;
-                case 5000:
-                    BlockedLabel.Foreground = new SolidColorBrush(Color.FromRgb(255, 204, 165));
-                    break;
-            }
+            //switch (blockedIncrement)
+            //{
+            //    case 0:
+            //        BlockedLabel.Foreground = new SolidColorBrush(Color.FromRgb(255, 235, 238));
+            //        break;
+            //    case 1500:
+            //        BlockedLabel.Foreground = new SolidColorBrush(Color.FromRgb(255, 235, 238));
+            //        break;
+            //    case 2000:
+            //        BlockedLabel.Foreground = new SolidColorBrush(Color.FromRgb(220, 237, 200));
+            //        break;
+            //    case 2500:
+            //        BlockedLabel.Foreground = new SolidColorBrush(Color.FromRgb(178, 235, 242));
+            //        break;
+            //    case 3500:
+            //        BlockedLabel.Foreground = new SolidColorBrush(Color.FromRgb(225, 190, 231));
+            //        break;
+            //    case 5000:
+            //        BlockedLabel.Foreground = new SolidColorBrush(Color.FromRgb(255, 204, 165));
+            //        break;
+            //}
         }
 
-        // Изменение размера окна
+        #region Изменение размера окна
         [DllImport("user32.dll", CharSet = CharSet.Unicode)]
         private static extern bool GetWindowRect(IntPtr hwnd, ref Rect rectangle);
 
@@ -202,5 +210,6 @@ namespace WpfAppDPO.Views
         private int _width;
         private int _posX;
         private int _PosY;
+        #endregion
     }
 }

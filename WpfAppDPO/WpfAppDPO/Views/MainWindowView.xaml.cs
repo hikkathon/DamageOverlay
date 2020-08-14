@@ -34,7 +34,7 @@ namespace WpfAppDPO
             {
                 try
                 {
-                    ME.GetBaseAddress();
+                    ME.GetBaseAddress();                    
                     WindowView taskWindow = new WindowView();
                     taskWindow.Owner = this;
                     taskWindow.Show();
