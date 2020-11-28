@@ -38,8 +38,6 @@ namespace WpfAppDPO.Views
         {
             ME.RegisterHandler(new MemoryEditor.MemoryEditorStateHandler(DamageBlockedShow));
 
-            healthIncrement = Health;
-
             DispatcherTimer dt = new DispatcherTimer();
             dt.Interval = TimeSpan.FromMilliseconds(1);
             dt.Tick += ME.DamageBlocked;
@@ -49,56 +47,18 @@ namespace WpfAppDPO.Views
             dt.Start();
         }
 
-        int Damage { get { return ME.Damage; } set { value = ME.Damage; } }
-        int Blocked { get { return ME.Blocked; } set { value = ME.Blocked; } }
-        int Health { get { return ME.Health; } set { value = ME.Health; } }
-
-        int HealthMax = 0;
-
-        int damageIncrement = 0;
-        int blockedIncrement = 0;
-        int healthIncrement = 0;
+        int Damage { get { return ME.Damage; } }
+        int Blocked { get { return ME.Blocked; } }
+        int Health { get { return ME.Health; } }
 
         public void DamageBlockedShow()
         {
-            //string block1 = (ME.Blocked == 0) ? " 0" : $"{ME.Blocked:# ### ###}";
-            //string block2 = (blockedCurrent == 0) ? "0" : $"{blockedCurrent:# ### ###}";
 
-            //string damage1 = (ME.Damage == 0) ? " 0" : $"{ME.Damage:# ### ###}";
-            //string damage2 = (damageCurrent == 0) ? "0" : $"{damageCurrent:# ### ###}";
+            DamageLabel.Content = (Damage <= 0) ? " 0" : $"{Damage:# ### ###}";
+            BlockedLabel.Content = (Blocked <= 0) ? " 0" : $"{Blocked:# ### ###}";
+            HealthLabel.Content = (Health <= 0) ? " 0" : $"{Health:# ### ###}";
 
-            if (damageIncrement < Damage)
-            {
-                damageIncrement++;
-            }
-            if (blockedIncrement < Blocked)
-            {
-                blockedIncrement++;
-            }
-
-            if (Health > HealthMax)
-            {
-                HealthMax = Health;
-            }
-            else
-            {
-                HealthMax = 0;
-            }
-
-            if (healthIncrement < HealthMax)
-            {
-                healthIncrement++;
-            }
-
-            int damage = (Damage == 0) ? damageIncrement-- : damageIncrement;
-            int blocked = (Blocked == 0) ? blockedIncrement-- : blockedIncrement;
-            int health = (Health == 0) ? healthIncrement-- : healthIncrement;
-
-            DamageLabel.Content = (damageIncrement <= 0) ? " 0" : $"{damage:# ### ###}";
-            BlockedLabel.Content = (blockedIncrement <= 0) ? " 0" : $"{blocked:# ### ###}";
-            HealthLabel.Content = (healthIncrement <= 0) ? " 0" : $"{Health:# ### ###}";
-
-            switch (damageIncrement)
+            switch (Damage)
             {
                 case 0:
                     DamageLabel.Foreground = new SolidColorBrush(Color.FromRgb(255, 235, 238));
@@ -120,7 +80,7 @@ namespace WpfAppDPO.Views
                     break;
             }
 
-            switch (blockedIncrement)
+            switch (Blocked)
             {
                 case 0:
                     BlockedLabel.Foreground = new SolidColorBrush(Color.FromRgb(255, 235, 238));
