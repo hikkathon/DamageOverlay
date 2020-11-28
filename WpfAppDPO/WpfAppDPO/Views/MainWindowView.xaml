@@ -6,7 +6,7 @@
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         xmlns:local="clr-namespace:WpfAppDPO"
         mc:Ignorable="d"
-        Title="Damage Overlay v1.3.20.1 TRIAL" MaxHeight="250" MaxWidth="450" MinHeight="250" MinWidth="450" Height="250" Width="450" AllowsTransparency="False" WindowStyle="SingleBorderWindow" Topmost="False" WindowStartupLocation="CenterScreen">
+        Title="Damage Overlay v1.4.34.1 до 11/16/2020 @ 12:00am (UTC)" MaxHeight="250" MaxWidth="500" MinHeight="250" MinWidth="500" Height="250" Width="450" AllowsTransparency="False" WindowStyle="SingleBorderWindow" Topmost="False" WindowStartupLocation="CenterScreen">
 
     <!--<WindowChrome.WindowChrome>
         <WindowChrome CaptionHeight="35"/>
@@ -24,7 +24,7 @@
                     <StackPanel Orientation="Horizontal" Margin="15">
                         <materialDesign:PackIcon Kind="Information" Foreground="{StaticResource PrimaryHueMidBrush}" Width="50" Height="50"/>
                         <TextBlock Foreground="Gray" Width="200" Margin="15 5" TextWrapping="Wrap">
-                                Вы используете мод на свой страх и риск.
+                                Вы используете мод на свой страх и риск. Что бы выть в курсе новостей по моим модам подпишись на группу https://vk.com/bestofblitz
                         </TextBlock>
                     </StackPanel>
                     <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="15">
@@ -43,6 +43,7 @@
                         <TextBlock Text="ВКЛЮЧИТЬ" FontSize="15" VerticalAlignment="Center"/>
                     </Button>
                 </StackPanel>
+                <Slider TickFrequency="1" Minimum="210" Maximum="810" x:Name="slider1" IsSnapToTickEnabled="True" ValueChanged="slider1_ValueChanged" />
             </Grid>
         </materialDesign:DialogHost>
     </Grid>

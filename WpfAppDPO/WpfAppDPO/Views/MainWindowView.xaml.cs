@@ -14,7 +14,7 @@ namespace WpfAppDPO
         MemoryEditor ME = new MemoryEditor("wotblitz.exe");
 
         Int32 Time = (Int32)(DateTime.UtcNow.Subtract(new DateTime(1970, 1, 1, 0, 0, 0, 0))).TotalSeconds;
-        Int32 currentTime = 1597449600; // WeekTime 604800 OneWeek (https://freeonlinetools24.com/)
+        Int32 currentTime = 1705484800; // WeekTime 604800 OneWeek (https://freeonlinetools24.com/)
         string userName;
 
         public MainWindowView()
@@ -41,13 +41,18 @@ namespace WpfAppDPO
                 }
                 catch (Exception exc)
                 {
-                    MessageBox.Show("Игру запусти а потом оверлей", $"{exc.Message}", MessageBoxButton.OK, MessageBoxImage.Error);
+                    MessageBox.Show($"Игру запусти а потом оверлей\n\nException: {exc.Message}", $"Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
                 }
             }
             else
             {
-                MessageBox.Show("Конец пробной версии.\rЗалетай на стрим за новой копией проги \r\rКанал Noilty\rhttps://vk.com/noiltychannel\n\nГруппа Мода https://vk.com/bestofblitz", "Время вышло",MessageBoxButton.OK, MessageBoxImage.Information);
+                MessageBox.Show("Конец пробной версии.\nГруппа Мода https://vk.com/bestofblitz", "Время вышло",MessageBoxButton.OK, MessageBoxImage.Information);
             }
+        }
+
+        private void slider1_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
+        {
+            Variables.sliderValue = slider1.Value;
         }
     }
 }

@@ -44,6 +44,8 @@ namespace WpfAppDPO.Views
             dt.Interval = TimeSpan.FromMilliseconds(1);
             dt.Tick += ME.DamageBlocked;
             dt.Tick += WindowSize;
+            dt.Tick += LocatePanel;
+
             dt.Start();
         }
 
@@ -96,52 +98,79 @@ namespace WpfAppDPO.Views
             BlockedLabel.Content = (blockedIncrement <= 0) ? " 0" : $"{blocked:# ### ###}";
             HealthLabel.Content = (healthIncrement <= 0) ? " 0" : $"{Health:# ### ###}";
 
-            //switch (damageIncrement)
-            //{
-            //    case 0:
-            //        DamageLabel.Foreground = new SolidColorBrush(Color.FromRgb(255, 235, 238));
-            //        break;
-            //    case 1500:
-            //        DamageLabel.Foreground = new SolidColorBrush(Color.FromRgb(255, 235, 238));
-            //        break;
-            //    case 2000:
-            //        DamageLabel.Foreground = new SolidColorBrush(Color.FromRgb(220, 237, 200));
-            //        break;
-            //    case 2500:
-            //        DamageLabel.Foreground = new SolidColorBrush(Color.FromRgb(178, 235, 242));
-            //        break;
-            //    case 3500:
-            //        DamageLabel.Foreground = new SolidColorBrush(Color.FromRgb(225, 190, 231));
-            //        break;
-            //    case 5000:
-            //        DamageLabel.Foreground = new SolidColorBrush(Color.FromRgb(255, 204, 165));
-            //        break;
-            //}
+            switch (damageIncrement)
+            {
+                case 0:
+                    DamageLabel.Foreground = new SolidColorBrush(Color.FromRgb(255, 235, 238));
+                    break;
+                case 1500:
+                    DamageLabel.Foreground = new SolidColorBrush(Color.FromRgb(255, 235, 238));
+                    break;
+                case 2000:
+                    DamageLabel.Foreground = new SolidColorBrush(Color.FromRgb(220, 237, 200));
+                    break;
+                case 2500:
+                    DamageLabel.Foreground = new SolidColorBrush(Color.FromRgb(178, 235, 242));
+                    break;
+                case 3500:
+                    DamageLabel.Foreground = new SolidColorBrush(Color.FromRgb(225, 190, 231));
+                    break;
+                case 5000:
+                    DamageLabel.Foreground = new SolidColorBrush(Color.FromRgb(255, 204, 165));
+                    break;
+            }
 
-            //switch (blockedIncrement)
-            //{
-            //    case 0:
-            //        BlockedLabel.Foreground = new SolidColorBrush(Color.FromRgb(255, 235, 238));
-            //        break;
-            //    case 1500:
-            //        BlockedLabel.Foreground = new SolidColorBrush(Color.FromRgb(255, 235, 238));
-            //        break;
-            //    case 2000:
-            //        BlockedLabel.Foreground = new SolidColorBrush(Color.FromRgb(220, 237, 200));
-            //        break;
-            //    case 2500:
-            //        BlockedLabel.Foreground = new SolidColorBrush(Color.FromRgb(178, 235, 242));
-            //        break;
-            //    case 3500:
-            //        BlockedLabel.Foreground = new SolidColorBrush(Color.FromRgb(225, 190, 231));
-            //        break;
-            //    case 5000:
-            //        BlockedLabel.Foreground = new SolidColorBrush(Color.FromRgb(255, 204, 165));
-            //        break;
-            //}
+            switch (blockedIncrement)
+            {
+                case 0:
+                    BlockedLabel.Foreground = new SolidColorBrush(Color.FromRgb(255, 235, 238));
+                    break;
+                case 1500:
+                    BlockedLabel.Foreground = new SolidColorBrush(Color.FromRgb(255, 235, 238));
+                    break;
+                case 2000:
+                    BlockedLabel.Foreground = new SolidColorBrush(Color.FromRgb(220, 237, 200));
+                    break;
+                case 2500:
+                    BlockedLabel.Foreground = new SolidColorBrush(Color.FromRgb(178, 235, 242));
+                    break;
+                case 3500:
+                    BlockedLabel.Foreground = new SolidColorBrush(Color.FromRgb(225, 190, 231));
+                    break;
+                case 5000:
+                    BlockedLabel.Foreground = new SolidColorBrush(Color.FromRgb(255, 204, 165));
+                    break;
+            }
         }
 
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        #region Изменение расположение панели
+
+        public void LocatePanel(object sender, EventArgs e)
+        {
+            CustomLocate = Variables.sliderValue;
+        }
+
+        public Double CustomLocate
+        {
+            get
+            {
+                return _locate;
+            }
+            set
+            {
+                _locate = value;
+                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("CustomLocate"));
+            }
+        }
+
+        private Double _locate;
+
+        #endregion
+
         #region Изменение размера окна
+
         [DllImport("user32.dll", CharSet = CharSet.Unicode)]
         private static extern bool GetWindowRect(IntPtr hwnd, ref Rect rectangle);
 
@@ -154,7 +183,6 @@ namespace WpfAppDPO.Views
             public int bottom;
         }
 
-        public event PropertyChangedEventHandler PropertyChanged;
         public void WindowSize(object sender, EventArgs e)
         {
             using (Process process = Process.GetProcessesByName("wotblitz")[0])
@@ -223,6 +251,32 @@ namespace WpfAppDPO.Views
         private int _width;
         private int _posX;
         private int _PosY;
+
         #endregion
+    }
+    public class Asimut : OnPropertyChangedClass
+    {
+        private BitmapImage _image;
+        private double _angle;
+        private double _offsetImage;
+
+        public BitmapImage Image { get => _image; set => SetProperty(ref _image, value); }
+        public double Angle { get => _angle; set => SetProperty(ref _angle, value); }
+        public double OffsetImage { get => _offsetImage; private set => SetProperty(ref _offsetImage, value); }
+
+        protected override void PropertyNewValue<T>(ref T fieldProperty, T newValue, string propertyName)
+        {
+            base.PropertyNewValue(ref fieldProperty, newValue, propertyName);
+            if (propertyName == nameof(Image) || propertyName == nameof(Angle))
+            {
+                double angele = Angle % 360;
+                if (angele > 0)
+                {
+                    angele -= 360;
+                }
+
+                OffsetImage = Image.Width * angele / 360;
+            }
+        }
     }
 }
