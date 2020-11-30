@@ -47,9 +47,9 @@ namespace WpfAppDPO.Views
             dt.Start();
         }
 
-        int Damage { get { return ME.Damage; } }
-        int Blocked { get { return ME.Blocked; } }
-        int Health { get { return ME.Health; } }
+        int Damage { get { return ME.Damage; } set { value = ME.Damage; } }
+        int Blocked { get { return ME.Blocked; } set { value = ME.Blocked; } }
+        int Health { get { return ME.Health; } set { value = ME.Health; } }
 
         public void DamageBlockedShow()
         {

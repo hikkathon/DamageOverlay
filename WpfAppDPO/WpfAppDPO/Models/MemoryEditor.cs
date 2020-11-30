@@ -100,8 +100,8 @@ namespace WpfAppDPO.Models
             Blocked = BitConverter.ToInt32(ReadMemory((IntPtr)ReadPointer(blckAddr, blckOffsets), (uint)4), 0);
 
             // Health
-            Int32 HealthAddr = BA + 0x02C3B35C; // 1 базовый адрес 2 смещение
-            Int32[] HealthOffsets = { 0x38, 0x204, 0x114, 0x0, 0x30, 0x148, 0x2C };
+            Int32 HealthAddr = BA + 0x00FEBCE8; // 1 базовый адрес 2 смещение
+            Int32[] HealthOffsets = { 0xC, 0x44, 0x4, 0x14, 0x8, 0xC8, 0xB38 };
             Health = BitConverter.ToInt32(ReadMemory((IntPtr)ReadPointer(HealthAddr, HealthOffsets), (uint)4), 0);
         }
 
