@@ -1,7 +1,14 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
+using System.Collections.Generic;
+using System.Collections.Specialized;
 using System.ComponentModel;
 using System.Diagnostics;
+using System.Linq;
+using System.Net;
 using System.Runtime.InteropServices;
+using System.Text;
+using System.Threading;
 using System.Windows;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
@@ -15,8 +22,11 @@ namespace WpfAppDPO.Views
     /// </summary>
     public partial class WindowView : Window, INotifyPropertyChanged
     {
-        MemoryEditor ME = new MemoryEditor("wotblitz.exe");      
-        
+        MemoryEditor ME = new MemoryEditor("wotblitz.exe");
+
+        WebClient webClient = new WebClient();
+        NameValueCollection dataToSend = new NameValueCollection();
+
         public WindowView()
         {
             InitializeComponent();
@@ -47,60 +57,127 @@ namespace WpfAppDPO.Views
             dt.Start();
         }
 
-        int Damage { get { return ME.Damage; } set { value = ME.Damage; } }
-        int Blocked { get { return ME.Blocked; } set { value = ME.Blocked; } }
-        int Health { get { return ME.Health; } set { value = ME.Health; } }
+        // Нанесенный урон
+        int Damage { get { return ME.Damage; } }
+
+        // Заблокированный урон
+        int Blocked { get { return ME.Blocked; } }
+
+        // Жизни
+        int Health { get { return ME.Health; } }
+
+        public void DataSend()
+        {
+            try
+            {
+                if (Damage > 0)
+                {
+                    Variables.onDamag = true;
+                }
+
+                if (Variables.maxDamage > 30000 || Variables.maxBlocked > 30000)
+                {
+                    Variables.onCheat = true;
+                    TextBox2.Content = $"Validate false";
+                }
+                else
+                {
+                    Variables.onCheat = false;
+                    TextBox2.Content = $"Validate true";
+
+                    Variables.damageList.Add(Damage);
+                    Variables.blockedList.Add(Blocked);
+
+                    Variables.maxDamage = Variables.damageList.Distinct().Max();
+                    Variables.maxBlocked = Variables.blockedList.Distinct().Max();
+                }
+
+                if (Damage == 0 && Variables.onDamag && !Variables.onCheat)
+                {
+                    var rnd = new Random();
+                    int val = rnd.Next(1, 6);
+                    Thread.Sleep(val * 1000);
+
+                    Variables.countSend++;
+                    string json = Encoding.UTF8.GetString(webClient.UploadValues(
+                        @"http://" + $"{Variables.UriSite}" + "/push/data/desktop/?user_id=" + Variables.response.User.id +
+                        "&user_wg_account_id=" + Variables.response.User.wg_account_id +
+                        "&user_wg_region=" + Variables.response.User.wg_region +
+                        "&user_auth_desktop_token=" + Variables.response.User.auth_desktop_token +
+                        "&dmg=" + Variables.maxDamage +
+                        "&dmg_block=" + Variables.maxBlocked, dataToSend));
+
+                    Variables.response2 = JsonConvert.DeserializeObject<AnswerServer>(json);
+
+                    //TextBox1.Content += $"SENT TO SERVER #{Variables.countSend}" + "\n" + "DAMAGE: " + Variables.maxDamage + "\n" + "BLOCK: " + Variables.maxBlocked;
+                    TextBox1.Content = $"Send data: {Variables.countSend}\nStatus: {Variables.response2.status}\nMessage: {Variables.response2.message}";
+
+                    Variables.onDamag = false;
+
+                    Variables.damageList.Clear();
+                    Variables.blockedList.Clear();
+                    Variables.maxDamage = 0;
+                    Variables.maxBlocked = 0;
+                }
+            }
+            catch (Exception exc)
+            {
+                Variables.countSend = 0;
+                TextBox1.Content = $"Send data error:  + {exc.Message}\nStatus: {Variables.response2.status}\nMessage: {Variables.response2.message}";
+            }
+        }
 
         public void DamageBlockedShow()
         {
-
             DamageLabel.Content = (Damage <= 0) ? " 0" : $"{Damage:# ### ###}";
             BlockedLabel.Content = (Blocked <= 0) ? " 0" : $"{Blocked:# ### ###}";
             HealthLabel.Content = (Health <= 0) ? " 0" : $"{Health:# ### ###}";
 
-            switch (Damage)
-            {
-                case 0:
-                    DamageLabel.Foreground = new SolidColorBrush(Color.FromRgb(255, 235, 238));
-                    break;
-                case 1500:
-                    DamageLabel.Foreground = new SolidColorBrush(Color.FromRgb(255, 235, 238));
-                    break;
-                case 2000:
-                    DamageLabel.Foreground = new SolidColorBrush(Color.FromRgb(220, 237, 200));
-                    break;
-                case 2500:
-                    DamageLabel.Foreground = new SolidColorBrush(Color.FromRgb(178, 235, 242));
-                    break;
-                case 3500:
-                    DamageLabel.Foreground = new SolidColorBrush(Color.FromRgb(225, 190, 231));
-                    break;
-                case 5000:
-                    DamageLabel.Foreground = new SolidColorBrush(Color.FromRgb(255, 204, 165));
-                    break;
-            }
+            DataSend();
 
-            switch (Blocked)
-            {
-                case 0:
-                    BlockedLabel.Foreground = new SolidColorBrush(Color.FromRgb(255, 235, 238));
-                    break;
-                case 1500:
-                    BlockedLabel.Foreground = new SolidColorBrush(Color.FromRgb(255, 235, 238));
-                    break;
-                case 2000:
-                    BlockedLabel.Foreground = new SolidColorBrush(Color.FromRgb(220, 237, 200));
-                    break;
-                case 2500:
-                    BlockedLabel.Foreground = new SolidColorBrush(Color.FromRgb(178, 235, 242));
-                    break;
-                case 3500:
-                    BlockedLabel.Foreground = new SolidColorBrush(Color.FromRgb(225, 190, 231));
-                    break;
-                case 5000:
-                    BlockedLabel.Foreground = new SolidColorBrush(Color.FromRgb(255, 204, 165));
-                    break;
-            }
+            //switch (Damage)
+            //{
+            //    case 0:
+            //        DamageLabel.Foreground = new SolidColorBrush(Color.FromRgb(255, 235, 238));
+            //        break;
+            //    case 1500:
+            //        DamageLabel.Foreground = new SolidColorBrush(Color.FromRgb(255, 235, 238));
+            //        break;
+            //    case 2000:
+            //        DamageLabel.Foreground = new SolidColorBrush(Color.FromRgb(220, 237, 200));
+            //        break;
+            //    case 2500:
+            //        DamageLabel.Foreground = new SolidColorBrush(Color.FromRgb(178, 235, 242));
+            //        break;
+            //    case 3500:
+            //        DamageLabel.Foreground = new SolidColorBrush(Color.FromRgb(225, 190, 231));
+            //        break;
+            //    case 5000:
+            //        DamageLabel.Foreground = new SolidColorBrush(Color.FromRgb(255, 204, 165));
+            //        break;
+            //}
+
+            //switch (Blocked)
+            //{
+            //    case 0:
+            //        BlockedLabel.Foreground = new SolidColorBrush(Color.FromRgb(255, 235, 238));
+            //        break;
+            //    case 1500:
+            //        BlockedLabel.Foreground = new SolidColorBrush(Color.FromRgb(255, 235, 238));
+            //        break;
+            //    case 2000:
+            //        BlockedLabel.Foreground = new SolidColorBrush(Color.FromRgb(220, 237, 200));
+            //        break;
+            //    case 2500:
+            //        BlockedLabel.Foreground = new SolidColorBrush(Color.FromRgb(178, 235, 242));
+            //        break;
+            //    case 3500:
+            //        BlockedLabel.Foreground = new SolidColorBrush(Color.FromRgb(225, 190, 231));
+            //        break;
+            //    case 5000:
+            //        BlockedLabel.Foreground = new SolidColorBrush(Color.FromRgb(255, 204, 165));
+            //        break;
+            //}
         }
 
         public event PropertyChangedEventHandler PropertyChanged;
@@ -109,23 +186,38 @@ namespace WpfAppDPO.Views
 
         public void LocatePanel(object sender, EventArgs e)
         {
-            CustomLocate = Variables.sliderValue;
+            CustomLocateY = Variables.sliderValueY;
+            CustomLocateX = Variables.sliderValueX;
         }
 
-        public Double CustomLocate
+        public Double CustomLocateY
         {
             get
             {
-                return _locate;
+                return _locateY;
             }
             set
             {
-                _locate = value;
-                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("CustomLocate"));
+                _locateY = value;
+                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("CustomLocateY"));
             }
         }
 
-        private Double _locate;
+        public Double CustomLocateX
+        {
+            get
+            {
+                return _locateX;
+            }
+            set
+            {
+                _locateX = value;
+                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("CustomLocateX"));
+            }
+        }
+
+        private Double _locateY;
+        private Double _locateX;
 
         #endregion
 
