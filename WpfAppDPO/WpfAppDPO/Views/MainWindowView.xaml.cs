@@ -37,73 +37,22 @@ namespace WpfAppDPO
 
         private void btnOpen_Click(object sender, RoutedEventArgs e)
         {
-            EnterGame.IsEnabled = false;
-            userkey.IsEnabled = false;
-
-            dataToSend["token"] = userkey.Password;
-            
             forbidden = true; //(Time < currentTime) ? true : false;
 
-            string json = Encoding.UTF8.GetString(webClient.UploadValues("http://" + $"{Variables.UriSite}" + "/auth/desktop/?token=" + userkey.Password, dataToSend)).Replace("[","").Replace("]","");
+            try
+            {
+                ME.GetBaseAddress();
+                WindowView taskWindow = new WindowView();
+                taskWindow.Owner = this;
+                EnterGame.IsEnabled = true;
+                taskWindow.Show();
 
-            if (json.Contains("error"))
-            {
-                Variables.TokenValid = false;
-                Variables.response2 = JsonConvert.DeserializeObject<AnswerServer>(json);
             }
-            else
+            catch (Exception exc)
             {
-                Variables.TokenValid = true;
-                Variables.response = JsonConvert.DeserializeObject<Root>(json);
-
-                EnterGame.Content = Variables.response.User.wg_nickname.Replace($"_{Variables.response.User.wg_region.ToUpper()}", " ");
-                labelVersion.Content = "ver. " + Variables.response.Version.version;
-            }
-
-            if (Variables.TokenValid && Variables.VersionBuild == Variables.response.Version.version)
-            {
-                try
-                {
-                    if (Variables.TokenValid && Variables.response.User.auth_desktop_token == userkey.Password)
-                    {                        
-                        MessageBox.Show($"Welcome {Variables.response.User.wg_nickname}", $"Success!", MessageBoxButton.OK, MessageBoxImage.Information);
-                        ME.GetBaseAddress();
-                        WindowView taskWindow = new WindowView();
-                        taskWindow.Owner = this;
-                        taskWindow.Show();
-                    }
-                    else
-                    {
-                        MessageBox.Show($"Token not valide", $"Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
-                        EnterGame.IsEnabled = true;
-                        userkey.IsEnabled = true;
-                        EnterGame.Content = "ВКЛЮЧИТЬ";
-                    }
-                }
-                catch (Exception exc)
-                {
-                    MessageBox.Show($"Игру запусти а потом оверлей\n\nException: {exc.Message}", $"Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
-                    EnterGame.IsEnabled = true;
-                    userkey.IsEnabled = true;
-                    EnterGame.Content = "ВКЛЮЧИТЬ";
-                }
-            }
-            else
-            {
-                if (Variables.TokenValid && Variables.response.User.auth_desktop_token == userkey.Password)
-                {
-                    MessageBox.Show($"Версия приложения устарела, скачайте обновленную версию приложения.\n\nВерсия приложения: {Variables.VersionBuild}\nАктуальная версия: {Variables.response.Version.version}", "Приложение устарело", MessageBoxButton.OK, MessageBoxImage.Information);
-                    EnterGame.IsEnabled = true;
-                    userkey.IsEnabled = true;
-                    EnterGame.Content = "ВКЛЮЧИТЬ";
-                }
-                else
-                {
-                    MessageBox.Show($"Token not valide", $"Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
-                    EnterGame.IsEnabled = true;
-                    userkey.IsEnabled = true;
-                    EnterGame.Content = "ВКЛЮЧИТЬ";
-                }
+                MessageBox.Show($"Игру запусти а потом оверлей\n\nException: {exc.Message}", $"Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+                EnterGame.IsEnabled = true;
+                EnterGame.Content = "ВКЛЮЧИТЬ";
             }
         }
 

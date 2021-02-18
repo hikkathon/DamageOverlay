@@ -66,7 +66,7 @@
         <!--<Label x:Name="DamageLabel" Grid.Column="1" Content="unknown"  FontSize="17" Foreground="#FFFFFF" Margin="30,15,301,44" FontFamily="Arial" RenderTransformOrigin="0.586,-0.361" FontWeight="Bold" Grid.ColumnSpan="3" Grid.Row="1" />
         <Label x:Name="BlockedLabel" Grid.Column="1" Grid.Row="1" Content="unknown"  FontSize="17" Foreground="#FFFFFF" Margin="30,46,301,14" FontFamily="Arial" FontWeight="Bold" Grid.ColumnSpan="3" />-->
 
-        <Image x:Name="ImgErr" 
+        <!--<Image x:Name="ImgErr" 
                    HorizontalAlignment="Right" 
                    VerticalAlignment="Top"
                    Width="20" 
@@ -84,7 +84,7 @@
             <Image.Source>
                 <ImageSource>/Assets/Images/done.png</ImageSource>
             </Image.Source>
-        </Image>
+        </Image>-->
 
         <StackPanel Grid.Column="3" Grid.Row="1" Grid.RowSpan="6" HorizontalAlignment="Right" Opacity="0.0">
             <Label x:Name="TextBox1" Content="Sent data: 0">

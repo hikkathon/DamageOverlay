@@ -47,9 +47,9 @@
                     <Slider TickFrequency="1" Minimum="5" Maximum="2560" x:Name="slider2" IsSnapToTickEnabled="True" ValueChanged="slider2_ValueChanged" />
                 </StackPanel>
                 <StackPanel Width="150" VerticalAlignment="Top" HorizontalAlignment="Left" Background="#2D2D30">
-                    <TextBlock Foreground="White" Text="Enter Token" FontSize="22"/>
+                    <!--<TextBlock Foreground="White" Text="Enter Token" FontSize="22"/>-->
                     <!--<TextBox x:Name="userkey" Margin="5 5 5 5" Text="Enter Key" Foreground="White" FontSize="12"></TextBox>-->
-                    <PasswordBox x:Name="userkey" Margin="5 5 5 5" Foreground="White" FontSize="12"/>
+                    <!--<PasswordBox x:Name="userkey" Margin="5 5 5 5" Foreground="White" FontSize="12"/>-->
                     <Button x:Name="EnterGame" Height="30" Width="120" Command="{x:Static materialDesign:DialogHost.OpenDialogCommand}">
                         <TextBlock Foreground="White" Text="ВКЛЮЧИТЬ" FontSize="15" VerticalAlignment="Center"/>
                     </Button>

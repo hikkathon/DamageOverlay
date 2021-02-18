@@ -31,8 +31,8 @@ namespace WpfAppDPO.Views
         public WindowView()
         {
             InitializeComponent();
-            ImgErr.Opacity = 0.0f;
-            ImgDone.Opacity = 0.0f;
+            //ImgErr.Opacity = 0.0f;
+            //ImgDone.Opacity = 0.0f;
             this.ShowInTaskbar = false;
             this.DataContext = this;
             try
@@ -69,78 +69,11 @@ namespace WpfAppDPO.Views
         // Жизни
         int Health { get { return ME.Health; } }
 
-        public void DataSend()
-        {
-            try
-            {
-                if (Damage > 0)
-                {
-                    Variables.onDamag = true;
-                }
-
-                if (Variables.maxDamage > 30000 || Variables.maxBlocked > 30000)
-                {
-                    Variables.onCheat = true;
-                    TextBox2.Content = $"Validate false";
-                    ImgErr.Opacity = 1.0f;
-                    ImgDone.Opacity = 0.0f;
-                }
-                else
-                {
-                    Variables.onCheat = false;
-                    TextBox2.Content = $"Validate true";
-                    ImgDone.Opacity = 1.0f;
-                    ImgErr.Opacity = 0.0f;
-
-                    Variables.damageList.Add(Damage);
-                    Variables.blockedList.Add(Blocked);
-
-                    Variables.maxDamage = Variables.damageList.Distinct().Max();
-                    Variables.maxBlocked = Variables.blockedList.Distinct().Max();
-                }
-
-                if (Damage == 0 && Variables.onDamag && !Variables.onCheat)
-                {
-                    var rnd = new Random();
-                    int val = rnd.Next(1, 6);
-                    Thread.Sleep(val * 1000);
-
-                    Variables.countSend++;
-                    string json = Encoding.UTF8.GetString(webClient.UploadValues(
-                        @"http://" + $"{Variables.UriSite}" + "/push/data/desktop/?user_id=" + Variables.response.User.id +
-                        "&user_wg_account_id=" + Variables.response.User.wg_account_id +
-                        "&user_wg_region=" + Variables.response.User.wg_region +
-                        "&user_auth_desktop_token=" + Variables.response.User.auth_desktop_token +
-                        "&dmg=" + Variables.maxDamage +
-                        "&dmg_block=" + Variables.maxBlocked, dataToSend));
-
-                    Variables.response2 = JsonConvert.DeserializeObject<AnswerServer>(json);
-
-                    //TextBox1.Content += $"SENT TO SERVER #{Variables.countSend}" + "\n" + "DAMAGE: " + Variables.maxDamage + "\n" + "BLOCK: " + Variables.maxBlocked;
-                    TextBox1.Content = $"Send data: {Variables.countSend}\nStatus: {Variables.response2.status}\nMessage: {Variables.response2.message}";
-
-                    Variables.onDamag = false;
-
-                    Variables.damageList.Clear();
-                    Variables.blockedList.Clear();
-                    Variables.maxDamage = 0;
-                    Variables.maxBlocked = 0;
-                }
-            }
-            catch (Exception exc)
-            {
-                Variables.countSend = 0;
-                TextBox1.Content = $"Send data error:  + {exc.Message}\nStatus: {Variables.response2.status}\nMessage: {Variables.response2.message}";
-            }
-        }
-
         public void DamageBlockedShow()
         {
             DamageLabel.Content = (Damage <= 0) ? " 0" : $"{Damage:# ### ###}";
             BlockedLabel.Content = (Blocked <= 0) ? " 0" : $"{Blocked:# ### ###}";
             HealthLabel.Content = (Health <= 0) ? " 0" : $"{Health:# ### ###}";
-
-            DataSend();
 
             //switch (Damage)
             //{
