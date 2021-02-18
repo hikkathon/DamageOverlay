@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Collections.Specialized;
 using System.ComponentModel;
 using System.Diagnostics;
+using System.Drawing;
 using System.Linq;
 using System.Net;
 using System.Runtime.InteropServices;
@@ -30,6 +31,8 @@ namespace WpfAppDPO.Views
         public WindowView()
         {
             InitializeComponent();
+            ImgErr.Opacity = 0.0f;
+            ImgDone.Opacity = 0.0f;
             this.ShowInTaskbar = false;
             this.DataContext = this;
             try
@@ -79,11 +82,15 @@ namespace WpfAppDPO.Views
                 {
                     Variables.onCheat = true;
                     TextBox2.Content = $"Validate false";
+                    ImgErr.Opacity = 1.0f;
+                    ImgDone.Opacity = 0.0f;
                 }
                 else
                 {
                     Variables.onCheat = false;
                     TextBox2.Content = $"Validate true";
+                    ImgDone.Opacity = 1.0f;
+                    ImgErr.Opacity = 0.0f;
 
                     Variables.damageList.Add(Damage);
                     Variables.blockedList.Add(Blocked);

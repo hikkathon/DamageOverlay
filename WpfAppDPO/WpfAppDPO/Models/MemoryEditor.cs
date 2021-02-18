@@ -90,17 +90,17 @@ namespace WpfAppDPO.Models
         public void DamageBlocked(object sender, EventArgs e)
         {
             // Damage
-            Int32 dmgAddr = BA + 0x02D40448; // 1 базовый адрес 2 смещение +7B9DC = новое смещение для БА
+            Int32 dmgAddr = BA + 0x02DA00CC; // 1 базовый адрес 2 смещение +7B9DC = новое смещение для БА
             Int32[] dmgOffsets = { 0x9C, 0x0, 0x10, 0xBC, 0x64, 0x148, 0x24 }; // 0x94(old) + 0x8 = 0x9C(new)
             Damage = BitConverter.ToInt32(ReadMemory((IntPtr)ReadPointer(dmgAddr, dmgOffsets), (uint)4), 0);
 
             // Blocked
-            Int32 blckAddr = BA + 0x02D40448; // 1 базовый адрес 2 смещение
+            Int32 blckAddr = BA + 0x02DA00CC; // 1 базовый адрес 2 смещение
             Int32[] blckOffsets = { 0x9C, 0x0, 0x10, 0xBC, 0x64, 0x148, 0x28 };
             Blocked = BitConverter.ToInt32(ReadMemory((IntPtr)ReadPointer(blckAddr, blckOffsets), (uint)4), 0);
 
             // Health
-            Int32 HealthAddr = BA + 0x02D40448; // 1 базовый адрес 2 смещение
+            Int32 HealthAddr = BA + 0x02DA00CC; // 1 базовый адрес 2 смещение
             Int32[] HealthOffsets = { 0x10, 0x84, 0xA0, 0x10, 0x4, 0xDC, 0x148 };
             Health = BitConverter.ToInt32(ReadMemory((IntPtr)ReadPointer(HealthAddr, HealthOffsets), (uint)4), 0);
         }
