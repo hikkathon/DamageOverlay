@@ -6,7 +6,7 @@
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         xmlns:local="clr-namespace:WpfAppDPO"
         mc:Ignorable="d"
-        Title="BlitzHUB - Damage Overlay" MinHeight="250" MinWidth="350" Height="250" Width="350" Topmost="False" WindowStartupLocation="CenterScreen" WindowStyle="ThreeDBorderWindow">
+        Title="Damage Overlay" MinHeight="250" MinWidth="350" Height="250" Width="350" Topmost="False" WindowStartupLocation="CenterScreen" WindowStyle="ThreeDBorderWindow">
 
     <!--<WindowChrome.WindowChrome>
         <WindowChrome CaptionHeight="35"/>
