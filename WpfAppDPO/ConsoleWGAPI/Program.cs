@@ -18,6 +18,7 @@ namespace ConsoleWGAPI
                 Thread.Sleep(10000);
                 Console.Clear();
             }
+
         }
 
         static async Task MainAsync()
@@ -37,7 +38,9 @@ namespace ConsoleWGAPI
                 int endIndex = json.LastIndexOf(@""":{""statistics""");
                 var str = json.Remove(startIndex, endIndex - startIndex).Insert(startIndex, "info");
                 var account = JsonConvert.DeserializeObject<Account>(str);
-                Console.WriteLine($"Ник: {account.data.info.nickname}\nБоёв: {account.data.info.statistics.all.battles + account.data.info.statistics.rating.battles}\nПобед: {account.data.info.statistics.all.wins}\nПоражений: {account.data.info.statistics.all.battles - account.data.info.statistics.all.wins}");
+                float WinRate = (float)account.data.info.statistics.all.wins / account.data.info.statistics.all.battles * 100;
+
+                Console.WriteLine($"Ник: {account.data.info.nickname}\nПобеды: {Math.Round(WinRate, 2)}%\nС/У: {Math.Round((float)account.data.info.statistics.all.damage_dealt / account.data.info.statistics.all.battles, 0)}");
             }
         }
     }
