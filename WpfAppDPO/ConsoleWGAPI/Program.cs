@@ -47,26 +47,30 @@ namespace ConsoleWGAPI
                     Variables.saveJSON = false;
                 }
 
-                float wins = (float)account.data.info.statistics.all.wins - accountStartSession.data.info.statistics.all.wins;
-                float battles = (float)account.data.info.statistics.all.battles - accountStartSession.data.info.statistics.all.battles;
-                int frags = account.data.info.statistics.all.frags - accountStartSession.data.info.statistics.all.frags;
-                int survived_battles = account.data.info.statistics.all.survived_battles - accountStartSession.data.info.statistics.all.survived_battles;
-                float fragsPercent = (float)frags / battles;
-                float deaths = (float)battles - survived_battles;
-                float winRate = (float)(wins) / (battles) * 100;
+                float wins = (float)(account.data.info.statistics.all.wins - accountStartSession.data.info.statistics.all.wins);
+                float battles = (float)(account.data.info.statistics.all.battles - accountStartSession.data.info.statistics.all.battles);
+                float frags = (float)(account.data.info.statistics.all.frags - accountStartSession.data.info.statistics.all.frags);
+                float survived_battles = (float)(account.data.info.statistics.all.survived_battles - accountStartSession.data.info.statistics.all.survived_battles);
+                float hits = (float)(account.data.info.statistics.all.hits - accountStartSession.data.info.statistics.all.hits);
+                float shots = (float)(account.data.info.statistics.all.shots - accountStartSession.data.info.statistics.all.shots);
+                float deaths = (float)(battles - survived_battles);
+                float damage_dealt = (float)(account.data.info.statistics.all.damage_dealt - accountStartSession.data.info.statistics.all.damage_dealt);
+                float damage_received = (float)(account.data.info.statistics.all.damage_received - accountStartSession.data.info.statistics.all.damage_received);
+                float spotted = (float)(account.data.info.statistics.all.spotted - accountStartSession.data.info.statistics.all.spotted);
+                float dropped_capture_points = (float)(account.data.info.statistics.all.dropped_capture_points - accountStartSession.data.info.statistics.all.dropped_capture_points);
+                float capture_points = (float)(account.data.info.statistics.all.capture_points - accountStartSession.data.info.statistics.all.capture_points);
+                float winRate = (float)((wins / battles) * 100);
 
-                Console.WriteLine($"Session\n" +
-                    $"Wins/Battles:\t{wins} ({battles})\t({Math.Round(winRate, 2)}%)\n" +
-                    $"Kills:\t\t{frags}\t({fragsPercent})\n" +
-                    $"Deaths:\t\t{deaths}\t({deaths / battles * 100}%)\n" +
-                    $"Hits/Shots:\t\n" +
-                    $"Penetrations:\t\n" +
-                    $"Damage Dealt:\t\n" +
-                    $"Damage Received:\t\n" +
-                    $"Spotted:\t\n" +
-                    $"Defence:\t\n" +
-                    $"Capture:\t\n\n" +
-                    $"С/У:\t{Math.Round((float)(account.data.info.statistics.all.damage_dealt - accountStartSession.data.info.statistics.all.damage_dealt) / (account.data.info.statistics.all.battles - accountStartSession.data.info.statistics.all.battles), 0)}\n");
+                Console.WriteLine($"Session user {account.data.info.nickname}\n" +
+                    $"Wins/Battles:\t{wins} ({battles})\t({Math.Round((wins / battles) * 100, 2).ToString().Replace("не число", "0")}%)\n" +
+                    $"Kills:\t\t{frags}\t({Math.Round(frags / battles, 2).ToString().Replace("не число", "0")})\n" +
+                    $"Deaths:\t\t{deaths}\t({Math.Round((deaths / battles) * 100, 2).ToString().Replace("не число", "0")}%)\n" +
+                    $"Hits/Shots:\t{hits} / {shots}\t({Math.Round((hits / shots) * 100, 2).ToString().Replace("не число", "0")}%)\n" +
+                    $"Damage Dealt:\t{damage_dealt}\t({Math.Round(damage_dealt / battles, 0).ToString().Replace("не число", "0")})\n" +
+                    $"Damage Received:{damage_received}\t({Math.Round(damage_received / battles, 0).ToString().Replace("не число", "0")})\n" +
+                    $"Spotted:\t{spotted}\t({Math.Round(spotted / battles, 2).ToString().Replace("не число", "0")})\n" +
+                    $"Defence:\t{dropped_capture_points}\t({Math.Round(dropped_capture_points / battles, 0).ToString().Replace("не число", "0")})\n" +
+                    $"Capture:\t{capture_points}\t({Math.Round(capture_points / battles, 0).ToString().Replace("не число", "0")})\n\n");
             }
         }
     }
