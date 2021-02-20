@@ -4,6 +4,7 @@ using System.Net.Http;
 using Newtonsoft.Json;
 using System;
 using System.Threading;
+using System.IO;
 
 namespace ConsoleWGAPI
 {
@@ -38,9 +39,34 @@ namespace ConsoleWGAPI
                 int endIndex = json.LastIndexOf(@""":{""statistics""");
                 var str = json.Remove(startIndex, endIndex - startIndex).Insert(startIndex, "info");
                 var account = JsonConvert.DeserializeObject<Account>(str);
-                float WinRate = (float)account.data.info.statistics.all.wins / account.data.info.statistics.all.battles * 100;
+                var accountStartSession = File.Exists("account.json") ? JsonConvert.DeserializeObject<Account>(File.ReadAllText("account.json")) : JsonConvert.DeserializeObject<Account>(str);
 
-                Console.WriteLine($"Ник: {account.data.info.nickname}\nПобеды: {Math.Round(WinRate, 2)}%\nС/У: {Math.Round((float)account.data.info.statistics.all.damage_dealt / account.data.info.statistics.all.battles, 0)}");
+                while (Variables.saveJSON)
+                {
+                    File.WriteAllText("account.json", JsonConvert.SerializeObject(account));
+                    Variables.saveJSON = false;
+                }
+
+                float wins = (float)account.data.info.statistics.all.wins - accountStartSession.data.info.statistics.all.wins;
+                float battles = (float)account.data.info.statistics.all.battles - accountStartSession.data.info.statistics.all.battles;
+                int frags = account.data.info.statistics.all.frags - accountStartSession.data.info.statistics.all.frags;
+                int survived_battles = account.data.info.statistics.all.survived_battles - accountStartSession.data.info.statistics.all.survived_battles;
+                float fragsPercent = (float)frags / battles;
+                float deaths = (float)battles - survived_battles;
+                float winRate = (float)(wins) / (battles) * 100;
+
+                Console.WriteLine($"Session\n" +
+                    $"Wins/Battles:\t{wins} ({battles})\t({Math.Round(winRate, 2)}%)\n" +
+                    $"Kills:\t\t{frags}\t({fragsPercent})\n" +
+                    $"Deaths:\t\t{deaths}\t({deaths / battles * 100}%)\n" +
+                    $"Hits/Shots:\t\n" +
+                    $"Penetrations:\t\n" +
+                    $"Damage Dealt:\t\n" +
+                    $"Damage Received:\t\n" +
+                    $"Spotted:\t\n" +
+                    $"Defence:\t\n" +
+                    $"Capture:\t\n\n" +
+                    $"С/У:\t{Math.Round((float)(account.data.info.statistics.all.damage_dealt - accountStartSession.data.info.statistics.all.damage_dealt) / (account.data.info.statistics.all.battles - accountStartSession.data.info.statistics.all.battles), 0)}\n");
             }
         }
     }
