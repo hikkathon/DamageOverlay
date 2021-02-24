@@ -21,19 +21,19 @@
 
         <materialDesign:DialogHost BorderBrush="{DynamicResource MaterialDesignDivider}">
             <materialDesign:DialogHost.DialogContent>
-                <Grid Width="300" Height="150" HorizontalAlignment="Center">
+                <Grid Width="300" Height="150" HorizontalAlignment="Center" Background="#2D2D30">
                     <StackPanel Orientation="Horizontal" Margin="15">
-                        <materialDesign:PackIcon Kind="Information" Foreground="{StaticResource PrimaryHueMidBrush}" Width="50" Height="50"/>
-                        <TextBlock Foreground="Gray" Width="200" Margin="15 5" TextWrapping="Wrap">
-                                Вы используете мод на свой страх и риск. Что бы быть в курсе новостей по моим модам подпишись на группу https://vk.com/bestofblitz
+                        <materialDesign:PackIcon Kind="Information" Foreground="#008aff" Width="50" Height="50"/>
+                        <TextBlock Foreground="White" Width="200" Margin="15 5" TextWrapping="Wrap">
+                                Что бы быть в курсе новостей подпишись на группу https://vk.com/blitzhubmods
                         </TextBlock>
                     </StackPanel>
                     <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="15">
                         <Button x:Name="btnOpen" Click="btnOpen_Click"  Command="{x:Static materialDesign:DialogHost.CloseDialogCommand}" Style="{DynamicResource MaterialDesignFlatButton}" Margin="4" VerticalAlignment="Center">
-                            Да
+                            Запустить
                         </Button>
                         <Button  Command="{x:Static materialDesign:DialogHost.CloseDialogCommand}" Style="{DynamicResource MaterialDesignFlatButton}" Margin="4" VerticalAlignment="Center">
-                            Нет
+                            Закрыть
                         </Button>
                     </StackPanel>
                 </Grid>

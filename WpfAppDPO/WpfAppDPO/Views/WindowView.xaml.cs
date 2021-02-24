@@ -31,8 +31,6 @@ namespace WpfAppDPO.Views
         public WindowView()
         {
             InitializeComponent();
-            //ImgErr.Opacity = 0.0f;
-            //ImgDone.Opacity = 0.0f;
             this.ShowInTaskbar = false;
             this.DataContext = this;
             try
