@@ -20,7 +20,7 @@ namespace WpfAppDPO
         public static bool onDamag = false;
         public static bool onCheat = false;
         public static int countSend = 0;
-        public static string VersionBuild = "1.6.8.1";
+        public static string VersionBuild = "1.6.9.1";
         public static bool TokenValid = false;
         public static string UriSite = "bestofblitz.noilty.com";
 
