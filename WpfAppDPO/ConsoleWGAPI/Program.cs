@@ -1,18 +1,23 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
+using System.Threading;
 using System.Net.Http;
 using Newtonsoft.Json;
-using System;
-using System.Threading;
 using System.IO;
+using System;
 
 namespace ConsoleWGAPI
 {
     class Program
     {
+        public static bool check = true;
+        public static int count = 0;
+        public static string account_id;
         static void Main(string[] args)
         {
             Console.Title = "WG API TEST";
+            Console.Write("Enter WGID: ");
+            account_id = Console.ReadLine();
             while (true)
             {
                 Task.Run(() => MainAsync());
@@ -30,7 +35,7 @@ namespace ConsoleWGAPI
                 var content = new FormUrlEncodedContent(new[]
                 {
                 new KeyValuePair<string, string>("application_id", "8c4eecab18df2fd980424d5e35dba7bd"),
-                new KeyValuePair<string, string>("account_id", "71941826"),
+                new KeyValuePair<string, string>("account_id", account_id),
                 new KeyValuePair<string, string>("extra", "statistics.rating")
             });
                 var result = await client.PostAsync("/wotb/account/info/", content);
@@ -41,10 +46,10 @@ namespace ConsoleWGAPI
                 var account = JsonConvert.DeserializeObject<Account>(str);
                 var accountStartSession = File.Exists("account.json") ? JsonConvert.DeserializeObject<Account>(File.ReadAllText("account.json")) : JsonConvert.DeserializeObject<Account>(str);
 
-                while (Variables.saveJSON)
+                while (check)
                 {
                     File.WriteAllText("account.json", JsonConvert.SerializeObject(account));
-                    Variables.saveJSON = false;
+                    check = false;
                 }
 
                 float wins = (float)(account.data.info.statistics.all.wins - accountStartSession.data.info.statistics.all.wins);
@@ -61,16 +66,18 @@ namespace ConsoleWGAPI
                 float capture_points = (float)(account.data.info.statistics.all.capture_points - accountStartSession.data.info.statistics.all.capture_points);
                 float winRate = (float)((wins / battles) * 100);
 
+                count++;
+
                 Console.WriteLine($"Session user {account.data.info.nickname}\n" +
                     $"Wins/Battles:\t{wins} ({battles})\t({Math.Round((wins / battles) * 100, 2).ToString().Replace("не число", "0")}%)\n" +
                     $"Kills:\t\t{frags}\t({Math.Round(frags / battles, 2).ToString().Replace("не число", "0")})\n" +
                     $"Deaths:\t\t{deaths}\t({Math.Round((deaths / battles) * 100, 2).ToString().Replace("не число", "0")}%)\n" +
-                    $"Hits/Shots:\t{hits} / {shots}\t({Math.Round((hits / shots) * 100, 2).ToString().Replace("не число", "0")}%)\n" +
+                    $"Hits/Shots:\t{hits}/{shots}\t({Math.Round((hits / shots) * 100, 2).ToString().Replace("не число", "0")}%)\n" +
                     $"Damage Dealt:\t{damage_dealt}\t({Math.Round(damage_dealt / battles, 0).ToString().Replace("не число", "0")})\n" +
                     $"Damage Received:{damage_received}\t({Math.Round(damage_received / battles, 0).ToString().Replace("не число", "0")})\n" +
                     $"Spotted:\t{spotted}\t({Math.Round(spotted / battles, 2).ToString().Replace("не число", "0")})\n" +
                     $"Defence:\t{dropped_capture_points}\t({Math.Round(dropped_capture_points / battles, 0).ToString().Replace("не число", "0")})\n" +
-                    $"Capture:\t{capture_points}\t({Math.Round(capture_points / battles, 0).ToString().Replace("не число", "0")})\n\n");
+                    $"Capture:\t{capture_points}\t({Math.Round(capture_points / battles, 0).ToString().Replace("не число", "0")})\n\n" + count);
             }
         }
     }
