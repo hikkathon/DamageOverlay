@@ -44,7 +44,7 @@ namespace WpfAppDPO
                 ME.GetBaseAddress();
                 WindowView taskWindow = new WindowView();
                 taskWindow.Owner = this;
-                EnterGame.IsEnabled = true;
+                EnterGame.IsEnabled = false;
                 taskWindow.Show();
 
             }
