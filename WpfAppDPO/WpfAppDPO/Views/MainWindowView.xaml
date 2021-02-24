@@ -28,11 +28,11 @@
                                 Что бы быть в курсе новостей подпишись на группу https://vk.com/blitzhubmods
                         </TextBlock>
                     </StackPanel>
-                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="15">
-                        <Button x:Name="btnOpen" Click="btnOpen_Click"  Command="{x:Static materialDesign:DialogHost.CloseDialogCommand}" Style="{DynamicResource MaterialDesignFlatButton}" Margin="4" VerticalAlignment="Center">
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Right"  VerticalAlignment="Bottom" Margin="15">
+                        <Button x:Name="btnOpen" Click="btnOpen_Click" Foreground="White"  Command="{x:Static materialDesign:DialogHost.CloseDialogCommand}" Style="{DynamicResource MaterialDesignFlatButton}" Margin="4" VerticalAlignment="Center">
                             Запустить
                         </Button>
-                        <Button  Command="{x:Static materialDesign:DialogHost.CloseDialogCommand}" Style="{DynamicResource MaterialDesignFlatButton}" Margin="4" VerticalAlignment="Center">
+                        <Button  Command="{x:Static materialDesign:DialogHost.CloseDialogCommand}" Foreground="White" Style="{DynamicResource MaterialDesignFlatButton}" Margin="4" VerticalAlignment="Center">
                             Закрыть
                         </Button>
                     </StackPanel>
