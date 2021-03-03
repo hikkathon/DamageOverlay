@@ -86,17 +86,17 @@
             </Image.Source>
         </Image>
 
-        <StackPanel Grid.Column="3" Grid.Row="1" Grid.RowSpan="6" HorizontalAlignment="Right" Opacity="0.0">
-            <Label x:Name="TextBox1" Content="Sent data: 0">
+        <StackPanel Grid.Column="3" Grid.Row="1" Grid.RowSpan="6" HorizontalAlignment="Right" Opacity="1.0">
+            <Label x:Name="TextBox1">
                 <Label.BitmapEffect>
                     <DropShadowBitmapEffect Color="Black" Opacity=".6"/>
                 </Label.BitmapEffect>
             </Label>
-            <Label x:Name="TextBox2" Content="Validate data: unknown" >
+            <!--<Label x:Name="TextBox2" Content="Validate data: unknown" >
                 <Label.BitmapEffect>
                     <DropShadowBitmapEffect Color="Black" Opacity=".6"/>
                 </Label.BitmapEffect>
-            </Label>
+            </Label>-->
         </StackPanel>
 
         <StackPanel Grid.Column="2" Grid.Row="5" Grid.ColumnSpan="2">

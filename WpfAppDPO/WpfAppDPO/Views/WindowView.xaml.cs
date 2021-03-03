@@ -69,6 +69,8 @@ namespace WpfAppDPO.Views
         // Жизни
         int Health { get { return ME.Health; } }
 
+        int wgID { get { return ME.WGID; } }
+
         public void DataSend()
         {
             try
@@ -81,14 +83,14 @@ namespace WpfAppDPO.Views
                 if (Variables.maxDamage > 30000 || Variables.maxBlocked > 30000)
                 {
                     Variables.onCheat = true;
-                    TextBox2.Content = $"Validate false";
+                    //TextBox2.Content = $"Validate false";
                     ImgErr.Opacity = 1.0f;
                     ImgDone.Opacity = 0.0f;
                 }
                 else
                 {
                     Variables.onCheat = false;
-                    TextBox2.Content = $"Validate true";
+                    //TextBox2.Content = $"Validate true";
                     ImgDone.Opacity = 1.0f;
                     ImgErr.Opacity = 0.0f;
 
@@ -139,6 +141,7 @@ namespace WpfAppDPO.Views
             DamageLabel.Content = (Damage <= 0) ? " 0" : $"{Damage:# ### ###}";
             BlockedLabel.Content = (Blocked <= 0) ? " 0" : $"{Blocked:# ### ###}";
             HealthLabel.Content = (Health <= 0) ? " 0" : $"{Health:# ### ###}";
+            TextBox1.Content = wgID.ToString();
 
             DataSend();
 
@@ -306,6 +309,7 @@ namespace WpfAppDPO.Views
                 PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("CustomLeft"));
             }
         }
+
         private int _height;
         private int _width;
         private int _posX;
