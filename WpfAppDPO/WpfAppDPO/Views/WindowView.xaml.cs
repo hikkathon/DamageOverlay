@@ -31,8 +31,8 @@ namespace WpfAppDPO.Views
         public WindowView()
         {
             InitializeComponent();
-            ImgErr.Opacity = 0.0f;
-            ImgDone.Opacity = 0.0f;
+            //ImgErr.Opacity = 0.0f;
+            //ImgDone.Opacity = 0.0f;
             this.ShowInTaskbar = false;
             this.DataContext = this;
             try
@@ -84,15 +84,15 @@ namespace WpfAppDPO.Views
                 {
                     Variables.onCheat = true;
                     //TextBox2.Content = $"Validate false";
-                    ImgErr.Opacity = 1.0f;
-                    ImgDone.Opacity = 0.0f;
+                    //ImgErr.Opacity = 1.0f;
+                    //ImgDone.Opacity = 0.0f;
                 }
                 else
                 {
                     Variables.onCheat = false;
                     //TextBox2.Content = $"Validate true";
-                    ImgDone.Opacity = 1.0f;
-                    ImgErr.Opacity = 0.0f;
+                    //ImgDone.Opacity = 1.0f;
+                    //ImgErr.Opacity = 0.0f;
 
                     Variables.damageList.Add(Damage);
                     Variables.blockedList.Add(Blocked);
@@ -119,7 +119,7 @@ namespace WpfAppDPO.Views
                     Variables.response2 = JsonConvert.DeserializeObject<AnswerServer>(json);
 
                     //TextBox1.Content += $"SENT TO SERVER #{Variables.countSend}" + "\n" + "DAMAGE: " + Variables.maxDamage + "\n" + "BLOCK: " + Variables.maxBlocked;
-                    TextBox1.Content = $"Send data: {Variables.countSend}\nStatus: {Variables.response2.status}\nMessage: {Variables.response2.message}";
+                    //TextBox1.Content = $"Send data: {Variables.countSend}\nStatus: {Variables.response2.status}\nMessage: {Variables.response2.message}";
 
                     Variables.onDamag = false;
 
@@ -132,7 +132,7 @@ namespace WpfAppDPO.Views
             catch (Exception exc)
             {
                 Variables.countSend = 0;
-                TextBox1.Content = $"Send data error:  + {exc.Message}\nStatus: {Variables.response2.status}\nMessage: {Variables.response2.message}";
+                //TextBox1.Content = $"Send data error:  + {exc.Message}\nStatus: {Variables.response2.status}\nMessage: {Variables.response2.message}";
             }
         }
 
@@ -140,8 +140,8 @@ namespace WpfAppDPO.Views
         {
             DamageLabel.Content = (Damage <= 0) ? " 0" : $"{Damage:# ### ###}";
             BlockedLabel.Content = (Blocked <= 0) ? " 0" : $"{Blocked:# ### ###}";
-            HealthLabel.Content = (Health <= 0) ? " 0" : $"{Health:# ### ###}";
-            TextBox1.Content = wgID.ToString();
+            //HealthLabel.Content = (Health <= 0) ? " 0" : $"{Health:# ### ###}";
+            //TextBox1.Content = wgID.ToString();
 
             DataSend();
 
@@ -316,6 +316,18 @@ namespace WpfAppDPO.Views
         private int _PosY;
 
         #endregion
+
+        private void BtnSetting_Click(object sender, RoutedEventArgs e)
+        {
+            if (RightGrid.Visibility == Visibility.Hidden)
+            {
+                RightGrid.Visibility = Visibility.Visible;
+            }
+            else
+            {
+                RightGrid.Visibility = Visibility.Hidden;
+            }
+        }
     }
     public class Asimut : OnPropertyChangedClass
     {

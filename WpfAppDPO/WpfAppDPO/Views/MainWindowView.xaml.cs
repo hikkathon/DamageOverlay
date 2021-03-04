@@ -69,7 +69,7 @@ namespace WpfAppDPO
                         MessageBox.Show($"Welcome {Variables.response.User.wg_nickname}", $"Success!", MessageBoxButton.OK, MessageBoxImage.Information);
                         ME.GetBaseAddress();
                         WindowView taskWindow = new WindowView();
-                        taskWindow.Owner = this;
+                        //taskWindow.Owner = this;
                         taskWindow.Show();
                     }
                     else

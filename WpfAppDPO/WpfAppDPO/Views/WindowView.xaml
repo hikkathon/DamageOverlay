@@ -5,6 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WpfAppDPO.Views"
         mc:Ignorable="d"
+        xmlns:fa="http://schemas.fontawesome.com/icons/"
         Title="WindowOverlayView" 
         Height="{Binding CustomHeight, Mode=TwoWay}" 
         Width="{Binding CustomWidth, Mode=TwoWay}" 
@@ -21,6 +22,67 @@
                 Property="TextElement.FontFamily" 
                 Value="/Assets/Fonts/WarHeliosCondCBold.ttf #WarHeliosCondCBold"/>
         </Style>
+        <!-- Стиль для  ComboboxButton -->
+        <Style x:Key="ComboboxButton" TargetType="Button">
+            <Setter Property="OverridesDefaultStyle" Value="True"/>
+            <Setter Property="Background" Value="#FF1B1F29"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border x:Name="border" 
+                                BorderThickness="0" 
+                                BorderBrush="Black" 
+                                Background="{TemplateBinding Background}">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <EventTrigger RoutedEvent="PreviewMouseDown">
+                                <BeginStoryboard>
+                                    <Storyboard>
+                                        <ThicknessAnimation Storyboard.TargetProperty="Margin"
+                                                            Duration="0:0:0.100" To="2 2 0 0"/>
+                                    </Storyboard>
+                                </BeginStoryboard>
+                            </EventTrigger>
+                            <EventTrigger RoutedEvent="PreviewMouseUp">
+                                <BeginStoryboard>
+                                    <Storyboard>
+                                        <ThicknessAnimation Storyboard.TargetProperty="Margin"
+                                                            Duration="0:0:0.100" To="0"/>
+                                    </Storyboard>
+                                </BeginStoryboard>
+                            </EventTrigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <!-- Стиль для Button в  ComboboxButton -->
+        <Style x:Key="CmbBtn" TargetType="Button">
+            <Setter Property="OverridesDefaultStyle" Value="True"/>
+            <Setter Property="Background" Value="#FF272E3B"/>
+            <Setter Property="Height" Value="25"/>
+            <Setter Property="Foreground" Value="#FF929496"/>
+            <Setter Property="FontSize" Value="13"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border x:Name="border" 
+                                BorderThickness="0" 
+                                BorderBrush="Black" 
+                                Background="{TemplateBinding Background}">
+                            <ContentPresenter HorizontalAlignment="Left" VerticalAlignment="Center" Margin="30 0 0 0"/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Background" Value="#FF323945"/>
+                                <Setter Property="Foreground" Value="#FFC3C4C8"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
     </Window.Resources>
 
     <Window.Background>
@@ -29,8 +91,195 @@
 
     <Grid ShowGridLines="False">
         <Grid.RowDefinitions>
+            <RowDefinition Height="181"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        
+        <!-- Контейнер для списков игроков -->
+        <Grid Grid.Row="0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+
+            <Label x:Name="Player_1" Grid.Row="0" Grid.Column="0" Content="unknown" Visibility="Visible" HorizontalAlignment="Left" Foreground="White" Style="{StaticResource CustomFont}"/>
+            <Label x:Name="Player_2" Grid.Row="1" Grid.Column="0" Content="unknown" Visibility="Visible" HorizontalAlignment="Left" Foreground="White" Style="{StaticResource CustomFont}"/>
+            <Label x:Name="Player_3" Grid.Row="2" Grid.Column="0" Content="unknown" Visibility="Visible" HorizontalAlignment="Left" Foreground="White" Style="{StaticResource CustomFont}"/>
+            <Label x:Name="Player_4" Grid.Row="3" Grid.Column="0" Content="unknown" Visibility="Visible" HorizontalAlignment="Left" Foreground="White" Style="{StaticResource CustomFont}"/>
+            <Label x:Name="Player_5" Grid.Row="4" Grid.Column="0" Content="unknown" Visibility="Visible" HorizontalAlignment="Left" Foreground="White" Style="{StaticResource CustomFont}"/>
+            <Label x:Name="Player_6" Grid.Row="5" Grid.Column="0" Content="unknown" Visibility="Visible" HorizontalAlignment="Left" Foreground="White" Style="{StaticResource CustomFont}"/>
+            <Label x:Name="Player_7" Grid.Row="6" Grid.Column="0" Content="unknown" Visibility="Visible" HorizontalAlignment="Left" Foreground="White" Style="{StaticResource CustomFont}"/>
+
+            <Label x:Name="Player_8" Grid.Row="0" Grid.Column="1" Content="unknown" Visibility="Visible" HorizontalAlignment="Right" Foreground="White" Style="{StaticResource CustomFont}"/>
+            <Label x:Name="Player_9" Grid.Row="1" Grid.Column="1" Content="unknown" Visibility="Visible" HorizontalAlignment="Right" Foreground="White" Style="{StaticResource CustomFont}"/>
+            <Label x:Name="Player_10" Grid.Row="2" Grid.Column="1" Content="unknown" Visibility="Visible" HorizontalAlignment="Right" Foreground="White" Style="{StaticResource CustomFont}"/>
+            <Label x:Name="Player_11" Grid.Row="3" Grid.Column="1" Content="unknown" Visibility="Visible" HorizontalAlignment="Right" Foreground="White" Style="{StaticResource CustomFont}"/>
+            <Label x:Name="Player_12" Grid.Row="4" Grid.Column="1" Content="unknown" Visibility="Visible" HorizontalAlignment="Right" Foreground="White" Style="{StaticResource CustomFont}"/>
+            <Label x:Name="Player_13" Grid.Row="5" Grid.Column="1" Content="unknown" Visibility="Visible" HorizontalAlignment="Right" Foreground="White" Style="{StaticResource CustomFont}"/>
+            <Label x:Name="Player_14" Grid.Row="6" Grid.Column="1" Content="unknown" Visibility="Visible" HorizontalAlignment="Right" Foreground="White" Style="{StaticResource CustomFont}"/>
+        </Grid>
+        
+        <!-- Контейнер для плашки нанесенного/заблокированного урона -->
+        <Grid Grid.Row="1">
+            <Image x:Name="imgAssistant" Grid.Column="1" Grid.Row="1"  Source="/Assets/Images/UI WOTB Assistant.png" Width="140" Height="90" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0 10 0 0" Opacity=".9"/>
+            <Label x:Name="DamageLabel" Content="unknown" Style="{StaticResource CustomFont}" Foreground="White" FontSize="18" FontWeight="Bold" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="30 9 0 0" Opacity=".9"/>
+            <Label x:Name="BlockedLabel" Content="unknown" Style="{StaticResource CustomFont}" Foreground="White" FontSize="18" FontWeight="Bold" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="30 33 0 0" Opacity=".9"/>
+        </Grid>
+
+        <!-- Контейнер для послебоевой статистики -->
+        <Grid Grid.Row="2">
+            
+            <!-- Custom ComboBox Button -->
+            <Border x:Name="CbmBorder2"
+                    HorizontalAlignment="Right" 
+                    VerticalAlignment="Bottom" 
+                    Background="Black"
+                    BorderThickness="1"
+                    CornerRadius="2"
+                    Margin="0 0 10 10"
+                    Grid.Row="2" 
+                    Height="24" 
+                    Width="25"
+                    Cursor="Hand">
+                <Border.Style>
+                    <Style TargetType="{x:Type Border}">
+                        <Setter Property="BorderBrush" Value="#FF333842"/>
+                        <Style.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="BorderBrush" Value="#FF51555C"/>
+                            </Trigger>
+                            <EventTrigger RoutedEvent="PreviewMouseDown">
+                                <BeginStoryboard>
+                                    <Storyboard>
+                                        <ColorAnimation Storyboard.TargetProperty="BorderBrush.Color"
+                                                        Duration="0:0:0.100" To="#FF333842"/>
+                                    </Storyboard>
+                                </BeginStoryboard>
+                            </EventTrigger>
+                            <EventTrigger RoutedEvent="PreviewMouseUp">
+                                <BeginStoryboard>
+                                    <Storyboard>
+                                        <ColorAnimation Storyboard.TargetProperty="BorderBrush.Color"
+                                                        Duration="0:0:0.100" To="#FF51555C"/>
+                                    </Storyboard>
+                                </BeginStoryboard>
+                            </EventTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </Border.Style>
+                <Button x:Name="BtnSetting" Style="{StaticResource ComboboxButton}" Click="BtnSetting_Click">
+                    <StackPanel Orientation="Horizontal">
+                        <fa:ImageAwesome Icon="Solid_Cog" 
+                                     Width="15" Height="14" 
+                                     Foreground="White">
+                            <fa:ImageAwesome.Style>
+                                <Style TargetType="{x:Type fa:ImageAwesome}">
+                                    <Setter Property="Opacity" Value="0.3"/>
+                                    <Style.Triggers>
+                                        <DataTrigger Binding="{Binding Path = IsMouseOver, ElementName = CbmBorder2}" 
+                                                         Value="True">
+                                            <Setter Property="Opacity" Value="0.5"/>
+                                        </DataTrigger>
+                                        <DataTrigger Binding="{Binding RelativeSource={RelativeSource FindAncestor, 
+                                                AncestorType={x:Type Button},AncestorLevel=1},Path=IsPressed}" Value="True">
+                                            <Setter Property="Opacity" Value="0.3"/>
+                                        </DataTrigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </fa:ImageAwesome.Style>
+                        </fa:ImageAwesome>
+                    </StackPanel>
+                </Button>
+            </Border>
+            
+            <!--  Выподающие меню настроек right -->
+            <Grid x:Name="RightGrid" 
+                  HorizontalAlignment="Right" 
+                  VerticalAlignment="Bottom" 
+                  Margin="0 0 5 35"
+                  Height="130" 
+                  Width="310"
+                  Visibility="Hidden"
+                  Panel.ZIndex="999">
+                <Polygon Fill="#FF0C0101" 
+                         StrokeThickness="2" 
+                         Stroke="#000000"
+                         HorizontalAlignment="Center"
+                         Points="0,8,
+                         0,120,
+                         280,120,
+                         288,128,
+                         295,120,
+                         300,120
+                         300,8,
+                         295,8,
+                         279,8"/>
+                <Polygon Fill="#FF272E3B" 
+                         StrokeThickness="1" 
+                         Stroke="#FF40454E"
+                         HorizontalAlignment="Center"
+                         Points="0,8,
+                         0,120,
+                         280,120,
+                         288,128,
+                         295,120,
+                         300,120
+                         300,8,
+                         295,8,
+                         279,8"/>
+                <Grid Height="132" Width="299" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0 10 0 0">
+                    <StackPanel Orientation="Vertical">
+                        <Button Style="{StaticResource CmbBtn}">
+                            <TextBlock Text="Использовать мой последний статус"/>
+                        </Button>
+                        <Button Style="{StaticResource CmbBtn}">
+                            <TextBlock Text="Невидимый"/>
+                        </Button>
+                        <Polygon Fill="White" Points="0,3,310,3" StrokeThickness="1" Stroke="#FF40454E"/>
+                        <Button Style="{StaticResource CmbBtn}" Margin="0 3 0 0">
+                            <Grid Width="299" Margin="-30 0 0 0">
+                                <TextBlock Text="Настойки" Margin="30 0 0 0"/>
+                                <fa:ImageAwesome Icon="Solid_Cog" 
+                                     Width="13" Height="13" 
+                                     Foreground="White"
+                                     Margin="10 0 0 0" 
+                                     HorizontalAlignment="Left"
+                                     Opacity=".3"/>
+                            </Grid>
+                        </Button>
+                        <Button Style="{StaticResource CmbBtn}" Margin="0 3 0 0">
+                            <Grid Width="299" Margin="-30 0 0 0">
+                                <TextBlock Text="Продолжить без авторизации" Margin="30 0 0 0"/>
+                                <fa:ImageAwesome Icon="Solid_WaveSquare" 
+                                     Width="13" Height="13" 
+                                     Foreground="White"
+                                     Margin="10 0 0 0" 
+                                     HorizontalAlignment="Left"
+                                     Opacity=".3"/>
+                            </Grid>
+                        </Button>
+                    </StackPanel>
+                </Grid>
+            </Grid>
+            
+        </Grid>
+    </Grid>
+
+    <!--
+    <Grid ShowGridLines="False">
+        <Grid.RowDefinitions>
             <RowDefinition Height="{Binding CustomLocateY}"></RowDefinition>
-            <!-- 210 -->
+            --><!-- 210 --><!--
             <RowDefinition Height="90"></RowDefinition>
             <RowDefinition></RowDefinition>
             <RowDefinition></RowDefinition>
@@ -46,25 +295,25 @@
         <Image x:Name="imgAssistant" Grid.Column="1" Grid.Row="1"  Source="/Assets/Images/UI WOTB Assistant.png" Width="140" Margin="0,0,10,0"/>
 
         <Label x:Name="DamageLabel" Content="unknown" Style="{StaticResource CustomFont}" Foreground="White" FontSize="18" FontWeight="Bold" Margin="28,6,97,53" Grid.Column="1" Grid.ColumnSpan="2" Grid.Row="1">
-            <!--<Label.BitmapEffect>
+            --><!--<Label.BitmapEffect>
                 <DropShadowBitmapEffect Color="Black" Opacity=".6"/>
-            </Label.BitmapEffect>-->
+            </Label.BitmapEffect>--><!--
         </Label>
 
         <Label x:Name="BlockedLabel" Content="unknown" Style="{StaticResource CustomFont}" Foreground="White" FontSize="18" FontWeight="Bold" Margin="28,29,97,30" Grid.Column="1" Grid.ColumnSpan="2" Grid.Row="1">
-            <!--<Label.BitmapEffect>
+            --><!--<Label.BitmapEffect>
                 <DropShadowBitmapEffect Color="Black" Opacity=".6"/>
-            </Label.BitmapEffect>-->
+            </Label.BitmapEffect>--><!--
         </Label>
-
+        --><!--<Button Content="Button" Width="auto" Height="auto" Opacity=".5" IsHitTestVisible="False"/>--><!--
         <Label x:Name="HealthLabel" Opacity="0.0" Content="unknown" Style="{StaticResource CustomFont}" Foreground="White" FontSize="18" FontWeight="Bold" Margin="28,52,97,7" Grid.Column="1" Grid.ColumnSpan="2" Grid.Row="1">
-            <!--<Label.BitmapEffect>
+            --><!--<Label.BitmapEffect>
                 <DropShadowBitmapEffect Color="Black" Opacity=".6"/>
-            </Label.BitmapEffect>-->
+            </Label.BitmapEffect>--><!--
         </Label>
 
-        <!--<Label x:Name="DamageLabel" Grid.Column="1" Content="unknown"  FontSize="17" Foreground="#FFFFFF" Margin="30,15,301,44" FontFamily="Arial" RenderTransformOrigin="0.586,-0.361" FontWeight="Bold" Grid.ColumnSpan="3" Grid.Row="1" />
-        <Label x:Name="BlockedLabel" Grid.Column="1" Grid.Row="1" Content="unknown"  FontSize="17" Foreground="#FFFFFF" Margin="30,46,301,14" FontFamily="Arial" FontWeight="Bold" Grid.ColumnSpan="3" />-->
+        --><!--<Label x:Name="DamageLabel" Grid.Column="1" Content="unknown"  FontSize="17" Foreground="#FFFFFF" Margin="30,15,301,44" FontFamily="Arial" RenderTransformOrigin="0.586,-0.361" FontWeight="Bold" Grid.ColumnSpan="3" Grid.Row="1" />
+        <Label x:Name="BlockedLabel" Grid.Column="1" Grid.Row="1" Content="unknown"  FontSize="17" Foreground="#FFFFFF" Margin="30,46,301,14" FontFamily="Arial" FontWeight="Bold" Grid.ColumnSpan="3" />--><!--
 
         <Image x:Name="ImgErr" 
                    HorizontalAlignment="Right" 
@@ -92,11 +341,11 @@
                     <DropShadowBitmapEffect Color="Black" Opacity=".6"/>
                 </Label.BitmapEffect>
             </Label>
-            <!--<Label x:Name="TextBox2" Content="Validate data: unknown" >
+            --><!--<Label x:Name="TextBox2" Content="Validate data: unknown" >
                 <Label.BitmapEffect>
                     <DropShadowBitmapEffect Color="Black" Opacity=".6"/>
                 </Label.BitmapEffect>
-            </Label>-->
+            </Label>--><!--
         </StackPanel>
 
         <StackPanel Grid.Column="2" Grid.Row="5" Grid.ColumnSpan="2">
@@ -105,7 +354,7 @@
                 <local:Asimut x:Key="Asimut" Image="{StaticResource Image}"/>
             </StackPanel.Resources>
 
-            <!--<Border  BorderThickness="1" HorizontalAlignment="Center">
+            --><!--<Border  BorderThickness="1" HorizontalAlignment="Center">
                 <Canvas Width="{Binding Image.Width, Mode=OneWay, Source={StaticResource Asimut}}"
                             Height="{Binding Image.Height, Mode=OneWay, Source={StaticResource Asimut}}"
                             ClipToBounds="True">
@@ -114,7 +363,8 @@
                         <Image Source="{Binding Image, Source={StaticResource Asimut}}"/>
                     </StackPanel>
                 </Canvas>
-            </Border>-->
+            </Border>--><!--
         </StackPanel>
     </Grid>
+    -->
 </Window>
