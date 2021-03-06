@@ -71,6 +71,7 @@ namespace WpfAppDPO
                         WindowView taskWindow = new WindowView();
                         //taskWindow.Owner = this;
                         taskWindow.Show();
+                        this.Close();
                     }
                     else
                     {

@@ -95,9 +95,9 @@
             <RowDefinition Height="*"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
-        
+
         <!-- Контейнер для списков игроков -->
-        <Grid Grid.Row="0">
+        <Grid x:Name="GridPlayerList" Visibility="Hidden" Grid.Row="0">
             <Grid.RowDefinitions>
                 <RowDefinition Height="*"/>
                 <RowDefinition Height="*"/>
@@ -128,9 +128,9 @@
             <Label x:Name="Player_13" Grid.Row="5" Grid.Column="1" Content="unknown" Visibility="Visible" HorizontalAlignment="Right" Foreground="White" Style="{StaticResource CustomFont}"/>
             <Label x:Name="Player_14" Grid.Row="6" Grid.Column="1" Content="unknown" Visibility="Visible" HorizontalAlignment="Right" Foreground="White" Style="{StaticResource CustomFont}"/>
         </Grid>
-        
+
         <!-- Контейнер для плашки нанесенного/заблокированного урона -->
-        <Grid Grid.Row="1">
+        <Grid x:Name="GridDamagePanel" Grid.Row="1">
             <Image x:Name="imgAssistant" Grid.Column="1" Grid.Row="1"  Source="/Assets/Images/UI WOTB Assistant.png" Width="140" Height="90" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0 10 0 0" Opacity=".9"/>
             <Label x:Name="DamageLabel" Content="unknown" Style="{StaticResource CustomFont}" Foreground="White" FontSize="18" FontWeight="Bold" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="30 9 0 0" Opacity=".9"/>
             <Label x:Name="BlockedLabel" Content="unknown" Style="{StaticResource CustomFont}" Foreground="White" FontSize="18" FontWeight="Bold" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="30 33 0 0" Opacity=".9"/>
@@ -138,7 +138,7 @@
 
         <!-- Контейнер для послебоевой статистики -->
         <Grid Grid.Row="2">
-            
+
             <!-- Custom ComboBox Button -->
             <Border x:Name="CbmBorder2"
                     HorizontalAlignment="Right" 
@@ -201,7 +201,7 @@
                     </StackPanel>
                 </Button>
             </Border>
-            
+
             <!--  Выподающие меню настроек right -->
             <Grid x:Name="RightGrid" 
                   HorizontalAlignment="Right" 
@@ -239,28 +239,84 @@
                          279,8"/>
                 <Grid Height="132" Width="299" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0 10 0 0">
                     <StackPanel Orientation="Vertical">
-                        <Button Style="{StaticResource CmbBtn}">
-                            <TextBlock Text="Использовать мой последний статус"/>
+                        <Button x:Name="BtnLoadStats" Style="{StaticResource CmbBtn}" Click="BtnLoadStats_Click">
+                            <TextBlock Text="Загрузить статистику"/>
                         </Button>
                         <Button Style="{StaticResource CmbBtn}">
-                            <TextBlock Text="Невидимый"/>
+                            <TextBlock Text="О Программе"/>
                         </Button>
                         <Polygon Fill="White" Points="0,3,310,3" StrokeThickness="1" Stroke="#FF40454E"/>
                         <Button Style="{StaticResource CmbBtn}" Margin="0 3 0 0">
                             <Grid Width="299" Margin="-30 0 0 0">
-                                <TextBlock Text="Настойки" Margin="30 0 0 0"/>
-                                <fa:ImageAwesome Icon="Solid_Cog" 
-                                     Width="13" Height="13" 
-                                     Foreground="White"
-                                     Margin="10 0 0 0" 
-                                     HorizontalAlignment="Left"
-                                     Opacity=".3"/>
+                                <TextBlock Text="Урон/Блок" Margin="30 0 0 0" VerticalAlignment="Center"/>
+                                <ToggleButton x:Name="toggleButton" IsChecked="True"
+                                  Grid.Row="2" 
+                                  Height="30" 
+                                  Width="20" 
+                                  HorizontalAlignment="Left" 
+                                  VerticalAlignment="Center" 
+                                  Margin="5 0 0 0"
+                                  Foreground="#FFACB3BF" Click="toggleButton_Click">
+                                    <ToggleButton.Template>
+                                        <ControlTemplate TargetType="{x:Type ToggleButton}">
+                                            <StackPanel Orientation="Horizontal">
+                                                <Border Background="Black" HorizontalAlignment="Left"
+                                                    BorderThickness="1"
+                                                    CornerRadius="2" 
+                                                    Height="20" 
+                                                    Width="20">
+                                                    <Border.Style>
+                                                        <Style TargetType="{x:Type Border}">
+                                                            <Setter Property="BorderBrush" Value="#FF333842"/>
+                                                            <Style.Triggers>
+                                                                <Trigger Property="IsMouseOver" Value="True">
+                                                                    <Setter Property="BorderBrush" Value="#FF51555C"/>
+                                                                </Trigger>
+                                                                <EventTrigger RoutedEvent="PreviewMouseDown">
+                                                                    <BeginStoryboard>
+                                                                        <Storyboard>
+                                                                            <ColorAnimation Storyboard.TargetProperty="BorderBrush.Color"
+                                                                                Duration="0:0:0.100" To="#FF333842"/>
+                                                                        </Storyboard>
+                                                                    </BeginStoryboard>
+                                                                </EventTrigger>
+                                                                <EventTrigger RoutedEvent="PreviewMouseUp">
+                                                                    <BeginStoryboard>
+                                                                        <Storyboard>
+                                                                            <ColorAnimation Storyboard.TargetProperty="BorderBrush.Color"
+                                                                                Duration="0:0:0.100" To="#FF51555C"/>
+                                                                        </Storyboard>
+                                                                    </BeginStoryboard>
+                                                                </EventTrigger>
+                                                            </Style.Triggers>
+                                                        </Style>
+                                                    </Border.Style>
+                                                    <Image Margin="4" Opacity=".3">
+                                                        <Image.Style>
+                                                            <Style>
+                                                                <Style.Triggers>
+                                                                    <DataTrigger Binding="{Binding IsChecked, 
+                                                                         RelativeSource = {RelativeSource AncestorType = {x:Type ToggleButton}}}" 
+                                                                         Value = "true">
+                                                                        <Setter Property="Image.Source" Value="/Assets/Images/Check.png"/>
+                                                                    </DataTrigger>
+                                                                </Style.Triggers>
+                                                            </Style>
+                                                        </Image.Style>
+                                                    </Image>
+                                                </Border>
+                                                <ContentPresenter Content="{TemplateBinding Content}" Margin="10 0 0 0" 
+                                                  VerticalAlignment="Center" HorizontalAlignment="Left"/>
+                                            </StackPanel>
+                                        </ControlTemplate>
+                                    </ToggleButton.Template>
+                                </ToggleButton>
                             </Grid>
                         </Button>
-                        <Button Style="{StaticResource CmbBtn}" Margin="0 3 0 0">
+                        <Button x:Name="BtnCloseOverlay" Style="{StaticResource CmbBtn}" Margin="0 3 0 0" Click="BtnCloseOverlay_Click">
                             <Grid Width="299" Margin="-30 0 0 0">
-                                <TextBlock Text="Продолжить без авторизации" Margin="30 0 0 0"/>
-                                <fa:ImageAwesome Icon="Solid_WaveSquare" 
+                                <TextBlock Text="Закрыть" Margin="30 0 0 0"/>
+                                <fa:ImageAwesome Icon="Regular_WindowClose" 
                                      Width="13" Height="13" 
                                      Foreground="White"
                                      Margin="10 0 0 0" 
@@ -271,7 +327,12 @@
                     </StackPanel>
                 </Grid>
             </Grid>
-            
+
+        </Grid>
+
+        <!-- Контейнер для скрывающего блока -->
+        <Grid Grid.RowSpan="3" x:Name="GridInvisibleBlock" Visibility="Hidden">
+            <Image Source="/Assets/Images/block.png" Width="160" Height="286" Margin="60 0 0 60" Opacity="1"/>
         </Grid>
     </Grid>
 

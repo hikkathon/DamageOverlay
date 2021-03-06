@@ -24,6 +24,9 @@ namespace WpfAppDPO
         public static bool TokenValid = false;
         public static string UriSite = "bestofblitz.noilty.com";
 
+        public static List<string> nicks = new List<string>(); // Ники игроков полученные из картинки
+        public static List<Models.PlayerWG.Player> players = new List<Models.PlayerWG.Player>(); // Список ников игроков
+
         public static Root response;
         public static AnswerServer response2;
     }

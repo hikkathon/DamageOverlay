@@ -10,6 +10,7 @@ using System.Net;
 using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading;
+using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
@@ -56,6 +57,7 @@ namespace WpfAppDPO.Views
             dt.Tick += ME.DamageBlocked;
             dt.Tick += WindowSize;
             dt.Tick += LocatePanel;
+            dt.Tick += ShowPrechentage;
 
             dt.Start();
         }
@@ -188,6 +190,176 @@ namespace WpfAppDPO.Views
             //        BlockedLabel.Foreground = new SolidColorBrush(Color.FromRgb(255, 204, 165));
             //        break;
             //}
+        }
+
+        public void ShowPrechentage(object sender, EventArgs e)
+        {
+            if(Variables.players.Count > 0)
+            {
+                for(int i = 0; i < Variables.players.Count; i++)
+                {
+                    switch (i)
+                    {
+                        case 0:
+                            // TODO: 
+                            if (Variables.players.ElementAt(i).status == "ok" && Variables.players.ElementAt(i).data.Count > 0)
+                            {
+                                Player_1.Content = Variables.players.ElementAt(i).data.ElementAt(0).nickname;
+                            }
+                            else
+                            {
+                                Player_1.Content = "err";
+                            }
+                            break;
+                        case 1:
+                            // TODO: 
+                            if (Variables.players.ElementAt(i).status == "ok" && Variables.players.ElementAt(i).data.Count > 0)
+                            {
+                                Player_2.Content = Variables.players.ElementAt(i).data.ElementAt(0).nickname;
+                            }
+                            else
+                            {
+                                Player_2.Content = "err";
+                            }
+                            break;
+                        case 2:
+                            // TODO: 
+                            if (Variables.players.ElementAt(i).status == "ok" && Variables.players.ElementAt(i).data.Count > 0)
+                            {
+                                Player_3.Content = Variables.players.ElementAt(i).data.ElementAt(0).nickname;
+                            }
+                            else
+                            {
+                                Player_3.Content = "err";
+                            }
+                            break;
+                        case 3:
+                            // TODO: 
+                            if (Variables.players.ElementAt(i).status == "ok" && Variables.players.ElementAt(i).data.Count > 0)
+                            {
+                                Player_4.Content = Variables.players.ElementAt(i).data.ElementAt(0).nickname;
+                            }
+                            else
+                            {
+                                Player_4.Content = "err";
+                            }
+                            break;
+                        case 4:
+                            // TODO: 
+                            if (Variables.players.ElementAt(i).status == "ok" && Variables.players.ElementAt(i).data.Count > 0)
+                            {
+                                Player_5.Content = Variables.players.ElementAt(i).data.ElementAt(0).nickname;
+                            }
+                            else
+                            {
+                                Player_5.Content = "err";
+                            }
+                            break;
+                        case 5:
+                            // TODO: 
+                            if (Variables.players.ElementAt(i).status == "ok" && Variables.players.ElementAt(i).data.Count > 0)
+                            {
+                                Player_6.Content = Variables.players.ElementAt(i).data.ElementAt(0).nickname;
+                            }
+                            else
+                            {
+                                Player_6.Content = "err";
+                            }
+                            break;
+                        case 6:
+                            // TODO: 
+                            if (Variables.players.ElementAt(i).status == "ok" && Variables.players.ElementAt(i).data.Count > 0)
+                            {
+                                Player_7.Content = Variables.players.ElementAt(i).data.ElementAt(0).nickname;
+                            }
+                            else
+                            {
+                                Player_7.Content = "err";
+                            }
+                            break;
+                        case 7:
+                            // TODO: 
+                            if (Variables.players.ElementAt(i).status == "ok" && Variables.players.ElementAt(i).data.Count > 0)
+                            {
+                                Player_8.Content = Variables.players.ElementAt(i).data.ElementAt(0).nickname;
+                            }
+                            else
+                            {
+                                Player_8.Content = "err";
+                            }
+                            break;
+                        case 8:
+                            // TODO: 
+                            if (Variables.players.ElementAt(i).status == "ok" && Variables.players.ElementAt(i).data.Count > 0)
+                            {
+                                Player_9.Content = Variables.players.ElementAt(i).data.ElementAt(0).nickname;
+                            }
+                            else
+                            {
+                                Player_9.Content = "err";
+                            }
+                            break;
+                        case 9:
+                            // TODO: 
+                            if (Variables.players.ElementAt(i).status == "ok" && Variables.players.ElementAt(i).data.Count > 0)
+                            {
+                                Player_10.Content = Variables.players.ElementAt(i).data.ElementAt(0).nickname;
+                            }
+                            else
+                            {
+                                Player_10.Content = "err";
+                            }
+                            break;
+                        case 10:
+                            // TODO: 
+                            if (Variables.players.ElementAt(i).status == "ok" && Variables.players.ElementAt(i).data.Count > 0)
+                            {
+                                Player_11.Content = Variables.players.ElementAt(i).data.ElementAt(0).nickname;
+                            }
+                            else
+                            {
+                                Player_11.Content = "err";
+                            }
+                            break;
+                        case 11:
+                            // TODO: 
+                            if (Variables.players.ElementAt(i).status == "ok" && Variables.players.ElementAt(i).data.Count > 0)
+                            {
+                                Player_12.Content = Variables.players.ElementAt(i).data.ElementAt(0).nickname;
+                            }
+                            else
+                            {
+                                Player_12.Content = "err";
+                            }
+                            break;
+                        case 12:
+                            // TODO:
+                            if (Variables.players.ElementAt(i).status == "ok" && Variables.players.ElementAt(i).data.Count > 0)
+                            {
+                                Player_13.Content = Variables.players.ElementAt(i).data.ElementAt(0).nickname;
+                            }
+                            else
+                            {
+                                Player_13.Content = "err";
+                            }
+                            break;
+                        case 13:
+                            // TODO: 
+                            if (Variables.players.ElementAt(i).status == "ok" && Variables.players.ElementAt(i).data.Count > 0)
+                            {
+                                Player_14.Content = Variables.players.ElementAt(i).data.ElementAt(0).nickname;
+                            }
+                            else
+                            {
+                                Player_14.Content = "err";
+                            }
+                            break;
+                        default:
+                            // TODO: 
+                            break;
+                    }
+                }
+            }
         }
 
         public event PropertyChangedEventHandler PropertyChanged;
@@ -326,6 +498,39 @@ namespace WpfAppDPO.Views
             else
             {
                 RightGrid.Visibility = Visibility.Hidden;
+            }
+        }
+
+        private void BtnCloseOverlay_Click(object sender, RoutedEventArgs e)
+        {
+            Close();
+        }
+
+        WhiteWindow taskWindow = new WhiteWindow();
+        SearchTeam searchTeam = new SearchTeam();
+        private void BtnLoadStats_Click(object sender, RoutedEventArgs e)
+        {
+            GridPlayerList.Visibility = Visibility.Visible;
+
+            taskWindow.Owner = this;
+            taskWindow.Show();
+            searchTeam.Screenshot();
+            searchTeam.ScanImageOrc();
+            //taskWindow.Close();
+            taskWindow.Visibility = Visibility.Hidden;
+
+            Task.Run(() => SearchPlayer.SearchWG());
+        }
+
+        private void toggleButton_Click(object sender, RoutedEventArgs e)
+        {
+            if (toggleButton.IsChecked == true)
+            {
+                GridDamagePanel.Visibility = Visibility.Visible;
+            }
+            else
+            {
+                GridDamagePanel.Visibility = Visibility.Hidden;
             }
         }
     }
