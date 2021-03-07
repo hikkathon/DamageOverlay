@@ -1,5 +1,7 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -26,6 +28,9 @@ namespace WpfAppDPO
 
         public static List<string> nicks = new List<string>(); // Ники игроков полученные из картинки
         public static List<Models.PlayerWG.Player> players = new List<Models.PlayerWG.Player>(); // Список ников игроков
+        public static List<Account> accounts = new List<Account>(); // Список аккаунтов игроков
+
+        public static Account DefaultJson = JsonConvert.DeserializeObject<Account>(File.ReadAllText("Default.json"));
 
         public static Root response;
         public static AnswerServer response2;

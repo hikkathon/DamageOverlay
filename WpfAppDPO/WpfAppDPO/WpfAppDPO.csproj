@@ -115,6 +115,7 @@
     <Compile Include="Models\AnswerServer.cs" />
     <Compile Include="Models\MemoryEditor.cs" />
     <Compile Include="Models\Player.cs" />
+    <Compile Include="Models\ScrapDataPlayer.cs" />
     <Compile Include="Models\SearchPlayer.cs" />
     <Compile Include="Models\SearchTeam.cs" />
     <Compile Include="Models\User.cs" />

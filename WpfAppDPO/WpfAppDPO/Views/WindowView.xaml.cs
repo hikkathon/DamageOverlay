@@ -194,9 +194,9 @@ namespace WpfAppDPO.Views
 
         public void ShowPrechentage(object sender, EventArgs e)
         {
-            if(Variables.players.Count > 0)
+            if (Variables.players.Count > 0)
             {
-                for(int i = 0; i < Variables.players.Count; i++)
+                for (int i = 0; i < Variables.players.Count; i++)
                 {
                     switch (i)
                     {
@@ -204,7 +204,16 @@ namespace WpfAppDPO.Views
                             // TODO: 
                             if (Variables.players.ElementAt(i).status == "ok" && Variables.players.ElementAt(i).data.Count > 0)
                             {
-                                Player_1.Content = Variables.players.ElementAt(i).data.ElementAt(0).nickname;
+                                //Player_1.Content = Variables.players.ElementAt(i).data.ElementAt(0).nickname;
+                                try
+                                {
+                                    Player_1.Content = Variables.accounts.ElementAt(i).data.info.nickname + " " 
+                                        + Math.Round((float)Variables.accounts.ElementAt(i).data.info.statistics.all.wins / (float)Variables.accounts.ElementAt(i).data.info.statistics.all.battles * 100, 2) + "%";
+                                }
+                                catch (Exception exc)
+                                {
+
+                                }
                             }
                             else
                             {
@@ -215,7 +224,15 @@ namespace WpfAppDPO.Views
                             // TODO: 
                             if (Variables.players.ElementAt(i).status == "ok" && Variables.players.ElementAt(i).data.Count > 0)
                             {
-                                Player_2.Content = Variables.players.ElementAt(i).data.ElementAt(0).nickname;
+                                try
+                                {
+                                    Player_2.Content = Variables.accounts.ElementAt(i).data.info.nickname + " " 
+                                        + Math.Round((float)Variables.accounts.ElementAt(i).data.info.statistics.all.wins / (float)Variables.accounts.ElementAt(i).data.info.statistics.all.battles * 100, 2) + "%";
+                                }
+                                catch (Exception exc)
+                                {
+
+                                }
                             }
                             else
                             {
@@ -226,7 +243,15 @@ namespace WpfAppDPO.Views
                             // TODO: 
                             if (Variables.players.ElementAt(i).status == "ok" && Variables.players.ElementAt(i).data.Count > 0)
                             {
-                                Player_3.Content = Variables.players.ElementAt(i).data.ElementAt(0).nickname;
+                                try
+                                {
+                                    Player_3.Content = Variables.accounts.ElementAt(i).data.info.nickname + " " 
+                                        + Math.Round((float)Variables.accounts.ElementAt(i).data.info.statistics.all.wins / (float)Variables.accounts.ElementAt(i).data.info.statistics.all.battles * 100, 2) + "%";
+                                }
+                                catch (Exception exc)
+                                {
+
+                                }
                             }
                             else
                             {
@@ -237,7 +262,15 @@ namespace WpfAppDPO.Views
                             // TODO: 
                             if (Variables.players.ElementAt(i).status == "ok" && Variables.players.ElementAt(i).data.Count > 0)
                             {
-                                Player_4.Content = Variables.players.ElementAt(i).data.ElementAt(0).nickname;
+                                try
+                                {
+                                    Player_4.Content = Variables.accounts.ElementAt(i).data.info.nickname + " " 
+                                        + Math.Round((float)Variables.accounts.ElementAt(i).data.info.statistics.all.wins / (float)Variables.accounts.ElementAt(i).data.info.statistics.all.battles * 100, 2) + "%";
+                                }
+                                catch (Exception exc)
+                                {
+
+                                }
                             }
                             else
                             {
@@ -248,7 +281,15 @@ namespace WpfAppDPO.Views
                             // TODO: 
                             if (Variables.players.ElementAt(i).status == "ok" && Variables.players.ElementAt(i).data.Count > 0)
                             {
-                                Player_5.Content = Variables.players.ElementAt(i).data.ElementAt(0).nickname;
+                                try
+                                {
+                                    Player_5.Content = Variables.accounts.ElementAt(i).data.info.nickname + " " 
+                                        + Math.Round((float)Variables.accounts.ElementAt(i).data.info.statistics.all.wins / (float)Variables.accounts.ElementAt(i).data.info.statistics.all.battles * 100, 2) + "%";
+                                }
+                                catch (Exception exc)
+                                {
+
+                                }
                             }
                             else
                             {
@@ -259,7 +300,15 @@ namespace WpfAppDPO.Views
                             // TODO: 
                             if (Variables.players.ElementAt(i).status == "ok" && Variables.players.ElementAt(i).data.Count > 0)
                             {
-                                Player_6.Content = Variables.players.ElementAt(i).data.ElementAt(0).nickname;
+                                try
+                                {
+                                    Player_6.Content = Variables.accounts.ElementAt(i).data.info.nickname + " " 
+                                        + Math.Round((float)Variables.accounts.ElementAt(i).data.info.statistics.all.wins / (float)Variables.accounts.ElementAt(i).data.info.statistics.all.battles * 100, 2) + "%";
+                                }
+                                catch (Exception exc)
+                                {
+
+                                }
                             }
                             else
                             {
@@ -270,7 +319,15 @@ namespace WpfAppDPO.Views
                             // TODO: 
                             if (Variables.players.ElementAt(i).status == "ok" && Variables.players.ElementAt(i).data.Count > 0)
                             {
-                                Player_7.Content = Variables.players.ElementAt(i).data.ElementAt(0).nickname;
+                                try
+                                {
+                                    Player_7.Content = Variables.accounts.ElementAt(i).data.info.nickname + " " 
+                                        + Math.Round((float)Variables.accounts.ElementAt(i).data.info.statistics.all.wins / (float)Variables.accounts.ElementAt(i).data.info.statistics.all.battles * 100, 2) + "%";
+                                }
+                                catch (Exception exc)
+                                {
+
+                                }
                             }
                             else
                             {
@@ -281,7 +338,15 @@ namespace WpfAppDPO.Views
                             // TODO: 
                             if (Variables.players.ElementAt(i).status == "ok" && Variables.players.ElementAt(i).data.Count > 0)
                             {
-                                Player_8.Content = Variables.players.ElementAt(i).data.ElementAt(0).nickname;
+                                try
+                                {
+                                    Player_8.Content = Variables.accounts.ElementAt(i).data.info.nickname + " " 
+                                        + Math.Round((float)Variables.accounts.ElementAt(i).data.info.statistics.all.wins / (float)Variables.accounts.ElementAt(i).data.info.statistics.all.battles * 100, 2) + "%";
+                                }
+                                catch (Exception exc)
+                                {
+
+                                }
                             }
                             else
                             {
@@ -292,7 +357,15 @@ namespace WpfAppDPO.Views
                             // TODO: 
                             if (Variables.players.ElementAt(i).status == "ok" && Variables.players.ElementAt(i).data.Count > 0)
                             {
-                                Player_9.Content = Variables.players.ElementAt(i).data.ElementAt(0).nickname;
+                                try
+                                {
+                                    Player_9.Content = Variables.accounts.ElementAt(i).data.info.nickname + " " 
+                                        + Math.Round((float)Variables.accounts.ElementAt(i).data.info.statistics.all.wins / (float)Variables.accounts.ElementAt(i).data.info.statistics.all.battles * 100, 2) + "%";
+                                }
+                                catch (Exception exc)
+                                {
+
+                                }
                             }
                             else
                             {
@@ -303,7 +376,15 @@ namespace WpfAppDPO.Views
                             // TODO: 
                             if (Variables.players.ElementAt(i).status == "ok" && Variables.players.ElementAt(i).data.Count > 0)
                             {
-                                Player_10.Content = Variables.players.ElementAt(i).data.ElementAt(0).nickname;
+                                try
+                                {
+                                    Player_10.Content = Variables.accounts.ElementAt(i).data.info.nickname + " " 
+                                        + Math.Round((float)Variables.accounts.ElementAt(i).data.info.statistics.all.wins / (float)Variables.accounts.ElementAt(i).data.info.statistics.all.battles * 100, 2) + "%";
+                                }
+                                catch (Exception exc)
+                                {
+
+                                }
                             }
                             else
                             {
@@ -314,7 +395,15 @@ namespace WpfAppDPO.Views
                             // TODO: 
                             if (Variables.players.ElementAt(i).status == "ok" && Variables.players.ElementAt(i).data.Count > 0)
                             {
-                                Player_11.Content = Variables.players.ElementAt(i).data.ElementAt(0).nickname;
+                                try
+                                {
+                                    Player_11.Content = Variables.accounts.ElementAt(i).data.info.nickname + " " 
+                                        + Math.Round((float)Variables.accounts.ElementAt(i).data.info.statistics.all.wins / (float)Variables.accounts.ElementAt(i).data.info.statistics.all.battles * 100, 2) + "%";
+                                }
+                                catch (Exception exc)
+                                {
+
+                                }
                             }
                             else
                             {
@@ -325,7 +414,15 @@ namespace WpfAppDPO.Views
                             // TODO: 
                             if (Variables.players.ElementAt(i).status == "ok" && Variables.players.ElementAt(i).data.Count > 0)
                             {
-                                Player_12.Content = Variables.players.ElementAt(i).data.ElementAt(0).nickname;
+                                try
+                                {
+                                    Player_12.Content = Variables.accounts.ElementAt(i).data.info.nickname + " " 
+                                        + Math.Round((float)Variables.accounts.ElementAt(i).data.info.statistics.all.wins / (float)Variables.accounts.ElementAt(i).data.info.statistics.all.battles * 100, 2) + "%";
+                                }
+                                catch (Exception exc)
+                                {
+
+                                }
                             }
                             else
                             {
@@ -336,7 +433,15 @@ namespace WpfAppDPO.Views
                             // TODO:
                             if (Variables.players.ElementAt(i).status == "ok" && Variables.players.ElementAt(i).data.Count > 0)
                             {
-                                Player_13.Content = Variables.players.ElementAt(i).data.ElementAt(0).nickname;
+                                try
+                                {
+                                    Player_13.Content = Variables.accounts.ElementAt(i).data.info.nickname + " " 
+                                        + Math.Round((float)Variables.accounts.ElementAt(i).data.info.statistics.all.wins / (float)Variables.accounts.ElementAt(i).data.info.statistics.all.battles * 100, 2) + "%";
+                                }
+                                catch (Exception exc)
+                                {
+
+                                }
                             }
                             else
                             {
@@ -347,7 +452,15 @@ namespace WpfAppDPO.Views
                             // TODO: 
                             if (Variables.players.ElementAt(i).status == "ok" && Variables.players.ElementAt(i).data.Count > 0)
                             {
-                                Player_14.Content = Variables.players.ElementAt(i).data.ElementAt(0).nickname;
+                                try
+                                {
+                                    Player_14.Content = Variables.accounts.ElementAt(i).data.info.nickname + " " 
+                                        + Math.Round((float)Variables.accounts.ElementAt(i).data.info.statistics.all.wins / (float)Variables.accounts.ElementAt(i).data.info.statistics.all.battles * 100, 2) + "%";
+                                }
+                                catch (Exception exc)
+                                {
+
+                                }
                             }
                             else
                             {
@@ -503,6 +616,10 @@ namespace WpfAppDPO.Views
 
         private void BtnCloseOverlay_Click(object sender, RoutedEventArgs e)
         {
+            var p1 = Variables.nicks;
+            var p2 = Variables.players;
+            var p3 = Variables.accounts;
+            var p4 = Variables.DefaultJson;
             Close();
         }
 
@@ -516,10 +633,9 @@ namespace WpfAppDPO.Views
             taskWindow.Show();
             searchTeam.Screenshot();
             searchTeam.ScanImageOrc();
-            //taskWindow.Close();
             taskWindow.Visibility = Visibility.Hidden;
 
-            Task.Run(() => SearchPlayer.SearchWG());
+            Task.Run(() => SearchPlayer.Search());
         }
 
         private void toggleButton_Click(object sender, RoutedEventArgs e)
@@ -532,6 +648,11 @@ namespace WpfAppDPO.Views
             {
                 GridDamagePanel.Visibility = Visibility.Hidden;
             }
+        }
+
+        private void TestEvent_Click(object sender, RoutedEventArgs e)
+        {
+
         }
     }
     public class Asimut : OnPropertyChangedClass

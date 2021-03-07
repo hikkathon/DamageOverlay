@@ -12,10 +12,8 @@ namespace WpfAppDPO.Models
 {
     public static class SearchPlayer
     {
-        public static bool check = true;
-        public static async Task SearchWG()
+        public static async Task Search()
         {
-
             // Игрок
             using (var client = new HttpClient())
             {
@@ -31,7 +29,7 @@ namespace WpfAppDPO.Models
                         new KeyValuePair<string, string>("type", "exact")
                     });
 
-                    Thread.Sleep(500);
+                    Thread.Sleep(250);
 
                     var result = await client.PostAsync("/wotb/account/list/", content);
                     string json = await result.Content.ReadAsStringAsync();
@@ -41,29 +39,38 @@ namespace WpfAppDPO.Models
             }
 
             // Информация о игроке
-            //using (var client = new HttpClient())
-            //{
-            //    client.BaseAddress = new Uri("https://api.wotblitz.ru/");
-            //    var content = new FormUrlEncodedContent(new[]
-            //    {
-            //        new KeyValuePair<string, string>("application_id", "8c4eecab18df2fd980424d5e35dba7bd"),
-            //        new KeyValuePair<string, string>("account_id", "71941826"),
-            //        new KeyValuePair<string, string>("extra", "statistics.rating")
-            //    });
-            //    var result = await client.PostAsync("/wotb/account/info/", content);
-            //    string json = await result.Content.ReadAsStringAsync();
-            //    int startIndex = json.IndexOf(@"""data"":{""") + 9;
-            //    int endIndex = json.LastIndexOf(@""":{""statistics""");
-            //    var str = json.Remove(startIndex, endIndex - startIndex).Insert(startIndex, "info");
-            //    var account = JsonConvert.DeserializeObject<Account>(str);
-            //    var accountStartSession = File.Exists("account.json") ? JsonConvert.DeserializeObject<Account>(File.ReadAllText("account.json")) : JsonConvert.DeserializeObject<Account>(str);
+            using (var client = new HttpClient())
+            {
+                Variables.accounts.Clear();
+                FormUrlEncodedContent content = null;
+                client.BaseAddress = new Uri("https://api.wotblitz.ru/");
 
-            //    while (check)
-            //    {
-            //        File.WriteAllText("account.json", JsonConvert.SerializeObject(account));
-            //        check = false;
-            //    }
-            //}
+                for (int i = 0; i < Variables.players.Count; i++)
+                {
+                    Thread.Sleep(250);
+                    if (Variables.players.ElementAt(i).data.Count > 0)
+                    {
+                        content = new FormUrlEncodedContent(new[]
+                        {
+                            new KeyValuePair<string, string>("application_id", "8c4eecab18df2fd980424d5e35dba7bd"),
+                            new KeyValuePair<string, string>("account_id", $"{Variables.players.ElementAt(i).data.ElementAt(0).account_id}"),
+                            new KeyValuePair<string, string>("extra", "statistics.rating")
+                        });
+                        var result = await client.PostAsync("/wotb/account/info/", content);
+                        string json = await result.Content.ReadAsStringAsync();
+                        int startIndex = json.IndexOf(@"""data"":{""") + 9;
+                        int endIndex = json.LastIndexOf(@""":{""statistics""");
+                        var str = json.Remove(startIndex, endIndex - startIndex).Insert(startIndex, "info");
+                        var account = JsonConvert.DeserializeObject<Account>(str);
+                        Variables.accounts.Add(account);
+                    }
+                    else
+                    {
+                        var account = Variables.DefaultJson;
+                        Variables.accounts.Add(account);
+                    }
+                }
+            }
         }
     }
 }

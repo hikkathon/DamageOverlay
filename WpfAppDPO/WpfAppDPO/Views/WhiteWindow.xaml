@@ -11,6 +11,6 @@
         <SolidColorBrush Opacity="0.0" Color="White"/>
     </Window.Background>
     <Grid>
-        <Image Source="/Assets/Images/block.png" Width="160" Height="286" Margin="60 0 0 60" Opacity="1"/>
+        <Image Source="/Assets/Images/block.png" Width="170" Height="300" Margin="60 0 0 60" Opacity="1"/>
     </Grid>
 </Window>

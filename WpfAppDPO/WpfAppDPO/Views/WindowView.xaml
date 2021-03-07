@@ -112,21 +112,20 @@
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
 
-            <Label x:Name="Player_1" Grid.Row="0" Grid.Column="0" Content="unknown" Visibility="Visible" HorizontalAlignment="Left" Foreground="White" Style="{StaticResource CustomFont}"/>
-            <Label x:Name="Player_2" Grid.Row="1" Grid.Column="0" Content="unknown" Visibility="Visible" HorizontalAlignment="Left" Foreground="White" Style="{StaticResource CustomFont}"/>
-            <Label x:Name="Player_3" Grid.Row="2" Grid.Column="0" Content="unknown" Visibility="Visible" HorizontalAlignment="Left" Foreground="White" Style="{StaticResource CustomFont}"/>
-            <Label x:Name="Player_4" Grid.Row="3" Grid.Column="0" Content="unknown" Visibility="Visible" HorizontalAlignment="Left" Foreground="White" Style="{StaticResource CustomFont}"/>
-            <Label x:Name="Player_5" Grid.Row="4" Grid.Column="0" Content="unknown" Visibility="Visible" HorizontalAlignment="Left" Foreground="White" Style="{StaticResource CustomFont}"/>
-            <Label x:Name="Player_6" Grid.Row="5" Grid.Column="0" Content="unknown" Visibility="Visible" HorizontalAlignment="Left" Foreground="White" Style="{StaticResource CustomFont}"/>
-            <Label x:Name="Player_7" Grid.Row="6" Grid.Column="0" Content="unknown" Visibility="Visible" HorizontalAlignment="Left" Foreground="White" Style="{StaticResource CustomFont}"/>
-
-            <Label x:Name="Player_8" Grid.Row="0" Grid.Column="1" Content="unknown" Visibility="Visible" HorizontalAlignment="Right" Foreground="White" Style="{StaticResource CustomFont}"/>
-            <Label x:Name="Player_9" Grid.Row="1" Grid.Column="1" Content="unknown" Visibility="Visible" HorizontalAlignment="Right" Foreground="White" Style="{StaticResource CustomFont}"/>
-            <Label x:Name="Player_10" Grid.Row="2" Grid.Column="1" Content="unknown" Visibility="Visible" HorizontalAlignment="Right" Foreground="White" Style="{StaticResource CustomFont}"/>
-            <Label x:Name="Player_11" Grid.Row="3" Grid.Column="1" Content="unknown" Visibility="Visible" HorizontalAlignment="Right" Foreground="White" Style="{StaticResource CustomFont}"/>
-            <Label x:Name="Player_12" Grid.Row="4" Grid.Column="1" Content="unknown" Visibility="Visible" HorizontalAlignment="Right" Foreground="White" Style="{StaticResource CustomFont}"/>
-            <Label x:Name="Player_13" Grid.Row="5" Grid.Column="1" Content="unknown" Visibility="Visible" HorizontalAlignment="Right" Foreground="White" Style="{StaticResource CustomFont}"/>
-            <Label x:Name="Player_14" Grid.Row="6" Grid.Column="1" Content="unknown" Visibility="Visible" HorizontalAlignment="Right" Foreground="White" Style="{StaticResource CustomFont}"/>
+            <Label x:Name="Player_1"  Grid.Row="0" Grid.Column="0" Content="unknown" HorizontalAlignment="Center" Foreground="BlanchedAlmond" Style="{StaticResource CustomFont}"/>
+            <Label x:Name="Player_2"  Grid.Row="1" Grid.Column="0" Content="unknown" HorizontalAlignment="Center" Foreground="BlanchedAlmond" Style="{StaticResource CustomFont}"/>
+            <Label x:Name="Player_3"  Grid.Row="2" Grid.Column="0" Content="unknown" HorizontalAlignment="Center" Foreground="BlanchedAlmond" Style="{StaticResource CustomFont}"/>
+            <Label x:Name="Player_4"  Grid.Row="3" Grid.Column="0" Content="unknown" HorizontalAlignment="Center" Foreground="BlanchedAlmond" Style="{StaticResource CustomFont}"/>
+            <Label x:Name="Player_5"  Grid.Row="4" Grid.Column="0" Content="unknown" HorizontalAlignment="Center" Foreground="BlanchedAlmond" Style="{StaticResource CustomFont}"/>
+            <Label x:Name="Player_6"  Grid.Row="5" Grid.Column="0" Content="unknown" HorizontalAlignment="Center" Foreground="BlanchedAlmond" Style="{StaticResource CustomFont}"/>
+            <Label x:Name="Player_7"  Grid.Row="6" Grid.Column="0" Content="unknown" HorizontalAlignment="Center" Foreground="BlanchedAlmond" Style="{StaticResource CustomFont}"/>
+            <Label x:Name="Player_8"  Grid.Row="0" Grid.Column="1" Content="unknown" HorizontalAlignment="Center" Foreground="BlanchedAlmond" Style="{StaticResource CustomFont}"/>
+            <Label x:Name="Player_9"  Grid.Row="1" Grid.Column="1" Content="unknown" HorizontalAlignment="Center" Foreground="BlanchedAlmond" Style="{StaticResource CustomFont}"/>
+            <Label x:Name="Player_10" Grid.Row="2" Grid.Column="1" Content="unknown" HorizontalAlignment="Center" Foreground="BlanchedAlmond" Style="{StaticResource CustomFont}"/>
+            <Label x:Name="Player_11" Grid.Row="3" Grid.Column="1" Content="unknown" HorizontalAlignment="Center" Foreground="BlanchedAlmond" Style="{StaticResource CustomFont}"/>
+            <Label x:Name="Player_12" Grid.Row="4" Grid.Column="1" Content="unknown" HorizontalAlignment="Center" Foreground="BlanchedAlmond" Style="{StaticResource CustomFont}"/>
+            <Label x:Name="Player_13" Grid.Row="5" Grid.Column="1" Content="unknown" HorizontalAlignment="Center" Foreground="BlanchedAlmond" Style="{StaticResource CustomFont}"/>
+            <Label x:Name="Player_14" Grid.Row="6" Grid.Column="1" Content="unknown" HorizontalAlignment="Center" Foreground="BlanchedAlmond" Style="{StaticResource CustomFont}"/>
         </Grid>
 
         <!-- Контейнер для плашки нанесенного/заблокированного урона -->
@@ -139,7 +138,7 @@
         <!-- Контейнер для послебоевой статистики -->
         <Grid Grid.Row="2">
 
-            <!-- Custom ComboBox Button -->
+            <!-- Custom ComboBox Оленемер -->
             <Border x:Name="CbmBorder2"
                     HorizontalAlignment="Right" 
                     VerticalAlignment="Bottom" 
@@ -179,7 +178,7 @@
                 </Border.Style>
                 <Button x:Name="BtnSetting" Style="{StaticResource ComboboxButton}" Click="BtnSetting_Click">
                     <StackPanel Orientation="Horizontal">
-                        <fa:ImageAwesome Icon="Solid_Cog" 
+                        <fa:ImageAwesome Icon="Solid_AlignJustify" 
                                      Width="15" Height="14" 
                                      Foreground="White">
                             <fa:ImageAwesome.Style>
@@ -187,6 +186,69 @@
                                     <Setter Property="Opacity" Value="0.3"/>
                                     <Style.Triggers>
                                         <DataTrigger Binding="{Binding Path = IsMouseOver, ElementName = CbmBorder2}" 
+                                                         Value="True">
+                                            <Setter Property="Opacity" Value="0.5"/>
+                                        </DataTrigger>
+                                        <DataTrigger Binding="{Binding RelativeSource={RelativeSource FindAncestor, 
+                                                AncestorType={x:Type Button},AncestorLevel=1},Path=IsPressed}" Value="True">
+                                            <Setter Property="Opacity" Value="0.3"/>
+                                        </DataTrigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </fa:ImageAwesome.Style>
+                        </fa:ImageAwesome>
+                    </StackPanel>
+                </Button>
+            </Border>
+
+            <!-- Custom ComboBox Оленемер -->
+            <Border x:Name="CbmBorderStata"
+                    HorizontalAlignment="Right" 
+                    VerticalAlignment="Bottom" 
+                    Background="Black"
+                    BorderThickness="1"
+                    CornerRadius="2"
+                    Margin="0 0 50 10"
+                    Grid.Row="2" 
+                    Height="24" 
+                    Width="25"
+                    Cursor="Hand">
+                <Border.Style>
+                    <Style TargetType="{x:Type Border}">
+                        <Setter Property="BorderBrush" Value="#FF333842"/>
+                        <Style.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="BorderBrush" Value="#FF51555C"/>
+                            </Trigger>
+                            <EventTrigger RoutedEvent="PreviewMouseDown">
+                                <BeginStoryboard>
+                                    <Storyboard>
+                                        <ColorAnimation Storyboard.TargetProperty="BorderBrush.Color"
+                                                        Duration="0:0:0.100" To="#FF333842"/>
+                                    </Storyboard>
+                                </BeginStoryboard>
+                            </EventTrigger>
+                            <EventTrigger RoutedEvent="PreviewMouseUp">
+                                <BeginStoryboard>
+                                    <Storyboard>
+                                        <ColorAnimation Storyboard.TargetProperty="BorderBrush.Color"
+                                                        Duration="0:0:0.100" To="#FF51555C"/>
+                                    </Storyboard>
+                                </BeginStoryboard>
+                            </EventTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </Border.Style>
+                <Button x:Name="BtnStata" Style="{StaticResource ComboboxButton}">
+                    <StackPanel Orientation="Horizontal">
+                        <fa:ImageAwesome Icon="Solid_CommentAlt" 
+                                     Width="15" Height="14" 
+                                     Foreground="White">
+                            <fa:ImageAwesome.Style>
+                                <Style TargetType="{x:Type fa:ImageAwesome}">
+                                    <Setter Property="Opacity" Value="0.3"/>
+                                    <Style.Triggers>
+                                        <DataTrigger Binding="{Binding Path = IsMouseOver, ElementName = CbmBorderStata}" 
                                                          Value="True">
                                             <Setter Property="Opacity" Value="0.5"/>
                                         </DataTrigger>
@@ -242,7 +304,7 @@
                         <Button x:Name="BtnLoadStats" Style="{StaticResource CmbBtn}" Click="BtnLoadStats_Click">
                             <TextBlock Text="Загрузить статистику"/>
                         </Button>
-                        <Button Style="{StaticResource CmbBtn}">
+                        <Button Style="{StaticResource CmbBtn}" x:Name="TestEvent" Click="TestEvent_Click">
                             <TextBlock Text="О Программе"/>
                         </Button>
                         <Polygon Fill="White" Points="0,3,310,3" StrokeThickness="1" Stroke="#FF40454E"/>
