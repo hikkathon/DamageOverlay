@@ -16,6 +16,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Threading;
 using WpfAppDPO.Models;
+using WpfAppDPO.Models.CS;
 
 namespace WpfAppDPO.Views
 {
@@ -129,6 +130,8 @@ namespace WpfAppDPO.Views
                     Variables.blockedList.Clear();
                     Variables.maxDamage = 0;
                     Variables.maxBlocked = 0;
+
+                    GridPlayerList.Visibility = Visibility.Hidden;
                 }
             }
             catch (Exception exc)
@@ -194,6 +197,8 @@ namespace WpfAppDPO.Views
 
         public void ShowPrechentage(object sender, EventArgs e)
         {
+            CalculateStats cs = new CalculateStats();
+
             if (Variables.players.Count > 0)
             {
                 for (int i = 0; i < Variables.players.Count; i++)
@@ -204,20 +209,35 @@ namespace WpfAppDPO.Views
                             // TODO: 
                             if (Variables.players.ElementAt(i).status == "ok" && Variables.players.ElementAt(i).data.Count > 0)
                             {
-                                //Player_1.Content = Variables.players.ElementAt(i).data.ElementAt(0).nickname;
                                 try
                                 {
-                                    Player_1.Content = Variables.accounts.ElementAt(i).data.info.nickname + " " 
-                                        + Math.Round((float)Variables.accounts.ElementAt(i).data.info.statistics.all.wins / (float)Variables.accounts.ElementAt(i).data.info.statistics.all.battles * 100, 2) + "%";
-                                }
-                                catch (Exception exc)
-                                {
+                                    double wr = cs.WinRate((float)Variables.accounts.ElementAt(i).data.info.statistics.all.battles, (float)Variables.accounts.ElementAt(i).data.info.statistics.all.wins);
 
+                                    if (wr >= 70)
+                                    {
+                                        Player_1.Foreground = new SolidColorBrush(System.Windows.Media.Color.FromRgb(155, 135, 239));
+                                    }
+                                    else if(wr >= 60)
+                                    {
+                                        Player_1.Foreground = new SolidColorBrush(System.Windows.Media.Color.FromRgb(68, 169, 241));
+                                    }
+                                    else if (wr >= 50)
+                                    {
+                                        Player_1.Foreground = new SolidColorBrush(System.Windows.Media.Color.FromRgb(198, 227, 168));
+                                    }
+                                    else
+                                    {
+                                        Player_1.Foreground = new SolidColorBrush(System.Windows.Media.Color.FromRgb(255, 255, 255));
+                                    }
+
+                                    Player_1.Content = $"{wr}% {Variables.accounts.ElementAt(i).data.info.nickname}";
                                 }
+                                catch (Exception exc){}
                             }
                             else
                             {
-                                Player_1.Content = "err";
+                                Player_1.Foreground = new SolidColorBrush(System.Windows.Media.Color.FromRgb(254, 78, 62));
+                                Player_1.Content = "Танкист не найден";
                             }
                             break;
                         case 1:
@@ -226,17 +246,33 @@ namespace WpfAppDPO.Views
                             {
                                 try
                                 {
-                                    Player_2.Content = Variables.accounts.ElementAt(i).data.info.nickname + " " 
-                                        + Math.Round((float)Variables.accounts.ElementAt(i).data.info.statistics.all.wins / (float)Variables.accounts.ElementAt(i).data.info.statistics.all.battles * 100, 2) + "%";
-                                }
-                                catch (Exception exc)
-                                {
+                                    double wr = cs.WinRate((float)Variables.accounts.ElementAt(i).data.info.statistics.all.battles, (float)Variables.accounts.ElementAt(i).data.info.statistics.all.wins);
 
+                                    if (wr >= 70)
+                                    {
+                                        Player_2.Foreground = new SolidColorBrush(System.Windows.Media.Color.FromRgb(155, 135, 239));
+                                    }
+                                    else if (wr >= 60)
+                                    {
+                                        Player_2.Foreground = new SolidColorBrush(System.Windows.Media.Color.FromRgb(68, 169, 241));
+                                    }
+                                    else if (wr >= 50)
+                                    {
+                                        Player_2.Foreground = new SolidColorBrush(System.Windows.Media.Color.FromRgb(198, 227, 168));
+                                    }
+                                    else
+                                    {
+                                        Player_2.Foreground = new SolidColorBrush(System.Windows.Media.Color.FromRgb(255, 255, 255));
+                                    }
+
+                                    Player_2.Content = $"{wr}% {Variables.accounts.ElementAt(i).data.info.nickname}";
                                 }
+                                catch (Exception exc){}
                             }
                             else
                             {
-                                Player_2.Content = "err";
+                                Player_2.Foreground = new SolidColorBrush(System.Windows.Media.Color.FromRgb(254, 78, 62));
+                                Player_2.Content = "Танкист не найден";
                             }
                             break;
                         case 2:
@@ -245,17 +281,33 @@ namespace WpfAppDPO.Views
                             {
                                 try
                                 {
-                                    Player_3.Content = Variables.accounts.ElementAt(i).data.info.nickname + " " 
-                                        + Math.Round((float)Variables.accounts.ElementAt(i).data.info.statistics.all.wins / (float)Variables.accounts.ElementAt(i).data.info.statistics.all.battles * 100, 2) + "%";
-                                }
-                                catch (Exception exc)
-                                {
+                                    double wr = cs.WinRate((float)Variables.accounts.ElementAt(i).data.info.statistics.all.battles, (float)Variables.accounts.ElementAt(i).data.info.statistics.all.wins);
 
+                                    if (wr >= 70)
+                                    {
+                                        Player_3.Foreground = new SolidColorBrush(System.Windows.Media.Color.FromRgb(155, 135, 239));
+                                    }
+                                    else if (wr >= 60)
+                                    {
+                                        Player_3.Foreground = new SolidColorBrush(System.Windows.Media.Color.FromRgb(68, 169, 241));
+                                    }
+                                    else if (wr >= 50)
+                                    {
+                                        Player_3.Foreground = new SolidColorBrush(System.Windows.Media.Color.FromRgb(198, 227, 168));
+                                    }
+                                    else
+                                    {
+                                        Player_3.Foreground = new SolidColorBrush(System.Windows.Media.Color.FromRgb(255, 255, 255));
+                                    }
+
+                                    Player_3.Content = $"{wr}% {Variables.accounts.ElementAt(i).data.info.nickname}";
                                 }
+                                catch (Exception exc){}
                             }
                             else
                             {
-                                Player_3.Content = "err";
+                                Player_3.Foreground = new SolidColorBrush(System.Windows.Media.Color.FromRgb(254, 78, 62));
+                                Player_3.Content = "Танкист не найден";
                             }
                             break;
                         case 3:
@@ -264,17 +316,33 @@ namespace WpfAppDPO.Views
                             {
                                 try
                                 {
-                                    Player_4.Content = Variables.accounts.ElementAt(i).data.info.nickname + " " 
-                                        + Math.Round((float)Variables.accounts.ElementAt(i).data.info.statistics.all.wins / (float)Variables.accounts.ElementAt(i).data.info.statistics.all.battles * 100, 2) + "%";
-                                }
-                                catch (Exception exc)
-                                {
+                                    double wr = cs.WinRate((float)Variables.accounts.ElementAt(i).data.info.statistics.all.battles, (float)Variables.accounts.ElementAt(i).data.info.statistics.all.wins);
 
+                                    if (wr >= 70)
+                                    {
+                                        Player_4.Foreground = new SolidColorBrush(System.Windows.Media.Color.FromRgb(155, 135, 239));
+                                    }
+                                    else if (wr >= 60)
+                                    {
+                                        Player_4.Foreground = new SolidColorBrush(System.Windows.Media.Color.FromRgb(68, 169, 241));
+                                    }
+                                    else if (wr >= 50)
+                                    {
+                                        Player_4.Foreground = new SolidColorBrush(System.Windows.Media.Color.FromRgb(198, 227, 168));
+                                    }
+                                    else
+                                    {
+                                        Player_4.Foreground = new SolidColorBrush(System.Windows.Media.Color.FromRgb(255, 255, 255));
+                                    }
+
+                                    Player_4.Content = $"{wr}% {Variables.accounts.ElementAt(i).data.info.nickname}";
                                 }
+                                catch (Exception exc){}
                             }
                             else
                             {
-                                Player_4.Content = "err";
+                                Player_4.Foreground = new SolidColorBrush(System.Windows.Media.Color.FromRgb(254, 78, 62));
+                                Player_4.Content = "Танкист не найден";
                             }
                             break;
                         case 4:
@@ -283,17 +351,33 @@ namespace WpfAppDPO.Views
                             {
                                 try
                                 {
-                                    Player_5.Content = Variables.accounts.ElementAt(i).data.info.nickname + " " 
-                                        + Math.Round((float)Variables.accounts.ElementAt(i).data.info.statistics.all.wins / (float)Variables.accounts.ElementAt(i).data.info.statistics.all.battles * 100, 2) + "%";
-                                }
-                                catch (Exception exc)
-                                {
+                                    double wr = cs.WinRate((float)Variables.accounts.ElementAt(i).data.info.statistics.all.battles, (float)Variables.accounts.ElementAt(i).data.info.statistics.all.wins);
 
+                                    if (wr >= 70)
+                                    {
+                                        Player_5.Foreground = new SolidColorBrush(System.Windows.Media.Color.FromRgb(155, 135, 239));
+                                    }
+                                    else if (wr >= 60)
+                                    {
+                                        Player_5.Foreground = new SolidColorBrush(System.Windows.Media.Color.FromRgb(68, 169, 241));
+                                    }
+                                    else if (wr >= 50)
+                                    {
+                                        Player_5.Foreground = new SolidColorBrush(System.Windows.Media.Color.FromRgb(198, 227, 168));
+                                    }
+                                    else
+                                    {
+                                        Player_5.Foreground = new SolidColorBrush(System.Windows.Media.Color.FromRgb(255, 255, 255));
+                                    }
+
+                                    Player_5.Content = $"{wr}% {Variables.accounts.ElementAt(i).data.info.nickname}";
                                 }
+                                catch (Exception exc){}
                             }
                             else
                             {
-                                Player_5.Content = "err";
+                                Player_5.Foreground = new SolidColorBrush(System.Windows.Media.Color.FromRgb(254, 78, 62));
+                                Player_5.Content = "Танкист не найден";
                             }
                             break;
                         case 5:
@@ -302,17 +386,33 @@ namespace WpfAppDPO.Views
                             {
                                 try
                                 {
-                                    Player_6.Content = Variables.accounts.ElementAt(i).data.info.nickname + " " 
-                                        + Math.Round((float)Variables.accounts.ElementAt(i).data.info.statistics.all.wins / (float)Variables.accounts.ElementAt(i).data.info.statistics.all.battles * 100, 2) + "%";
-                                }
-                                catch (Exception exc)
-                                {
+                                    double wr = cs.WinRate((float)Variables.accounts.ElementAt(i).data.info.statistics.all.battles, (float)Variables.accounts.ElementAt(i).data.info.statistics.all.wins);
 
+                                    if (wr >= 70)
+                                    {
+                                        Player_6.Foreground = new SolidColorBrush(System.Windows.Media.Color.FromRgb(155, 135, 239));
+                                    }
+                                    else if (wr >= 60)
+                                    {
+                                        Player_6.Foreground = new SolidColorBrush(System.Windows.Media.Color.FromRgb(68, 169, 241));
+                                    }
+                                    else if (wr >= 50)
+                                    {
+                                        Player_6.Foreground = new SolidColorBrush(System.Windows.Media.Color.FromRgb(198, 227, 168));
+                                    }
+                                    else
+                                    {
+                                        Player_6.Foreground = new SolidColorBrush(System.Windows.Media.Color.FromRgb(255, 255, 255));
+                                    }
+
+                                    Player_6.Content = $"{wr}% {Variables.accounts.ElementAt(i).data.info.nickname}";
                                 }
+                                catch (Exception exc){}
                             }
                             else
                             {
-                                Player_6.Content = "err";
+                                Player_6.Foreground = new SolidColorBrush(System.Windows.Media.Color.FromRgb(254, 78, 62));
+                                Player_6.Content = "Танкист не найден";
                             }
                             break;
                         case 6:
@@ -321,17 +421,33 @@ namespace WpfAppDPO.Views
                             {
                                 try
                                 {
-                                    Player_7.Content = Variables.accounts.ElementAt(i).data.info.nickname + " " 
-                                        + Math.Round((float)Variables.accounts.ElementAt(i).data.info.statistics.all.wins / (float)Variables.accounts.ElementAt(i).data.info.statistics.all.battles * 100, 2) + "%";
-                                }
-                                catch (Exception exc)
-                                {
+                                    double wr = cs.WinRate((float)Variables.accounts.ElementAt(i).data.info.statistics.all.battles, (float)Variables.accounts.ElementAt(i).data.info.statistics.all.wins);
 
+                                    if (wr >= 70)
+                                    {
+                                        Player_7.Foreground = new SolidColorBrush(System.Windows.Media.Color.FromRgb(155, 135, 239));
+                                    }
+                                    else if (wr >= 60)
+                                    {
+                                        Player_7.Foreground = new SolidColorBrush(System.Windows.Media.Color.FromRgb(68, 169, 241));
+                                    }
+                                    else if (wr >= 50)
+                                    {
+                                        Player_7.Foreground = new SolidColorBrush(System.Windows.Media.Color.FromRgb(198, 227, 168));
+                                    }
+                                    else
+                                    {
+                                        Player_7.Foreground = new SolidColorBrush(System.Windows.Media.Color.FromRgb(255, 255, 255));
+                                    }
+
+                                    Player_7.Content = $"{wr}% {Variables.accounts.ElementAt(i).data.info.nickname}";
                                 }
+                                catch (Exception exc){}
                             }
                             else
                             {
-                                Player_7.Content = "err";
+                                Player_7.Foreground = new SolidColorBrush(System.Windows.Media.Color.FromRgb(254, 78, 62));
+                                Player_7.Content = "Танкист не найден";
                             }
                             break;
                         case 7:
@@ -340,17 +456,33 @@ namespace WpfAppDPO.Views
                             {
                                 try
                                 {
-                                    Player_8.Content = Variables.accounts.ElementAt(i).data.info.nickname + " " 
-                                        + Math.Round((float)Variables.accounts.ElementAt(i).data.info.statistics.all.wins / (float)Variables.accounts.ElementAt(i).data.info.statistics.all.battles * 100, 2) + "%";
-                                }
-                                catch (Exception exc)
-                                {
+                                    double wr = cs.WinRate((float)Variables.accounts.ElementAt(i).data.info.statistics.all.battles, (float)Variables.accounts.ElementAt(i).data.info.statistics.all.wins);
 
+                                    if (wr >= 70)
+                                    {
+                                        Player_8.Foreground = new SolidColorBrush(System.Windows.Media.Color.FromRgb(155, 135, 239));
+                                    }
+                                    else if (wr >= 60)
+                                    {
+                                        Player_8.Foreground = new SolidColorBrush(System.Windows.Media.Color.FromRgb(68, 169, 241));
+                                    }
+                                    else if (wr >= 50)
+                                    {
+                                        Player_8.Foreground = new SolidColorBrush(System.Windows.Media.Color.FromRgb(198, 227, 168));
+                                    }
+                                    else
+                                    {
+                                        Player_8.Foreground = new SolidColorBrush(System.Windows.Media.Color.FromRgb(255, 255, 255));
+                                    }
+
+                                    Player_8.Content = $"{Variables.accounts.ElementAt(i).data.info.nickname} {wr}%";
                                 }
+                                catch (Exception exc){}
                             }
                             else
                             {
-                                Player_8.Content = "err";
+                                Player_8.Foreground = new SolidColorBrush(System.Windows.Media.Color.FromRgb(254, 78, 62));
+                                Player_8.Content = "Танкист не найден";
                             }
                             break;
                         case 8:
@@ -359,17 +491,33 @@ namespace WpfAppDPO.Views
                             {
                                 try
                                 {
-                                    Player_9.Content = Variables.accounts.ElementAt(i).data.info.nickname + " " 
-                                        + Math.Round((float)Variables.accounts.ElementAt(i).data.info.statistics.all.wins / (float)Variables.accounts.ElementAt(i).data.info.statistics.all.battles * 100, 2) + "%";
-                                }
-                                catch (Exception exc)
-                                {
+                                    double wr = cs.WinRate((float)Variables.accounts.ElementAt(i).data.info.statistics.all.battles, (float)Variables.accounts.ElementAt(i).data.info.statistics.all.wins);
 
+                                    if (wr >= 70)
+                                    {
+                                        Player_9.Foreground = new SolidColorBrush(System.Windows.Media.Color.FromRgb(155, 135, 239));
+                                    }
+                                    else if (wr >= 60)
+                                    {
+                                        Player_9.Foreground = new SolidColorBrush(System.Windows.Media.Color.FromRgb(68, 169, 241));
+                                    }
+                                    else if (wr >= 50)
+                                    {
+                                        Player_9.Foreground = new SolidColorBrush(System.Windows.Media.Color.FromRgb(198, 227, 168));
+                                    }
+                                    else
+                                    {
+                                        Player_9.Foreground = new SolidColorBrush(System.Windows.Media.Color.FromRgb(255, 255, 255));
+                                    }
+
+                                    Player_9.Content = $"{Variables.accounts.ElementAt(i).data.info.nickname} {wr}%";
                                 }
+                                catch (Exception exc){}
                             }
                             else
                             {
-                                Player_9.Content = "err";
+                                Player_9.Foreground = new SolidColorBrush(System.Windows.Media.Color.FromRgb(254, 78, 62));
+                                Player_9.Content = "Танкист не найден";
                             }
                             break;
                         case 9:
@@ -378,17 +526,33 @@ namespace WpfAppDPO.Views
                             {
                                 try
                                 {
-                                    Player_10.Content = Variables.accounts.ElementAt(i).data.info.nickname + " " 
-                                        + Math.Round((float)Variables.accounts.ElementAt(i).data.info.statistics.all.wins / (float)Variables.accounts.ElementAt(i).data.info.statistics.all.battles * 100, 2) + "%";
-                                }
-                                catch (Exception exc)
-                                {
+                                    double wr = cs.WinRate((float)Variables.accounts.ElementAt(i).data.info.statistics.all.battles, (float)Variables.accounts.ElementAt(i).data.info.statistics.all.wins);
 
+                                    if (wr >= 70)
+                                    {
+                                        Player_10.Foreground = new SolidColorBrush(System.Windows.Media.Color.FromRgb(155, 135, 239));
+                                    }
+                                    else if (wr >= 60)
+                                    {
+                                        Player_10.Foreground = new SolidColorBrush(System.Windows.Media.Color.FromRgb(68, 169, 241));
+                                    }
+                                    else if (wr >= 50)
+                                    {
+                                        Player_10.Foreground = new SolidColorBrush(System.Windows.Media.Color.FromRgb(198, 227, 168));
+                                    }
+                                    else
+                                    {
+                                        Player_10.Foreground = new SolidColorBrush(System.Windows.Media.Color.FromRgb(255, 255, 255));
+                                    }
+
+                                    Player_10.Content = $"{Variables.accounts.ElementAt(i).data.info.nickname} {wr}%";
                                 }
+                                catch (Exception exc){}
                             }
                             else
                             {
-                                Player_10.Content = "err";
+                                Player_10.Foreground = new SolidColorBrush(System.Windows.Media.Color.FromRgb(254, 78, 62));
+                                Player_10.Content = "Танкист не найден";
                             }
                             break;
                         case 10:
@@ -397,17 +561,33 @@ namespace WpfAppDPO.Views
                             {
                                 try
                                 {
-                                    Player_11.Content = Variables.accounts.ElementAt(i).data.info.nickname + " " 
-                                        + Math.Round((float)Variables.accounts.ElementAt(i).data.info.statistics.all.wins / (float)Variables.accounts.ElementAt(i).data.info.statistics.all.battles * 100, 2) + "%";
-                                }
-                                catch (Exception exc)
-                                {
+                                    double wr = cs.WinRate((float)Variables.accounts.ElementAt(i).data.info.statistics.all.battles, (float)Variables.accounts.ElementAt(i).data.info.statistics.all.wins);
 
+                                    if (wr >= 70)
+                                    {
+                                        Player_11.Foreground = new SolidColorBrush(System.Windows.Media.Color.FromRgb(155, 135, 239));
+                                    }
+                                    else if (wr >= 60)
+                                    {
+                                        Player_11.Foreground = new SolidColorBrush(System.Windows.Media.Color.FromRgb(68, 169, 241));
+                                    }
+                                    else if (wr >= 50)
+                                    {
+                                        Player_11.Foreground = new SolidColorBrush(System.Windows.Media.Color.FromRgb(198, 227, 168));
+                                    }
+                                    else
+                                    {
+                                        Player_11.Foreground = new SolidColorBrush(System.Windows.Media.Color.FromRgb(255, 255, 255));
+                                    }
+
+                                    Player_11.Content = $"{Variables.accounts.ElementAt(i).data.info.nickname} {wr}%";
                                 }
+                                catch (Exception exc){}
                             }
                             else
                             {
-                                Player_11.Content = "err";
+                                Player_11.Foreground = new SolidColorBrush(System.Windows.Media.Color.FromRgb(254, 78, 62));
+                                Player_11.Content = "Танкист не найден";
                             }
                             break;
                         case 11:
@@ -416,17 +596,33 @@ namespace WpfAppDPO.Views
                             {
                                 try
                                 {
-                                    Player_12.Content = Variables.accounts.ElementAt(i).data.info.nickname + " " 
-                                        + Math.Round((float)Variables.accounts.ElementAt(i).data.info.statistics.all.wins / (float)Variables.accounts.ElementAt(i).data.info.statistics.all.battles * 100, 2) + "%";
-                                }
-                                catch (Exception exc)
-                                {
+                                    double wr = cs.WinRate((float)Variables.accounts.ElementAt(i).data.info.statistics.all.battles, (float)Variables.accounts.ElementAt(i).data.info.statistics.all.wins);
 
+                                    if (wr >= 70)
+                                    {
+                                        Player_12.Foreground = new SolidColorBrush(System.Windows.Media.Color.FromRgb(155, 135, 239));
+                                    }
+                                    else if (wr >= 60)
+                                    {
+                                        Player_12.Foreground = new SolidColorBrush(System.Windows.Media.Color.FromRgb(68, 169, 241));
+                                    }
+                                    else if (wr >= 50)
+                                    {
+                                        Player_12.Foreground = new SolidColorBrush(System.Windows.Media.Color.FromRgb(198, 227, 168));
+                                    }
+                                    else
+                                    {
+                                        Player_12.Foreground = new SolidColorBrush(System.Windows.Media.Color.FromRgb(255, 255, 255));
+                                    }
+
+                                    Player_12.Content = $"{Variables.accounts.ElementAt(i).data.info.nickname} {wr}%";
                                 }
+                                catch (Exception exc){}
                             }
                             else
                             {
-                                Player_12.Content = "err";
+                                Player_12.Foreground = new SolidColorBrush(System.Windows.Media.Color.FromRgb(254, 78, 62));
+                                Player_12.Content = "Танкист не найден";
                             }
                             break;
                         case 12:
@@ -435,17 +631,33 @@ namespace WpfAppDPO.Views
                             {
                                 try
                                 {
-                                    Player_13.Content = Variables.accounts.ElementAt(i).data.info.nickname + " " 
-                                        + Math.Round((float)Variables.accounts.ElementAt(i).data.info.statistics.all.wins / (float)Variables.accounts.ElementAt(i).data.info.statistics.all.battles * 100, 2) + "%";
-                                }
-                                catch (Exception exc)
-                                {
+                                    double wr = cs.WinRate((float)Variables.accounts.ElementAt(i).data.info.statistics.all.battles, (float)Variables.accounts.ElementAt(i).data.info.statistics.all.wins);
 
+                                    if (wr >= 70)
+                                    {
+                                        Player_13.Foreground = new SolidColorBrush(System.Windows.Media.Color.FromRgb(155, 135, 239));
+                                    }
+                                    else if (wr >= 60)
+                                    {
+                                        Player_13.Foreground = new SolidColorBrush(System.Windows.Media.Color.FromRgb(68, 169, 241));
+                                    }
+                                    else if (wr >= 50)
+                                    {
+                                        Player_13.Foreground = new SolidColorBrush(System.Windows.Media.Color.FromRgb(198, 227, 168));
+                                    }
+                                    else
+                                    {
+                                        Player_13.Foreground = new SolidColorBrush(System.Windows.Media.Color.FromRgb(255, 255, 255));
+                                    }
+
+                                    Player_13.Content = $"{Variables.accounts.ElementAt(i).data.info.nickname} {wr}%";
                                 }
+                                catch (Exception exc){}
                             }
                             else
                             {
-                                Player_13.Content = "err";
+                                Player_13.Foreground = new SolidColorBrush(System.Windows.Media.Color.FromRgb(254, 78, 62));
+                                Player_13.Content = "Танкист не найден";
                             }
                             break;
                         case 13:
@@ -454,17 +666,33 @@ namespace WpfAppDPO.Views
                             {
                                 try
                                 {
-                                    Player_14.Content = Variables.accounts.ElementAt(i).data.info.nickname + " " 
-                                        + Math.Round((float)Variables.accounts.ElementAt(i).data.info.statistics.all.wins / (float)Variables.accounts.ElementAt(i).data.info.statistics.all.battles * 100, 2) + "%";
-                                }
-                                catch (Exception exc)
-                                {
+                                    double wr = cs.WinRate((float)Variables.accounts.ElementAt(i).data.info.statistics.all.battles, (float)Variables.accounts.ElementAt(i).data.info.statistics.all.wins);
 
+                                    if (wr >= 70)
+                                    {
+                                        Player_14.Foreground = new SolidColorBrush(System.Windows.Media.Color.FromRgb(155, 135, 239));
+                                    }
+                                    else if (wr >= 60)
+                                    {
+                                        Player_14.Foreground = new SolidColorBrush(System.Windows.Media.Color.FromRgb(68, 169, 241));
+                                    }
+                                    else if (wr >= 50)
+                                    {
+                                        Player_14.Foreground = new SolidColorBrush(System.Windows.Media.Color.FromRgb(198, 227, 168));
+                                    }
+                                    else
+                                    {
+                                        Player_14.Foreground = new SolidColorBrush(System.Windows.Media.Color.FromRgb(255, 255, 255));
+                                    }
+
+                                    Player_14.Content = $"{Variables.accounts.ElementAt(i).data.info.nickname} {wr}%";
                                 }
+                                catch (Exception exc){}
                             }
                             else
                             {
-                                Player_14.Content = "err";
+                                Player_14.Foreground = new SolidColorBrush(System.Windows.Media.Color.FromRgb(254, 78, 62));
+                                Player_14.Content = "Танкист не найден";
                             }
                             break;
                         default:

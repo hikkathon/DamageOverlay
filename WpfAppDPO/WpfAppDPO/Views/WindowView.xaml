@@ -6,6 +6,7 @@
         xmlns:local="clr-namespace:WpfAppDPO.Views"
         mc:Ignorable="d"
         xmlns:fa="http://schemas.fontawesome.com/icons/"
+        xmlns:gif="http://wpfanimatedgif.codeplex.com"
         Title="WindowOverlayView" 
         Height="{Binding CustomHeight, Mode=TwoWay}" 
         Width="{Binding CustomWidth, Mode=TwoWay}" 
@@ -97,7 +98,7 @@
         </Grid.RowDefinitions>
 
         <!-- Контейнер для списков игроков -->
-        <Grid x:Name="GridPlayerList" Visibility="Hidden" Grid.Row="0">
+        <Grid x:Name="GridPlayerList" Visibility="Visible" Grid.Row="0">
             <Grid.RowDefinitions>
                 <RowDefinition Height="*"/>
                 <RowDefinition Height="*"/>
@@ -112,27 +113,30 @@
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
 
-            <Label x:Name="Player_1"  Grid.Row="0" Grid.Column="0" Content="unknown" HorizontalAlignment="Center" Foreground="BlanchedAlmond" Style="{StaticResource CustomFont}"/>
-            <Label x:Name="Player_2"  Grid.Row="1" Grid.Column="0" Content="unknown" HorizontalAlignment="Center" Foreground="BlanchedAlmond" Style="{StaticResource CustomFont}"/>
-            <Label x:Name="Player_3"  Grid.Row="2" Grid.Column="0" Content="unknown" HorizontalAlignment="Center" Foreground="BlanchedAlmond" Style="{StaticResource CustomFont}"/>
-            <Label x:Name="Player_4"  Grid.Row="3" Grid.Column="0" Content="unknown" HorizontalAlignment="Center" Foreground="BlanchedAlmond" Style="{StaticResource CustomFont}"/>
-            <Label x:Name="Player_5"  Grid.Row="4" Grid.Column="0" Content="unknown" HorizontalAlignment="Center" Foreground="BlanchedAlmond" Style="{StaticResource CustomFont}"/>
-            <Label x:Name="Player_6"  Grid.Row="5" Grid.Column="0" Content="unknown" HorizontalAlignment="Center" Foreground="BlanchedAlmond" Style="{StaticResource CustomFont}"/>
-            <Label x:Name="Player_7"  Grid.Row="6" Grid.Column="0" Content="unknown" HorizontalAlignment="Center" Foreground="BlanchedAlmond" Style="{StaticResource CustomFont}"/>
-            <Label x:Name="Player_8"  Grid.Row="0" Grid.Column="1" Content="unknown" HorizontalAlignment="Center" Foreground="BlanchedAlmond" Style="{StaticResource CustomFont}"/>
-            <Label x:Name="Player_9"  Grid.Row="1" Grid.Column="1" Content="unknown" HorizontalAlignment="Center" Foreground="BlanchedAlmond" Style="{StaticResource CustomFont}"/>
-            <Label x:Name="Player_10" Grid.Row="2" Grid.Column="1" Content="unknown" HorizontalAlignment="Center" Foreground="BlanchedAlmond" Style="{StaticResource CustomFont}"/>
-            <Label x:Name="Player_11" Grid.Row="3" Grid.Column="1" Content="unknown" HorizontalAlignment="Center" Foreground="BlanchedAlmond" Style="{StaticResource CustomFont}"/>
-            <Label x:Name="Player_12" Grid.Row="4" Grid.Column="1" Content="unknown" HorizontalAlignment="Center" Foreground="BlanchedAlmond" Style="{StaticResource CustomFont}"/>
-            <Label x:Name="Player_13" Grid.Row="5" Grid.Column="1" Content="unknown" HorizontalAlignment="Center" Foreground="BlanchedAlmond" Style="{StaticResource CustomFont}"/>
-            <Label x:Name="Player_14" Grid.Row="6" Grid.Column="1" Content="unknown" HorizontalAlignment="Center" Foreground="BlanchedAlmond" Style="{StaticResource CustomFont}"/>
+            <Label x:Name="Player_1"  Grid.Row="0" Grid.Column="0" HorizontalAlignment="Left"  Foreground="White" Margin="408 0 0 0" FontSize="14" Style="{StaticResource CustomFont}"/>
+            <Label x:Name="Player_2"  Grid.Row="1" Grid.Column="0" HorizontalAlignment="Left"  Foreground="White" Margin="408 0 0 0" FontSize="14" Style="{StaticResource CustomFont}"/>
+            <Label x:Name="Player_3"  Grid.Row="2" Grid.Column="0" HorizontalAlignment="Left"  Foreground="White" Margin="408 0 0 0" FontSize="14" Style="{StaticResource CustomFont}"/>
+            <Label x:Name="Player_4"  Grid.Row="3" Grid.Column="0" HorizontalAlignment="Left"  Foreground="White" Margin="408 0 0 0" FontSize="14" Style="{StaticResource CustomFont}"/>
+            <Label x:Name="Player_5"  Grid.Row="4" Grid.Column="0" HorizontalAlignment="Left"  Foreground="White" Margin="408 0 0 0" FontSize="14" Style="{StaticResource CustomFont}"/>
+            <Label x:Name="Player_6"  Grid.Row="5" Grid.Column="0" HorizontalAlignment="Left"  Foreground="White" Margin="408 0 0 0" FontSize="14" Style="{StaticResource CustomFont}"/>
+            <Label x:Name="Player_7"  Grid.Row="6" Grid.Column="0" HorizontalAlignment="Left"  Foreground="White" Margin="408 0 0 0" FontSize="14" Style="{StaticResource CustomFont}"/>
+            <Label x:Name="Player_8"  Grid.Row="0" Grid.Column="1" HorizontalAlignment="Right" Foreground="White" Margin="0 0 408 0" FontSize="14" Style="{StaticResource CustomFont}"/>
+            <Label x:Name="Player_9"  Grid.Row="1" Grid.Column="1" HorizontalAlignment="Right" Foreground="White" Margin="0 0 408 0" FontSize="14" Style="{StaticResource CustomFont}"/>
+            <Label x:Name="Player_10" Grid.Row="2" Grid.Column="1" HorizontalAlignment="Right" Foreground="White" Margin="0 0 408 0" FontSize="14" Style="{StaticResource CustomFont}"/>
+            <Label x:Name="Player_11" Grid.Row="3" Grid.Column="1" HorizontalAlignment="Right" Foreground="White" Margin="0 0 408 0" FontSize="14" Style="{StaticResource CustomFont}"/>
+            <Label x:Name="Player_12" Grid.Row="4" Grid.Column="1" HorizontalAlignment="Right" Foreground="White" Margin="0 0 408 0" FontSize="14" Style="{StaticResource CustomFont}"/>
+            <Label x:Name="Player_13" Grid.Row="5" Grid.Column="1" HorizontalAlignment="Right" Foreground="White" Margin="0 0 408 0" FontSize="14" Style="{StaticResource CustomFont}"/>
+            <Label x:Name="Player_14" Grid.Row="6" Grid.Column="1" HorizontalAlignment="Right" Foreground="White" Margin="0 0 408 0" FontSize="14" Style="{StaticResource CustomFont}"/>
         </Grid>
 
         <!-- Контейнер для плашки нанесенного/заблокированного урона -->
         <Grid x:Name="GridDamagePanel" Grid.Row="1">
             <Image x:Name="imgAssistant" Grid.Column="1" Grid.Row="1"  Source="/Assets/Images/UI WOTB Assistant.png" Width="140" Height="90" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0 10 0 0" Opacity=".9"/>
-            <Label x:Name="DamageLabel" Content="unknown" Style="{StaticResource CustomFont}" Foreground="White" FontSize="18" FontWeight="Bold" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="30 9 0 0" Opacity=".9"/>
+<Label x:Name="DamageLabel" Content="unknown" Style="{StaticResource CustomFont}" Foreground="White" FontSize="18" FontWeight="Bold" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="30 9 0 0" Opacity=".9"/>
             <Label x:Name="BlockedLabel" Content="unknown" Style="{StaticResource CustomFont}" Foreground="White" FontSize="18" FontWeight="Bold" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="30 33 0 0" Opacity=".9"/>
+
+            <Image gif:ImageBehavior.AnimatedSource="/Assets/Images/loadwinter.gif" Width="30" Height="39"/>
+
         </Grid>
 
         <!-- Контейнер для послебоевой статистики -->

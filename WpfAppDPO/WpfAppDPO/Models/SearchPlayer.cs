@@ -48,7 +48,7 @@ namespace WpfAppDPO.Models
                 for (int i = 0; i < Variables.players.Count; i++)
                 {
                     Thread.Sleep(250);
-                    if (Variables.players.ElementAt(i).data.Count > 0)
+                    if (Variables.players.ElementAt(i).data != null && Variables.players.ElementAt(i).data.Count > 0)
                     {
                         content = new FormUrlEncodedContent(new[]
                         {
