@@ -12,6 +12,7 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Threading;
@@ -72,6 +73,7 @@ namespace WpfAppDPO.Views
         // Жизни
         int Health { get { return ME.Health; } }
 
+        // WG ID
         int wgID { get { return ME.WGID; } }
 
         public void DataSend()
@@ -131,7 +133,66 @@ namespace WpfAppDPO.Views
                     Variables.maxDamage = 0;
                     Variables.maxBlocked = 0;
 
-                    GridPlayerList.Visibility = Visibility.Hidden;
+                    Player_1_Nick.Content  = " ";
+                    Player_2_Nick.Content  = " ";
+                    Player_3_Nick.Content  = " ";
+                    Player_4_Nick.Content  = " ";
+                    Player_5_Nick.Content  = " ";
+                    Player_6_Nick.Content  = " ";
+                    Player_7_Nick.Content  = " ";
+                    Player_8_Nick.Content  = " ";
+                    Player_9_Nick.Content  = " ";
+                    Player_10_Nick.Content = " ";
+                    Player_11_Nick.Content = " ";
+                    Player_12_Nick.Content = " ";
+                    Player_13_Nick.Content = " ";
+                    Player_14_Nick.Content = " ";
+                    Player_1_WR.Content = " ";
+                    Player_2_WR.Content = " ";
+                    Player_3_WR.Content = " ";
+                    Player_4_WR.Content = " ";
+                    Player_5_WR.Content = " ";
+                    Player_6_WR.Content = " ";
+                    Player_7_WR.Content = " ";
+                    Player_8_WR.Content = " ";
+                    Player_9_WR.Content = " ";
+                    Player_10_WR.Content = " ";
+                    Player_11_WR.Content = " ";
+                    Player_12_WR.Content = " ";
+                    Player_13_WR.Content = " ";
+                    Player_14_WR.Content = " ";
+                    Player_1_Battle.Content = " ";
+                    Player_2_Battle.Content = " ";
+                    Player_3_Battle.Content = " ";
+                    Player_4_Battle.Content = " ";
+                    Player_5_Battle.Content = " ";
+                    Player_6_Battle.Content = " ";
+                    Player_7_Battle.Content = " ";
+                    Player_8_Battle.Content = " ";
+                    Player_9_Battle.Content = " ";
+                    Player_10_Battle.Content = " ";
+                    Player_11_Battle.Content = " ";
+                    Player_12_Battle.Content = " ";
+                    Player_13_Battle.Content = " ";
+                    Player_14_Battle.Content = " ";
+                    Player_1_Damage.Content = " ";
+                    Player_2_Damage.Content = " ";
+                    Player_3_Damage.Content = " ";
+                    Player_4_Damage.Content = " ";
+                    Player_5_Damage.Content = " ";
+                    Player_6_Damage.Content = " ";
+                    Player_7_Damage.Content = " ";
+                    Player_8_Damage.Content = " ";
+                    Player_9_Damage.Content = " ";
+                    Player_10_Damage.Content = " ";
+                    Player_11_Damage.Content = " ";
+                    Player_12_Damage.Content = " ";
+                    Player_13_Damage.Content = " ";
+                    Player_14_Damage.Content = " ";
+
+                    Variables.accounts.Clear();
+                    Variables.players.Clear();
+                    Variables.nicks.Clear();
                 }
             }
             catch (Exception exc)
@@ -143,10 +204,19 @@ namespace WpfAppDPO.Views
 
         public void DamageBlockedShow()
         {
-            DamageLabel.Content = (Damage <= 0) ? " 0" : $"{Damage:# ### ###}";
-            BlockedLabel.Content = (Blocked <= 0) ? " 0" : $"{Blocked:# ### ###}";
-            //HealthLabel.Content = (Health <= 0) ? " 0" : $"{Health:# ### ###}";
+            DamageText.Text = (Damage <= 0) ? " 0" : $"{Damage:# ### ###}";
+            BlockedText.Text = (Blocked <= 0) ? " 0" : $"{Blocked:# ### ###}";
+            HealthText.Text = (Health <= 0) ? " 0" : $"{Health:# ### ###}";
             //TextBox1.Content = wgID.ToString();
+
+            if (Health == 0)
+            {
+                GridPlayerList.Visibility = Visibility.Hidden;
+            }
+            else
+            {
+                GridPlayerList.Visibility = Visibility.Visible;
+            }
 
             DataSend();
 
@@ -197,502 +267,642 @@ namespace WpfAppDPO.Views
 
         public void ShowPrechentage(object sender, EventArgs e)
         {
-            CalculateStats cs = new CalculateStats();
-
             if (Variables.players.Count > 0)
             {
+                GridPlayerList.Visibility = Visibility.Visible;
+                CalculateStats cs = new CalculateStats();
                 for (int i = 0; i < Variables.players.Count; i++)
                 {
                     switch (i)
                     {
                         case 0:
                             // TODO: 
+                            Player_1_LoadGif.Visibility = Visibility.Visible;
+                            Player_1_Nick.Foreground = new SolidColorBrush(System.Windows.Media.Color.FromRgb(255, 255, 255));
                             if (Variables.players.ElementAt(i).status == "ok" && Variables.players.ElementAt(i).data.Count > 0)
                             {
                                 try
                                 {
                                     double wr = cs.WinRate((float)Variables.accounts.ElementAt(i).data.info.statistics.all.battles, (float)Variables.accounts.ElementAt(i).data.info.statistics.all.wins);
+                                    int ad = cs.AverageDamage(Variables.accounts.ElementAt(i).data.info.statistics.all.damage_dealt, Variables.accounts.ElementAt(i).data.info.statistics.all.battles);
 
                                     if (wr >= 70)
                                     {
-                                        Player_1.Foreground = new SolidColorBrush(System.Windows.Media.Color.FromRgb(155, 135, 239));
+                                        Player_1_WR.Foreground = new SolidColorBrush(System.Windows.Media.Color.FromRgb(155, 135, 239));
                                     }
-                                    else if(wr >= 60)
+                                    else if (wr >= 60)
                                     {
-                                        Player_1.Foreground = new SolidColorBrush(System.Windows.Media.Color.FromRgb(68, 169, 241));
+                                        Player_1_WR.Foreground = new SolidColorBrush(System.Windows.Media.Color.FromRgb(68, 169, 241));
                                     }
                                     else if (wr >= 50)
                                     {
-                                        Player_1.Foreground = new SolidColorBrush(System.Windows.Media.Color.FromRgb(198, 227, 168));
+                                        Player_1_WR.Foreground = new SolidColorBrush(System.Windows.Media.Color.FromRgb(198, 227, 168));
                                     }
                                     else
                                     {
-                                        Player_1.Foreground = new SolidColorBrush(System.Windows.Media.Color.FromRgb(255, 255, 255));
+                                        Player_1_WR.Foreground = new SolidColorBrush(System.Windows.Media.Color.FromRgb(255, 255, 255));
                                     }
 
-                                    Player_1.Content = $"{wr}% {Variables.accounts.ElementAt(i).data.info.nickname}";
+                                    Player_1_Nick.Content = $"{Variables.accounts.ElementAt(i).data.info.nickname}";
+                                    Player_1_WR.Content = $"{wr}%";
+                                    Player_1_Battle.Content = $" {cs.GetSuffixValue(Variables.accounts.ElementAt(i).data.info.statistics.all.battles)}";
+                                    Player_1_Damage.Content = $" {ad}";
+                                    Player_1_LoadGif.Visibility = Visibility.Hidden;
                                 }
-                                catch (Exception exc){}
+                                catch (Exception exc) { }
                             }
                             else
                             {
-                                Player_1.Foreground = new SolidColorBrush(System.Windows.Media.Color.FromRgb(254, 78, 62));
-                                Player_1.Content = "Танкист не найден";
+                                Player_1_Nick.Content = "-";
+                                Player_1_WR.Content = "--.--%";
+                                Player_1_Battle.Content = "-";
+                                Player_1_Damage.Content = "-";
+                                Player_1_LoadGif.Visibility = Visibility.Hidden;
                             }
                             break;
                         case 1:
                             // TODO: 
+                            Player_2_LoadGif.Visibility = Visibility.Visible;
+                            Player_2_Nick.Foreground = new SolidColorBrush(System.Windows.Media.Color.FromRgb(255, 255, 255));
                             if (Variables.players.ElementAt(i).status == "ok" && Variables.players.ElementAt(i).data.Count > 0)
                             {
                                 try
                                 {
                                     double wr = cs.WinRate((float)Variables.accounts.ElementAt(i).data.info.statistics.all.battles, (float)Variables.accounts.ElementAt(i).data.info.statistics.all.wins);
+                                    int ad = cs.AverageDamage(Variables.accounts.ElementAt(i).data.info.statistics.all.damage_dealt, Variables.accounts.ElementAt(i).data.info.statistics.all.battles);
 
                                     if (wr >= 70)
                                     {
-                                        Player_2.Foreground = new SolidColorBrush(System.Windows.Media.Color.FromRgb(155, 135, 239));
+                                        Player_2_WR.Foreground = new SolidColorBrush(System.Windows.Media.Color.FromRgb(155, 135, 239));
                                     }
                                     else if (wr >= 60)
                                     {
-                                        Player_2.Foreground = new SolidColorBrush(System.Windows.Media.Color.FromRgb(68, 169, 241));
+                                        Player_2_WR.Foreground = new SolidColorBrush(System.Windows.Media.Color.FromRgb(68, 169, 241));
                                     }
                                     else if (wr >= 50)
                                     {
-                                        Player_2.Foreground = new SolidColorBrush(System.Windows.Media.Color.FromRgb(198, 227, 168));
+                                        Player_2_WR.Foreground = new SolidColorBrush(System.Windows.Media.Color.FromRgb(198, 227, 168));
                                     }
                                     else
                                     {
-                                        Player_2.Foreground = new SolidColorBrush(System.Windows.Media.Color.FromRgb(255, 255, 255));
+                                        Player_2_WR.Foreground = new SolidColorBrush(System.Windows.Media.Color.FromRgb(255, 255, 255));
                                     }
 
-                                    Player_2.Content = $"{wr}% {Variables.accounts.ElementAt(i).data.info.nickname}";
+                                    Player_2_Nick.Content = $"{Variables.accounts.ElementAt(i).data.info.nickname}";
+                                    Player_2_WR.Content = $"{wr}%";
+                                    Player_2_Battle.Content = $" {cs.GetSuffixValue(Variables.accounts.ElementAt(i).data.info.statistics.all.battles)}";
+                                    Player_2_Damage.Content = $" {ad}";
+                                    Player_2_LoadGif.Visibility = Visibility.Hidden;
                                 }
-                                catch (Exception exc){}
+                                catch (Exception exc) { }
                             }
                             else
                             {
-                                Player_2.Foreground = new SolidColorBrush(System.Windows.Media.Color.FromRgb(254, 78, 62));
-                                Player_2.Content = "Танкист не найден";
+                                Player_2_Nick.Content = "-";
+                                Player_2_WR.Content = "--.--%";
+                                Player_2_Battle.Content = "-";
+                                Player_2_Damage.Content = "-";
+                                Player_2_LoadGif.Visibility = Visibility.Hidden;
                             }
                             break;
                         case 2:
                             // TODO: 
+                            Player_3_LoadGif.Visibility = Visibility.Visible;
+                            Player_3_Nick.Foreground = new SolidColorBrush(System.Windows.Media.Color.FromRgb(255, 255, 255));
                             if (Variables.players.ElementAt(i).status == "ok" && Variables.players.ElementAt(i).data.Count > 0)
                             {
                                 try
                                 {
                                     double wr = cs.WinRate((float)Variables.accounts.ElementAt(i).data.info.statistics.all.battles, (float)Variables.accounts.ElementAt(i).data.info.statistics.all.wins);
+                                    int ad = cs.AverageDamage(Variables.accounts.ElementAt(i).data.info.statistics.all.damage_dealt, Variables.accounts.ElementAt(i).data.info.statistics.all.battles);
 
                                     if (wr >= 70)
                                     {
-                                        Player_3.Foreground = new SolidColorBrush(System.Windows.Media.Color.FromRgb(155, 135, 239));
+                                        Player_3_WR.Foreground = new SolidColorBrush(System.Windows.Media.Color.FromRgb(155, 135, 239));
                                     }
                                     else if (wr >= 60)
                                     {
-                                        Player_3.Foreground = new SolidColorBrush(System.Windows.Media.Color.FromRgb(68, 169, 241));
+                                        Player_3_WR.Foreground = new SolidColorBrush(System.Windows.Media.Color.FromRgb(68, 169, 241));
                                     }
                                     else if (wr >= 50)
                                     {
-                                        Player_3.Foreground = new SolidColorBrush(System.Windows.Media.Color.FromRgb(198, 227, 168));
+                                        Player_3_WR.Foreground = new SolidColorBrush(System.Windows.Media.Color.FromRgb(198, 227, 168));
                                     }
                                     else
                                     {
-                                        Player_3.Foreground = new SolidColorBrush(System.Windows.Media.Color.FromRgb(255, 255, 255));
+                                        Player_3_WR.Foreground = new SolidColorBrush(System.Windows.Media.Color.FromRgb(255, 255, 255));
                                     }
 
-                                    Player_3.Content = $"{wr}% {Variables.accounts.ElementAt(i).data.info.nickname}";
+                                    Player_3_Nick.Content = $"{Variables.accounts.ElementAt(i).data.info.nickname}";
+                                    Player_3_WR.Content = $"{wr}%";
+                                    Player_3_Battle.Content = $" {cs.GetSuffixValue(Variables.accounts.ElementAt(i).data.info.statistics.all.battles)}";
+                                    Player_3_Damage.Content = $" {ad}";
+                                    Player_3_LoadGif.Visibility = Visibility.Hidden;
                                 }
-                                catch (Exception exc){}
+                                catch (Exception exc) { }
                             }
                             else
                             {
-                                Player_3.Foreground = new SolidColorBrush(System.Windows.Media.Color.FromRgb(254, 78, 62));
-                                Player_3.Content = "Танкист не найден";
+                                Player_3_Nick.Content = "-";
+                                Player_3_WR.Content = "--.--%";
+                                Player_3_Battle.Content = "-";
+                                Player_3_Damage.Content = "-";
+                                Player_3_LoadGif.Visibility = Visibility.Hidden;
                             }
                             break;
                         case 3:
                             // TODO: 
+                            Player_4_LoadGif.Visibility = Visibility.Visible;
+                            Player_4_Nick.Foreground = new SolidColorBrush(System.Windows.Media.Color.FromRgb(255, 255, 255));
                             if (Variables.players.ElementAt(i).status == "ok" && Variables.players.ElementAt(i).data.Count > 0)
                             {
                                 try
                                 {
                                     double wr = cs.WinRate((float)Variables.accounts.ElementAt(i).data.info.statistics.all.battles, (float)Variables.accounts.ElementAt(i).data.info.statistics.all.wins);
+                                    int ad = cs.AverageDamage(Variables.accounts.ElementAt(i).data.info.statistics.all.damage_dealt, Variables.accounts.ElementAt(i).data.info.statistics.all.battles);
 
                                     if (wr >= 70)
                                     {
-                                        Player_4.Foreground = new SolidColorBrush(System.Windows.Media.Color.FromRgb(155, 135, 239));
+                                        Player_4_WR.Foreground = new SolidColorBrush(System.Windows.Media.Color.FromRgb(155, 135, 239));
                                     }
                                     else if (wr >= 60)
                                     {
-                                        Player_4.Foreground = new SolidColorBrush(System.Windows.Media.Color.FromRgb(68, 169, 241));
+                                        Player_4_WR.Foreground = new SolidColorBrush(System.Windows.Media.Color.FromRgb(68, 169, 241));
                                     }
                                     else if (wr >= 50)
                                     {
-                                        Player_4.Foreground = new SolidColorBrush(System.Windows.Media.Color.FromRgb(198, 227, 168));
+                                        Player_4_WR.Foreground = new SolidColorBrush(System.Windows.Media.Color.FromRgb(198, 227, 168));
                                     }
                                     else
                                     {
-                                        Player_4.Foreground = new SolidColorBrush(System.Windows.Media.Color.FromRgb(255, 255, 255));
+                                        Player_4_WR.Foreground = new SolidColorBrush(System.Windows.Media.Color.FromRgb(255, 255, 255));
                                     }
 
-                                    Player_4.Content = $"{wr}% {Variables.accounts.ElementAt(i).data.info.nickname}";
+                                    Player_4_Nick.Content = $"{Variables.accounts.ElementAt(i).data.info.nickname}";
+                                    Player_4_WR.Content = $"{wr}%";
+                                    Player_4_Battle.Content = $" {cs.GetSuffixValue(Variables.accounts.ElementAt(i).data.info.statistics.all.battles)}";
+                                    Player_4_Damage.Content = $" {ad}";
+                                    Player_4_LoadGif.Visibility = Visibility.Hidden;
                                 }
-                                catch (Exception exc){}
+                                catch (Exception exc) { }
                             }
                             else
                             {
-                                Player_4.Foreground = new SolidColorBrush(System.Windows.Media.Color.FromRgb(254, 78, 62));
-                                Player_4.Content = "Танкист не найден";
+                                Player_4_Nick.Content = "-";
+                                Player_4_WR.Content = "--.--%";
+                                Player_4_Battle.Content = "-";
+                                Player_4_Damage.Content = "-";
+                                Player_4_LoadGif.Visibility = Visibility.Hidden;
                             }
                             break;
                         case 4:
                             // TODO: 
+                            Player_5_LoadGif.Visibility = Visibility.Visible;
+                            Player_5_Nick.Foreground = new SolidColorBrush(System.Windows.Media.Color.FromRgb(255, 255, 255));
                             if (Variables.players.ElementAt(i).status == "ok" && Variables.players.ElementAt(i).data.Count > 0)
                             {
                                 try
                                 {
                                     double wr = cs.WinRate((float)Variables.accounts.ElementAt(i).data.info.statistics.all.battles, (float)Variables.accounts.ElementAt(i).data.info.statistics.all.wins);
+                                    int ad = cs.AverageDamage(Variables.accounts.ElementAt(i).data.info.statistics.all.damage_dealt, Variables.accounts.ElementAt(i).data.info.statistics.all.battles);
 
                                     if (wr >= 70)
                                     {
-                                        Player_5.Foreground = new SolidColorBrush(System.Windows.Media.Color.FromRgb(155, 135, 239));
+                                        Player_5_WR.Foreground = new SolidColorBrush(System.Windows.Media.Color.FromRgb(155, 135, 239));
                                     }
                                     else if (wr >= 60)
                                     {
-                                        Player_5.Foreground = new SolidColorBrush(System.Windows.Media.Color.FromRgb(68, 169, 241));
+                                        Player_5_WR.Foreground = new SolidColorBrush(System.Windows.Media.Color.FromRgb(68, 169, 241));
                                     }
                                     else if (wr >= 50)
                                     {
-                                        Player_5.Foreground = new SolidColorBrush(System.Windows.Media.Color.FromRgb(198, 227, 168));
+                                        Player_5_WR.Foreground = new SolidColorBrush(System.Windows.Media.Color.FromRgb(198, 227, 168));
                                     }
                                     else
                                     {
-                                        Player_5.Foreground = new SolidColorBrush(System.Windows.Media.Color.FromRgb(255, 255, 255));
+                                        Player_5_WR.Foreground = new SolidColorBrush(System.Windows.Media.Color.FromRgb(255, 255, 255));
                                     }
 
-                                    Player_5.Content = $"{wr}% {Variables.accounts.ElementAt(i).data.info.nickname}";
+                                    Player_5_Nick.Content = $"{Variables.accounts.ElementAt(i).data.info.nickname}";
+                                    Player_5_WR.Content = $"{wr}%";
+                                    Player_5_Battle.Content = $" {cs.GetSuffixValue(Variables.accounts.ElementAt(i).data.info.statistics.all.battles)}";
+                                    Player_5_Damage.Content = $" {ad}";
+                                    Player_5_LoadGif.Visibility = Visibility.Hidden;
                                 }
-                                catch (Exception exc){}
+                                catch (Exception exc) { }
                             }
                             else
                             {
-                                Player_5.Foreground = new SolidColorBrush(System.Windows.Media.Color.FromRgb(254, 78, 62));
-                                Player_5.Content = "Танкист не найден";
+                                Player_5_Nick.Content = "-";
+                                Player_5_WR.Content = "--.--%";
+                                Player_5_Battle.Content = "-";
+                                Player_5_Damage.Content = "-";
+                                Player_5_LoadGif.Visibility = Visibility.Hidden;
                             }
                             break;
                         case 5:
                             // TODO: 
+                            Player_6_LoadGif.Visibility = Visibility.Visible;
+                            Player_6_Nick.Foreground = new SolidColorBrush(System.Windows.Media.Color.FromRgb(255, 255, 255));
                             if (Variables.players.ElementAt(i).status == "ok" && Variables.players.ElementAt(i).data.Count > 0)
                             {
                                 try
                                 {
                                     double wr = cs.WinRate((float)Variables.accounts.ElementAt(i).data.info.statistics.all.battles, (float)Variables.accounts.ElementAt(i).data.info.statistics.all.wins);
+                                    int ad = cs.AverageDamage(Variables.accounts.ElementAt(i).data.info.statistics.all.damage_dealt, Variables.accounts.ElementAt(i).data.info.statistics.all.battles);
 
                                     if (wr >= 70)
                                     {
-                                        Player_6.Foreground = new SolidColorBrush(System.Windows.Media.Color.FromRgb(155, 135, 239));
+                                        Player_6_WR.Foreground = new SolidColorBrush(System.Windows.Media.Color.FromRgb(155, 135, 239));
                                     }
                                     else if (wr >= 60)
                                     {
-                                        Player_6.Foreground = new SolidColorBrush(System.Windows.Media.Color.FromRgb(68, 169, 241));
+                                        Player_6_WR.Foreground = new SolidColorBrush(System.Windows.Media.Color.FromRgb(68, 169, 241));
                                     }
                                     else if (wr >= 50)
                                     {
-                                        Player_6.Foreground = new SolidColorBrush(System.Windows.Media.Color.FromRgb(198, 227, 168));
+                                        Player_6_WR.Foreground = new SolidColorBrush(System.Windows.Media.Color.FromRgb(198, 227, 168));
                                     }
                                     else
                                     {
-                                        Player_6.Foreground = new SolidColorBrush(System.Windows.Media.Color.FromRgb(255, 255, 255));
+                                        Player_6_WR.Foreground = new SolidColorBrush(System.Windows.Media.Color.FromRgb(255, 255, 255));
                                     }
 
-                                    Player_6.Content = $"{wr}% {Variables.accounts.ElementAt(i).data.info.nickname}";
+                                    Player_6_Nick.Content = $"{Variables.accounts.ElementAt(i).data.info.nickname}";
+                                    Player_6_WR.Content = $"{wr}%";
+                                    Player_6_Battle.Content = $" {cs.GetSuffixValue(Variables.accounts.ElementAt(i).data.info.statistics.all.battles)}";
+                                    Player_6_Damage.Content = $" {ad}";
+                                    Player_6_LoadGif.Visibility = Visibility.Hidden;
                                 }
-                                catch (Exception exc){}
+                                catch (Exception exc) { }
                             }
                             else
                             {
-                                Player_6.Foreground = new SolidColorBrush(System.Windows.Media.Color.FromRgb(254, 78, 62));
-                                Player_6.Content = "Танкист не найден";
+                                Player_6_Nick.Content = "-";
+                                Player_6_WR.Content = "--.--%";
+                                Player_6_Battle.Content = "-";
+                                Player_6_Damage.Content = "-";
+                                Player_6_LoadGif.Visibility = Visibility.Hidden;
                             }
                             break;
                         case 6:
                             // TODO: 
+                            Player_7_LoadGif.Visibility = Visibility.Visible;
+                            Player_7_Nick.Foreground = new SolidColorBrush(System.Windows.Media.Color.FromRgb(255, 255, 255));
                             if (Variables.players.ElementAt(i).status == "ok" && Variables.players.ElementAt(i).data.Count > 0)
                             {
                                 try
                                 {
                                     double wr = cs.WinRate((float)Variables.accounts.ElementAt(i).data.info.statistics.all.battles, (float)Variables.accounts.ElementAt(i).data.info.statistics.all.wins);
+                                    int ad = cs.AverageDamage(Variables.accounts.ElementAt(i).data.info.statistics.all.damage_dealt, Variables.accounts.ElementAt(i).data.info.statistics.all.battles);
 
                                     if (wr >= 70)
                                     {
-                                        Player_7.Foreground = new SolidColorBrush(System.Windows.Media.Color.FromRgb(155, 135, 239));
+                                        Player_7_WR.Foreground = new SolidColorBrush(System.Windows.Media.Color.FromRgb(155, 135, 239));
                                     }
                                     else if (wr >= 60)
                                     {
-                                        Player_7.Foreground = new SolidColorBrush(System.Windows.Media.Color.FromRgb(68, 169, 241));
+                                        Player_7_WR.Foreground = new SolidColorBrush(System.Windows.Media.Color.FromRgb(68, 169, 241));
                                     }
                                     else if (wr >= 50)
                                     {
-                                        Player_7.Foreground = new SolidColorBrush(System.Windows.Media.Color.FromRgb(198, 227, 168));
+                                        Player_7_WR.Foreground = new SolidColorBrush(System.Windows.Media.Color.FromRgb(198, 227, 168));
                                     }
                                     else
                                     {
-                                        Player_7.Foreground = new SolidColorBrush(System.Windows.Media.Color.FromRgb(255, 255, 255));
+                                        Player_7_WR.Foreground = new SolidColorBrush(System.Windows.Media.Color.FromRgb(255, 255, 255));
                                     }
 
-                                    Player_7.Content = $"{wr}% {Variables.accounts.ElementAt(i).data.info.nickname}";
+                                    Player_7_Nick.Content = $"{Variables.accounts.ElementAt(i).data.info.nickname}";
+                                    Player_7_WR.Content = $"{wr}%";
+                                    Player_7_Battle.Content = $" {cs.GetSuffixValue(Variables.accounts.ElementAt(i).data.info.statistics.all.battles)}";
+                                    Player_7_Damage.Content = $" {ad}";
+                                    Player_7_LoadGif.Visibility = Visibility.Hidden;
                                 }
-                                catch (Exception exc){}
+                                catch (Exception exc) { }
                             }
                             else
                             {
-                                Player_7.Foreground = new SolidColorBrush(System.Windows.Media.Color.FromRgb(254, 78, 62));
-                                Player_7.Content = "Танкист не найден";
+                                Player_7_Nick.Content = "-";
+                                Player_7_WR.Content = "--.--%";
+                                Player_7_Battle.Content = "-";
+                                Player_7_Damage.Content = "-";
+                                Player_7_LoadGif.Visibility = Visibility.Hidden;
                             }
                             break;
                         case 7:
                             // TODO: 
+                            Player_8_LoadGif.Visibility = Visibility.Visible;
+                            Player_8_Nick.Foreground = new SolidColorBrush(System.Windows.Media.Color.FromRgb(255, 255, 255));
                             if (Variables.players.ElementAt(i).status == "ok" && Variables.players.ElementAt(i).data.Count > 0)
                             {
                                 try
                                 {
                                     double wr = cs.WinRate((float)Variables.accounts.ElementAt(i).data.info.statistics.all.battles, (float)Variables.accounts.ElementAt(i).data.info.statistics.all.wins);
+                                    int ad = cs.AverageDamage(Variables.accounts.ElementAt(i).data.info.statistics.all.damage_dealt, Variables.accounts.ElementAt(i).data.info.statistics.all.battles);
 
                                     if (wr >= 70)
                                     {
-                                        Player_8.Foreground = new SolidColorBrush(System.Windows.Media.Color.FromRgb(155, 135, 239));
+                                        Player_8_WR.Foreground = new SolidColorBrush(System.Windows.Media.Color.FromRgb(155, 135, 239));
                                     }
                                     else if (wr >= 60)
                                     {
-                                        Player_8.Foreground = new SolidColorBrush(System.Windows.Media.Color.FromRgb(68, 169, 241));
+                                        Player_8_WR.Foreground = new SolidColorBrush(System.Windows.Media.Color.FromRgb(68, 169, 241));
                                     }
                                     else if (wr >= 50)
                                     {
-                                        Player_8.Foreground = new SolidColorBrush(System.Windows.Media.Color.FromRgb(198, 227, 168));
+                                        Player_8_WR.Foreground = new SolidColorBrush(System.Windows.Media.Color.FromRgb(198, 227, 168));
                                     }
                                     else
                                     {
-                                        Player_8.Foreground = new SolidColorBrush(System.Windows.Media.Color.FromRgb(255, 255, 255));
+                                        Player_8_Nick.Foreground = new SolidColorBrush(System.Windows.Media.Color.FromRgb(255, 255, 255));
                                     }
 
-                                    Player_8.Content = $"{Variables.accounts.ElementAt(i).data.info.nickname} {wr}%";
+                                    Player_8_Nick.Content = $"{Variables.accounts.ElementAt(i).data.info.nickname}";
+                                    Player_8_WR.Content = $"{wr}%";
+                                    Player_8_Battle.Content = $" {cs.GetSuffixValue(Variables.accounts.ElementAt(i).data.info.statistics.all.battles)}";
+                                    Player_8_Damage.Content = $" {ad}";
+                                    Player_8_LoadGif.Visibility = Visibility.Hidden;
                                 }
-                                catch (Exception exc){}
+                                catch (Exception exc) { }
                             }
                             else
                             {
-                                Player_8.Foreground = new SolidColorBrush(System.Windows.Media.Color.FromRgb(254, 78, 62));
-                                Player_8.Content = "Танкист не найден";
+                                Player_8_Nick.Content = "-";
+                                Player_8_WR.Content = "--.--%";
+                                Player_8_Battle.Content = "-";
+                                Player_8_Damage.Content = "-";
+                                Player_8_LoadGif.Visibility = Visibility.Hidden;
                             }
                             break;
                         case 8:
                             // TODO: 
+                            Player_9_LoadGif.Visibility = Visibility.Visible;
+                            Player_9_Nick.Foreground = new SolidColorBrush(System.Windows.Media.Color.FromRgb(255, 255, 255));
                             if (Variables.players.ElementAt(i).status == "ok" && Variables.players.ElementAt(i).data.Count > 0)
                             {
                                 try
                                 {
                                     double wr = cs.WinRate((float)Variables.accounts.ElementAt(i).data.info.statistics.all.battles, (float)Variables.accounts.ElementAt(i).data.info.statistics.all.wins);
+                                    int ad = cs.AverageDamage(Variables.accounts.ElementAt(i).data.info.statistics.all.damage_dealt, Variables.accounts.ElementAt(i).data.info.statistics.all.battles);
 
                                     if (wr >= 70)
                                     {
-                                        Player_9.Foreground = new SolidColorBrush(System.Windows.Media.Color.FromRgb(155, 135, 239));
+                                        Player_9_WR.Foreground = new SolidColorBrush(System.Windows.Media.Color.FromRgb(155, 135, 239));
                                     }
                                     else if (wr >= 60)
                                     {
-                                        Player_9.Foreground = new SolidColorBrush(System.Windows.Media.Color.FromRgb(68, 169, 241));
+                                        Player_9_WR.Foreground = new SolidColorBrush(System.Windows.Media.Color.FromRgb(68, 169, 241));
                                     }
                                     else if (wr >= 50)
                                     {
-                                        Player_9.Foreground = new SolidColorBrush(System.Windows.Media.Color.FromRgb(198, 227, 168));
+                                        Player_9_WR.Foreground = new SolidColorBrush(System.Windows.Media.Color.FromRgb(198, 227, 168));
                                     }
                                     else
                                     {
-                                        Player_9.Foreground = new SolidColorBrush(System.Windows.Media.Color.FromRgb(255, 255, 255));
+                                        Player_9_WR.Foreground = new SolidColorBrush(System.Windows.Media.Color.FromRgb(255, 255, 255));
                                     }
 
-                                    Player_9.Content = $"{Variables.accounts.ElementAt(i).data.info.nickname} {wr}%";
+                                    Player_9_Nick.Content = $"{Variables.accounts.ElementAt(i).data.info.nickname}";
+                                    Player_9_WR.Content = $"{wr}%";
+                                    Player_9_Battle.Content = $" {cs.GetSuffixValue(Variables.accounts.ElementAt(i).data.info.statistics.all.battles)}";
+                                    Player_9_Damage.Content = $" {ad}";
+                                    Player_9_LoadGif.Visibility = Visibility.Hidden;
                                 }
-                                catch (Exception exc){}
+                                catch (Exception exc) { }
                             }
                             else
                             {
-                                Player_9.Foreground = new SolidColorBrush(System.Windows.Media.Color.FromRgb(254, 78, 62));
-                                Player_9.Content = "Танкист не найден";
+                                Player_9_Nick.Content = "-";
+                                Player_9_WR.Content = "--.--%";
+                                Player_9_Battle.Content = "-";
+                                Player_9_Damage.Content = "-";
+                                Player_9_LoadGif.Visibility = Visibility.Hidden;
                             }
                             break;
                         case 9:
                             // TODO: 
+                            Player_10_LoadGif.Visibility = Visibility.Visible;
+                            Player_10_Nick.Foreground = new SolidColorBrush(System.Windows.Media.Color.FromRgb(255, 255, 255));
                             if (Variables.players.ElementAt(i).status == "ok" && Variables.players.ElementAt(i).data.Count > 0)
                             {
                                 try
                                 {
                                     double wr = cs.WinRate((float)Variables.accounts.ElementAt(i).data.info.statistics.all.battles, (float)Variables.accounts.ElementAt(i).data.info.statistics.all.wins);
+                                    int ad = cs.AverageDamage(Variables.accounts.ElementAt(i).data.info.statistics.all.damage_dealt, Variables.accounts.ElementAt(i).data.info.statistics.all.battles);
 
                                     if (wr >= 70)
                                     {
-                                        Player_10.Foreground = new SolidColorBrush(System.Windows.Media.Color.FromRgb(155, 135, 239));
+                                        Player_10_WR.Foreground = new SolidColorBrush(System.Windows.Media.Color.FromRgb(155, 135, 239));
                                     }
                                     else if (wr >= 60)
                                     {
-                                        Player_10.Foreground = new SolidColorBrush(System.Windows.Media.Color.FromRgb(68, 169, 241));
+                                        Player_10_WR.Foreground = new SolidColorBrush(System.Windows.Media.Color.FromRgb(68, 169, 241));
                                     }
                                     else if (wr >= 50)
                                     {
-                                        Player_10.Foreground = new SolidColorBrush(System.Windows.Media.Color.FromRgb(198, 227, 168));
+                                        Player_10_WR.Foreground = new SolidColorBrush(System.Windows.Media.Color.FromRgb(198, 227, 168));
                                     }
                                     else
                                     {
-                                        Player_10.Foreground = new SolidColorBrush(System.Windows.Media.Color.FromRgb(255, 255, 255));
+                                        Player_10_WR.Foreground = new SolidColorBrush(System.Windows.Media.Color.FromRgb(255, 255, 255));
                                     }
 
-                                    Player_10.Content = $"{Variables.accounts.ElementAt(i).data.info.nickname} {wr}%";
+                                    Player_10_Nick.Content = $"{Variables.accounts.ElementAt(i).data.info.nickname}";
+                                    Player_10_WR.Content = $"{wr}%";
+                                    Player_10_Battle.Content = $" {cs.GetSuffixValue(Variables.accounts.ElementAt(i).data.info.statistics.all.battles)}";
+                                    Player_10_Damage.Content = $" {ad}";
+                                    Player_10_LoadGif.Visibility = Visibility.Hidden;
                                 }
-                                catch (Exception exc){}
+                                catch (Exception exc) { }
                             }
                             else
                             {
-                                Player_10.Foreground = new SolidColorBrush(System.Windows.Media.Color.FromRgb(254, 78, 62));
-                                Player_10.Content = "Танкист не найден";
+                                Player_10_Nick.Content = "-";
+                                Player_10_WR.Content = "--.--%";
+                                Player_10_Battle.Content = "-";
+                                Player_10_Damage.Content = "-";
+                                Player_10_LoadGif.Visibility = Visibility.Hidden;
                             }
                             break;
                         case 10:
                             // TODO: 
+                            Player_11_LoadGif.Visibility = Visibility.Visible;
+                            Player_11_Nick.Foreground = new SolidColorBrush(System.Windows.Media.Color.FromRgb(255, 255, 255));
                             if (Variables.players.ElementAt(i).status == "ok" && Variables.players.ElementAt(i).data.Count > 0)
                             {
                                 try
                                 {
                                     double wr = cs.WinRate((float)Variables.accounts.ElementAt(i).data.info.statistics.all.battles, (float)Variables.accounts.ElementAt(i).data.info.statistics.all.wins);
+                                    int ad = cs.AverageDamage(Variables.accounts.ElementAt(i).data.info.statistics.all.damage_dealt, Variables.accounts.ElementAt(i).data.info.statistics.all.battles);
 
                                     if (wr >= 70)
                                     {
-                                        Player_11.Foreground = new SolidColorBrush(System.Windows.Media.Color.FromRgb(155, 135, 239));
+                                        Player_11_WR.Foreground = new SolidColorBrush(System.Windows.Media.Color.FromRgb(155, 135, 239));
                                     }
                                     else if (wr >= 60)
                                     {
-                                        Player_11.Foreground = new SolidColorBrush(System.Windows.Media.Color.FromRgb(68, 169, 241));
+                                        Player_11_WR.Foreground = new SolidColorBrush(System.Windows.Media.Color.FromRgb(68, 169, 241));
                                     }
                                     else if (wr >= 50)
                                     {
-                                        Player_11.Foreground = new SolidColorBrush(System.Windows.Media.Color.FromRgb(198, 227, 168));
+                                        Player_11_WR.Foreground = new SolidColorBrush(System.Windows.Media.Color.FromRgb(198, 227, 168));
                                     }
                                     else
                                     {
-                                        Player_11.Foreground = new SolidColorBrush(System.Windows.Media.Color.FromRgb(255, 255, 255));
+                                        Player_11_WR.Foreground = new SolidColorBrush(System.Windows.Media.Color.FromRgb(255, 255, 255));
                                     }
 
-                                    Player_11.Content = $"{Variables.accounts.ElementAt(i).data.info.nickname} {wr}%";
+                                    Player_11_Nick.Content = $"{Variables.accounts.ElementAt(i).data.info.nickname}";
+                                    Player_11_WR.Content = $"{wr}%";
+                                    Player_11_Battle.Content = $" {cs.GetSuffixValue(Variables.accounts.ElementAt(i).data.info.statistics.all.battles)}";
+                                    Player_11_Damage.Content = $" {ad}";
+                                    Player_11_LoadGif.Visibility = Visibility.Hidden;
                                 }
-                                catch (Exception exc){}
+                                catch (Exception exc) { }
                             }
                             else
                             {
-                                Player_11.Foreground = new SolidColorBrush(System.Windows.Media.Color.FromRgb(254, 78, 62));
-                                Player_11.Content = "Танкист не найден";
+                                Player_11_Nick.Content = "-";
+                                Player_11_WR.Content = "--.--%";
+                                Player_11_Battle.Content = "-";
+                                Player_11_Damage.Content = "-";
+                                Player_11_LoadGif.Visibility = Visibility.Hidden;
                             }
                             break;
                         case 11:
                             // TODO: 
+                            Player_12_LoadGif.Visibility = Visibility.Visible;
+                            Player_12_Nick.Foreground = new SolidColorBrush(System.Windows.Media.Color.FromRgb(255, 255, 255));
                             if (Variables.players.ElementAt(i).status == "ok" && Variables.players.ElementAt(i).data.Count > 0)
                             {
                                 try
                                 {
                                     double wr = cs.WinRate((float)Variables.accounts.ElementAt(i).data.info.statistics.all.battles, (float)Variables.accounts.ElementAt(i).data.info.statistics.all.wins);
+                                    int ad = cs.AverageDamage(Variables.accounts.ElementAt(i).data.info.statistics.all.damage_dealt, Variables.accounts.ElementAt(i).data.info.statistics.all.battles);
 
                                     if (wr >= 70)
                                     {
-                                        Player_12.Foreground = new SolidColorBrush(System.Windows.Media.Color.FromRgb(155, 135, 239));
+                                        Player_12_WR.Foreground = new SolidColorBrush(System.Windows.Media.Color.FromRgb(155, 135, 239));
                                     }
                                     else if (wr >= 60)
                                     {
-                                        Player_12.Foreground = new SolidColorBrush(System.Windows.Media.Color.FromRgb(68, 169, 241));
+                                        Player_12_WR.Foreground = new SolidColorBrush(System.Windows.Media.Color.FromRgb(68, 169, 241));
                                     }
                                     else if (wr >= 50)
                                     {
-                                        Player_12.Foreground = new SolidColorBrush(System.Windows.Media.Color.FromRgb(198, 227, 168));
+                                        Player_12_WR.Foreground = new SolidColorBrush(System.Windows.Media.Color.FromRgb(198, 227, 168));
                                     }
                                     else
                                     {
-                                        Player_12.Foreground = new SolidColorBrush(System.Windows.Media.Color.FromRgb(255, 255, 255));
+                                        Player_12_Nick.Foreground = new SolidColorBrush(System.Windows.Media.Color.FromRgb(255, 255, 255));
                                     }
 
-                                    Player_12.Content = $"{Variables.accounts.ElementAt(i).data.info.nickname} {wr}%";
+                                    Player_12_Nick.Content = $"{Variables.accounts.ElementAt(i).data.info.nickname}";
+                                    Player_12_WR.Content = $"{wr}%";
+                                    Player_12_Battle.Content = $" {cs.GetSuffixValue(Variables.accounts.ElementAt(i).data.info.statistics.all.battles)}";
+                                    Player_12_Damage.Content = $" {ad}";
+                                    Player_12_LoadGif.Visibility = Visibility.Hidden;
                                 }
-                                catch (Exception exc){}
+                                catch (Exception exc) { }
                             }
                             else
                             {
-                                Player_12.Foreground = new SolidColorBrush(System.Windows.Media.Color.FromRgb(254, 78, 62));
-                                Player_12.Content = "Танкист не найден";
+                                Player_12_Nick.Content = "-";
+                                Player_12_WR.Content = "--.--%";
+                                Player_12_Battle.Content = "-";
+                                Player_12_Damage.Content = "-";
+                                Player_12_LoadGif.Visibility = Visibility.Hidden;
                             }
                             break;
                         case 12:
                             // TODO:
+                            Player_13_LoadGif.Visibility = Visibility.Visible;
+                            Player_13_Nick.Foreground = new SolidColorBrush(System.Windows.Media.Color.FromRgb(255, 255, 255));
                             if (Variables.players.ElementAt(i).status == "ok" && Variables.players.ElementAt(i).data.Count > 0)
                             {
                                 try
                                 {
                                     double wr = cs.WinRate((float)Variables.accounts.ElementAt(i).data.info.statistics.all.battles, (float)Variables.accounts.ElementAt(i).data.info.statistics.all.wins);
+                                    int ad = cs.AverageDamage(Variables.accounts.ElementAt(i).data.info.statistics.all.damage_dealt, Variables.accounts.ElementAt(i).data.info.statistics.all.battles);
 
                                     if (wr >= 70)
                                     {
-                                        Player_13.Foreground = new SolidColorBrush(System.Windows.Media.Color.FromRgb(155, 135, 239));
+                                        Player_13_WR.Foreground = new SolidColorBrush(System.Windows.Media.Color.FromRgb(155, 135, 239));
                                     }
                                     else if (wr >= 60)
                                     {
-                                        Player_13.Foreground = new SolidColorBrush(System.Windows.Media.Color.FromRgb(68, 169, 241));
+                                        Player_13_WR.Foreground = new SolidColorBrush(System.Windows.Media.Color.FromRgb(68, 169, 241));
                                     }
                                     else if (wr >= 50)
                                     {
-                                        Player_13.Foreground = new SolidColorBrush(System.Windows.Media.Color.FromRgb(198, 227, 168));
+                                        Player_13_WR.Foreground = new SolidColorBrush(System.Windows.Media.Color.FromRgb(198, 227, 168));
                                     }
                                     else
                                     {
-                                        Player_13.Foreground = new SolidColorBrush(System.Windows.Media.Color.FromRgb(255, 255, 255));
+                                        Player_13_WR.Foreground = new SolidColorBrush(System.Windows.Media.Color.FromRgb(255, 255, 255));
                                     }
 
-                                    Player_13.Content = $"{Variables.accounts.ElementAt(i).data.info.nickname} {wr}%";
+                                    Player_13_Nick.Content = $"{Variables.accounts.ElementAt(i).data.info.nickname}";
+                                    Player_13_WR.Content = $"{wr}%";
+                                    Player_13_Battle.Content = $" {cs.GetSuffixValue(Variables.accounts.ElementAt(i).data.info.statistics.all.battles)}";
+                                    Player_13_Damage.Content = $" {ad}";
+                                    Player_13_LoadGif.Visibility = Visibility.Hidden;
                                 }
-                                catch (Exception exc){}
+                                catch (Exception exc) { }
                             }
                             else
                             {
-                                Player_13.Foreground = new SolidColorBrush(System.Windows.Media.Color.FromRgb(254, 78, 62));
-                                Player_13.Content = "Танкист не найден";
+                                Player_13_Nick.Content = "-";
+                                Player_13_WR.Content = "--.--%";
+                                Player_13_Battle.Content = "-";
+                                Player_13_Damage.Content = "-";
+                                Player_13_LoadGif.Visibility = Visibility.Hidden;
                             }
                             break;
                         case 13:
                             // TODO: 
+                            Player_14_LoadGif.Visibility = Visibility.Visible;
+                            Player_14_Nick.Foreground = new SolidColorBrush(System.Windows.Media.Color.FromRgb(255, 255, 255));
                             if (Variables.players.ElementAt(i).status == "ok" && Variables.players.ElementAt(i).data.Count > 0)
                             {
                                 try
                                 {
                                     double wr = cs.WinRate((float)Variables.accounts.ElementAt(i).data.info.statistics.all.battles, (float)Variables.accounts.ElementAt(i).data.info.statistics.all.wins);
+                                    int ad = cs.AverageDamage(Variables.accounts.ElementAt(i).data.info.statistics.all.damage_dealt, Variables.accounts.ElementAt(i).data.info.statistics.all.battles);
 
                                     if (wr >= 70)
                                     {
-                                        Player_14.Foreground = new SolidColorBrush(System.Windows.Media.Color.FromRgb(155, 135, 239));
+                                        Player_14_WR.Foreground = new SolidColorBrush(System.Windows.Media.Color.FromRgb(155, 135, 239));
                                     }
                                     else if (wr >= 60)
                                     {
-                                        Player_14.Foreground = new SolidColorBrush(System.Windows.Media.Color.FromRgb(68, 169, 241));
+                                        Player_14_WR.Foreground = new SolidColorBrush(System.Windows.Media.Color.FromRgb(68, 169, 241));
                                     }
                                     else if (wr >= 50)
                                     {
-                                        Player_14.Foreground = new SolidColorBrush(System.Windows.Media.Color.FromRgb(198, 227, 168));
+                                        Player_14_WR.Foreground = new SolidColorBrush(System.Windows.Media.Color.FromRgb(198, 227, 168));
                                     }
                                     else
                                     {
-                                        Player_14.Foreground = new SolidColorBrush(System.Windows.Media.Color.FromRgb(255, 255, 255));
+                                        Player_14_WR.Foreground = new SolidColorBrush(System.Windows.Media.Color.FromRgb(255, 255, 255));
                                     }
 
-                                    Player_14.Content = $"{Variables.accounts.ElementAt(i).data.info.nickname} {wr}%";
+                                    Player_14_Nick.Content = $"{Variables.accounts.ElementAt(i).data.info.nickname}";
+                                    Player_14_WR.Content = $"{wr}%";
+                                    Player_14_Battle.Content = $" {cs.GetSuffixValue(Variables.accounts.ElementAt(i).data.info.statistics.all.battles)}";
+                                    Player_14_Damage.Content = $" {ad}";
+                                    Player_14_LoadGif.Visibility = Visibility.Hidden;
                                 }
-                                catch (Exception exc){}
+                                catch (Exception exc) { }
                             }
                             else
                             {
-                                Player_14.Foreground = new SolidColorBrush(System.Windows.Media.Color.FromRgb(254, 78, 62));
-                                Player_14.Content = "Танкист не найден";
+                                Player_14_Nick.Content = "-";
+                                Player_14_WR.Content = "--.--%";
+                                Player_14_Battle.Content = "-";
+                                Player_14_Damage.Content = "-";
+                                Player_14_LoadGif.Visibility = Visibility.Hidden;
                             }
                             break;
                         default:
@@ -848,6 +1058,7 @@ namespace WpfAppDPO.Views
             var p2 = Variables.players;
             var p3 = Variables.accounts;
             var p4 = Variables.DefaultJson;
+            var p5 = Variables.test_temp;
             Close();
         }
 
@@ -855,32 +1066,42 @@ namespace WpfAppDPO.Views
         SearchTeam searchTeam = new SearchTeam();
         private void BtnLoadStats_Click(object sender, RoutedEventArgs e)
         {
-            GridPlayerList.Visibility = Visibility.Visible;
-
             taskWindow.Owner = this;
             taskWindow.Show();
             searchTeam.Screenshot();
             searchTeam.ScanImageOrc();
             taskWindow.Visibility = Visibility.Hidden;
-
             Task.Run(() => SearchPlayer.Search());
         }
 
         private void toggleButton_Click(object sender, RoutedEventArgs e)
         {
-            if (toggleButton.IsChecked == true)
+            if (toggleButtonDamage.IsChecked == true)
             {
-                GridDamagePanel.Visibility = Visibility.Visible;
+                GridDamage.Visibility = Visibility.Visible;
             }
             else
             {
-                GridDamagePanel.Visibility = Visibility.Hidden;
+                GridDamage.Visibility = Visibility.Hidden;
             }
-        }
 
-        private void TestEvent_Click(object sender, RoutedEventArgs e)
-        {
+            if (toggleButtonBlocked.IsChecked == true)
+            {
+                GridBlocked.Visibility = Visibility.Visible;
+            }
+            else
+            {
+                GridBlocked.Visibility = Visibility.Hidden;
+            }
 
+            if (toggleButtonHealth.IsChecked == true)
+            {
+                GridHealth.Visibility = Visibility.Visible;
+            }
+            else
+            {
+                GridHealth.Visibility = Visibility.Hidden;
+            }
         }
     }
     public class Asimut : OnPropertyChangedClass

@@ -30,7 +30,11 @@ namespace WpfAppDPO.Models
                             //Console.WriteLine($"Recognized nickname's: {page.GetMeanConfidence() * 100}%");
                             //Console.WriteLine($"\n{text}");
                             //GB.Header = $"Screenshot team: {page.GetMeanConfidence() * 100}%";
-                            string[] words = text.Replace(" ", "\n").Split('\n');
+
+                            //string[] words = text.Split('\n');
+                            string[] words = text.Replace('\n', ' ').Split(' ');
+                            string[] temp = Variables.test_temp;
+
                             for (int i = 0; i < words.Length; i++)
                             {
                                 if (words[i] == string.Empty) { continue; }

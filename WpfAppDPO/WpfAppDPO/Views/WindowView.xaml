@@ -98,45 +98,475 @@
         </Grid.RowDefinitions>
 
         <!-- Контейнер для списков игроков -->
-        <Grid x:Name="GridPlayerList" Visibility="Visible" Grid.Row="0">
+        <Grid x:Name="GridPlayerList" Visibility="Hidden" Grid.Row="0">
             <Grid.RowDefinitions>
-                <RowDefinition Height="*"/>
-                <RowDefinition Height="*"/>
-                <RowDefinition Height="*"/>
-                <RowDefinition Height="*"/>
-                <RowDefinition Height="*"/>
-                <RowDefinition Height="*"/>
-                <RowDefinition Height="*"/>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="*"/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
             </Grid.ColumnDefinitions>
 
-            <Label x:Name="Player_1"  Grid.Row="0" Grid.Column="0" HorizontalAlignment="Left"  Foreground="White" Margin="408 0 0 0" FontSize="14" Style="{StaticResource CustomFont}"/>
-            <Label x:Name="Player_2"  Grid.Row="1" Grid.Column="0" HorizontalAlignment="Left"  Foreground="White" Margin="408 0 0 0" FontSize="14" Style="{StaticResource CustomFont}"/>
-            <Label x:Name="Player_3"  Grid.Row="2" Grid.Column="0" HorizontalAlignment="Left"  Foreground="White" Margin="408 0 0 0" FontSize="14" Style="{StaticResource CustomFont}"/>
-            <Label x:Name="Player_4"  Grid.Row="3" Grid.Column="0" HorizontalAlignment="Left"  Foreground="White" Margin="408 0 0 0" FontSize="14" Style="{StaticResource CustomFont}"/>
-            <Label x:Name="Player_5"  Grid.Row="4" Grid.Column="0" HorizontalAlignment="Left"  Foreground="White" Margin="408 0 0 0" FontSize="14" Style="{StaticResource CustomFont}"/>
-            <Label x:Name="Player_6"  Grid.Row="5" Grid.Column="0" HorizontalAlignment="Left"  Foreground="White" Margin="408 0 0 0" FontSize="14" Style="{StaticResource CustomFont}"/>
-            <Label x:Name="Player_7"  Grid.Row="6" Grid.Column="0" HorizontalAlignment="Left"  Foreground="White" Margin="408 0 0 0" FontSize="14" Style="{StaticResource CustomFont}"/>
-            <Label x:Name="Player_8"  Grid.Row="0" Grid.Column="1" HorizontalAlignment="Right" Foreground="White" Margin="0 0 408 0" FontSize="14" Style="{StaticResource CustomFont}"/>
-            <Label x:Name="Player_9"  Grid.Row="1" Grid.Column="1" HorizontalAlignment="Right" Foreground="White" Margin="0 0 408 0" FontSize="14" Style="{StaticResource CustomFont}"/>
-            <Label x:Name="Player_10" Grid.Row="2" Grid.Column="1" HorizontalAlignment="Right" Foreground="White" Margin="0 0 408 0" FontSize="14" Style="{StaticResource CustomFont}"/>
-            <Label x:Name="Player_11" Grid.Row="3" Grid.Column="1" HorizontalAlignment="Right" Foreground="White" Margin="0 0 408 0" FontSize="14" Style="{StaticResource CustomFont}"/>
-            <Label x:Name="Player_12" Grid.Row="4" Grid.Column="1" HorizontalAlignment="Right" Foreground="White" Margin="0 0 408 0" FontSize="14" Style="{StaticResource CustomFont}"/>
-            <Label x:Name="Player_13" Grid.Row="5" Grid.Column="1" HorizontalAlignment="Right" Foreground="White" Margin="0 0 408 0" FontSize="14" Style="{StaticResource CustomFont}"/>
-            <Label x:Name="Player_14" Grid.Row="6" Grid.Column="1" HorizontalAlignment="Right" Foreground="White" Margin="0 0 408 0" FontSize="14" Style="{StaticResource CustomFont}"/>
+            <!-- Контейнер для ника/wr/battle -->            
+            <Grid Grid.Row="0" Grid.Column="0" Margin="408 0 0 0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="100"/>
+                    <ColumnDefinition Width="65"/>
+                    <ColumnDefinition Width="50"/>
+                    <ColumnDefinition Width="45"/>
+                </Grid.ColumnDefinitions>
+
+                <Label x:Name="Player_1_Nick" Grid.Column="0" Foreground="White" FontSize="15" Style="{StaticResource CustomFont}" Margin=".5 .5 .5 .5">
+                    <Label.Background>
+                        <SolidColorBrush Color="Black" Opacity=".5"/>
+                    </Label.Background>
+                </Label>
+                <Label x:Name="Player_1_WR" Grid.Column="1" Foreground="White" FontSize="15" Style="{StaticResource CustomFont}"  Margin=".5 .5 .5 .5" HorizontalContentAlignment="Center">
+                    <Label.Background>
+                        <SolidColorBrush Color="Black" Opacity=".5"/>
+                    </Label.Background>
+                </Label>
+                <Label x:Name="Player_1_Battle" Grid.Column="2" Foreground="White" FontSize="15" Style="{StaticResource CustomFont}" Margin=".5 .5 .5 .5" HorizontalContentAlignment="Center">
+                    <Label.Background>
+                        <SolidColorBrush Color="Black" Opacity=".5"/>
+                    </Label.Background>
+                </Label>
+                <Label x:Name="Player_1_Damage" Grid.Column="3" Foreground="White" FontSize="15" Style="{StaticResource CustomFont}" Margin=".5 .5 .5 .5" HorizontalContentAlignment="Center">
+                    <Label.Background>
+                        <SolidColorBrush Color="Black" Opacity=".5"/>
+                    </Label.Background>
+                </Label>
+                <Image Grid.ColumnSpan="4" Visibility="Visible" x:Name="Player_1_LoadGif" gif:ImageBehavior.AnimatedSource="/Assets/Images/loadwinter.gif"/>
+            </Grid>
+            <Grid Grid.Row="1" Grid.Column="0" Margin="408 0 0 0" HorizontalAlignment="Left">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="100"/>
+                    <ColumnDefinition Width="65"/>
+                    <ColumnDefinition Width="50"/>
+                    <ColumnDefinition Width="45"/>
+                </Grid.ColumnDefinitions>
+
+                <Label x:Name="Player_2_Nick" Grid.Column="0" Foreground="White" FontSize="15" Style="{StaticResource CustomFont}" Margin=".5 .5 .5 .5">
+                    <Label.Background>
+                        <SolidColorBrush Color="Black" Opacity=".5"/>
+                    </Label.Background>
+                </Label>
+                <Label x:Name="Player_2_WR" Grid.Column="1" Foreground="White" FontSize="15" Style="{StaticResource CustomFont}"  Margin=".5 .5 .5 .5" HorizontalContentAlignment="Center">
+                    <Label.Background>
+                        <SolidColorBrush Color="Black" Opacity=".5"/>
+                    </Label.Background>
+                </Label>
+                <Label x:Name="Player_2_Battle" Grid.Column="2" Foreground="White" FontSize="15" Style="{StaticResource CustomFont}" Margin=".5 .5 .5 .5" HorizontalContentAlignment="Center">
+                    <Label.Background>
+                        <SolidColorBrush Color="Black" Opacity=".5"/>
+                    </Label.Background>
+                </Label>
+                <Label x:Name="Player_2_Damage" Grid.Column="3" Foreground="White" FontSize="15" Style="{StaticResource CustomFont}" Margin=".5 .5 .5 .5" HorizontalContentAlignment="Center">
+                    <Label.Background>
+                        <SolidColorBrush Color="Black" Opacity=".5"/>
+                    </Label.Background>
+                </Label>
+                <Image Grid.ColumnSpan="4" Visibility="Visible" x:Name="Player_2_LoadGif" gif:ImageBehavior.AnimatedSource="/Assets/Images/loadwinter.gif"/>
+            </Grid>
+            <Grid Grid.Row="2" Grid.Column="0" Margin="408 0 0 0" HorizontalAlignment="Left">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="100"/>
+                    <ColumnDefinition Width="65"/>
+                    <ColumnDefinition Width="50"/>
+                    <ColumnDefinition Width="45"/>
+                </Grid.ColumnDefinitions>
+
+                <Label x:Name="Player_3_Nick" Grid.Column="0" Foreground="White" FontSize="15" Style="{StaticResource CustomFont}" Margin=".5 .5 .5 .5">
+                    <Label.Background>
+                        <SolidColorBrush Color="Black" Opacity=".5"/>
+                    </Label.Background>
+                </Label>
+                <Label x:Name="Player_3_WR" Grid.Column="1" Foreground="White" FontSize="15" Style="{StaticResource CustomFont}"  Margin=".5 .5 .5 .5" HorizontalContentAlignment="Center">
+                    <Label.Background>
+                        <SolidColorBrush Color="Black" Opacity=".5"/>
+                    </Label.Background>
+                </Label>
+                <Label x:Name="Player_3_Battle" Grid.Column="2" Foreground="White" FontSize="15" Style="{StaticResource CustomFont}" Margin=".5 .5 .5 .5" HorizontalContentAlignment="Center">
+                    <Label.Background>
+                        <SolidColorBrush Color="Black" Opacity=".5"/>
+                    </Label.Background>
+                </Label>
+                <Label x:Name="Player_3_Damage" Grid.Column="3" Foreground="White" FontSize="15" Style="{StaticResource CustomFont}" Margin=".5 .5 .5 .5" HorizontalContentAlignment="Center">
+                    <Label.Background>
+                        <SolidColorBrush Color="Black" Opacity=".5"/>
+                    </Label.Background>
+                </Label>
+                <Image Grid.ColumnSpan="4" Visibility="Visible" x:Name="Player_3_LoadGif" gif:ImageBehavior.AnimatedSource="/Assets/Images/loadwinter.gif"/>
+            </Grid>
+            <Grid Grid.Row="3" Grid.Column="0" Margin="408 0 0 0" HorizontalAlignment="Left"> 
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="100"/>
+                    <ColumnDefinition Width="65"/>
+                    <ColumnDefinition Width="50"/>
+                    <ColumnDefinition Width="45"/>
+                </Grid.ColumnDefinitions>
+
+                <Label x:Name="Player_4_Nick" Grid.Column="0" Foreground="White" FontSize="15" Style="{StaticResource CustomFont}" Margin=".5 .5 .5 .5">
+                    <Label.Background>
+                        <SolidColorBrush Color="Black" Opacity=".5"/>
+                    </Label.Background>
+                </Label>
+                <Label x:Name="Player_4_WR" Grid.Column="1" Foreground="White" FontSize="15" Style="{StaticResource CustomFont}"  Margin=".5 .5 .5 .5" HorizontalContentAlignment="Center">
+                    <Label.Background>
+                        <SolidColorBrush Color="Black" Opacity=".5"/>
+                    </Label.Background>
+                </Label>
+                <Label x:Name="Player_4_Battle" Grid.Column="2" Foreground="White" FontSize="15" Style="{StaticResource CustomFont}" Margin=".5 .5 .5 .5" HorizontalContentAlignment="Center">
+                    <Label.Background>
+                        <SolidColorBrush Color="Black" Opacity=".5"/>
+                    </Label.Background>
+                </Label>
+                <Label x:Name="Player_4_Damage" Grid.Column="3" Foreground="White" FontSize="15" Style="{StaticResource CustomFont}" Margin=".5 .5 .5 .5" HorizontalContentAlignment="Center">
+                    <Label.Background>
+                        <SolidColorBrush Color="Black" Opacity=".5"/>
+                    </Label.Background>
+                </Label>
+                <Image Grid.ColumnSpan="4" Visibility="Visible" x:Name="Player_4_LoadGif" gif:ImageBehavior.AnimatedSource="/Assets/Images/loadwinter.gif"/>
+            </Grid>
+            <Grid Grid.Row="4" Grid.Column="0" Margin="408 0 0 0" HorizontalAlignment="Left">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="100"/>
+                    <ColumnDefinition Width="65"/>
+                    <ColumnDefinition Width="50"/>
+                    <ColumnDefinition Width="45"/>
+                </Grid.ColumnDefinitions>
+
+                <Label x:Name="Player_5_Nick" Grid.Column="0" Foreground="White" FontSize="15" Style="{StaticResource CustomFont}" Margin=".5 .5 .5 .5">
+                    <Label.Background>
+                        <SolidColorBrush Color="Black" Opacity=".5"/>
+                    </Label.Background>
+                </Label>
+                <Label x:Name="Player_5_WR" Grid.Column="1" Foreground="White" FontSize="15" Style="{StaticResource CustomFont}"  Margin=".5 .5 .5 .5" HorizontalContentAlignment="Center">
+                    <Label.Background>
+                        <SolidColorBrush Color="Black" Opacity=".5"/>
+                    </Label.Background>
+                </Label>
+                <Label x:Name="Player_5_Battle" Grid.Column="2" Foreground="White" FontSize="15" Style="{StaticResource CustomFont}" Margin=".5 .5 .5 .5" HorizontalContentAlignment="Center">
+                    <Label.Background>
+                        <SolidColorBrush Color="Black" Opacity=".5"/>
+                    </Label.Background>
+                </Label>
+                <Label x:Name="Player_5_Damage" Grid.Column="3" Foreground="White" FontSize="15" Style="{StaticResource CustomFont}" Margin=".5 .5 .5 .5" HorizontalContentAlignment="Center">
+                    <Label.Background>
+                        <SolidColorBrush Color="Black" Opacity=".5"/>
+                    </Label.Background>
+                </Label>
+                <Image Grid.ColumnSpan="4" Visibility="Visible" x:Name="Player_5_LoadGif" gif:ImageBehavior.AnimatedSource="/Assets/Images/loadwinter.gif"/>
+            </Grid>
+            <Grid Grid.Row="5" Grid.Column="0" Margin="408 0 0 0" HorizontalAlignment="Left">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="100"/>
+                    <ColumnDefinition Width="65"/>
+                    <ColumnDefinition Width="50"/>
+                    <ColumnDefinition Width="45"/>
+                </Grid.ColumnDefinitions>
+
+                <Label x:Name="Player_6_Nick" Grid.Column="0" Foreground="White" FontSize="15" Style="{StaticResource CustomFont}" Margin=".5 .5 .5 .5">
+                    <Label.Background>
+                        <SolidColorBrush Color="Black" Opacity=".5"/>
+                    </Label.Background>
+                </Label>
+                <Label x:Name="Player_6_WR" Grid.Column="1" Foreground="White" FontSize="15" Style="{StaticResource CustomFont}"  Margin=".5 .5 .5 .5" HorizontalContentAlignment="Center">
+                    <Label.Background>
+                        <SolidColorBrush Color="Black" Opacity=".5"/>
+                    </Label.Background>
+                </Label>
+                <Label x:Name="Player_6_Battle" Grid.Column="2" Foreground="White" FontSize="15" Style="{StaticResource CustomFont}" Margin=".5 .5 .5 .5" HorizontalContentAlignment="Center">
+                    <Label.Background>
+                        <SolidColorBrush Color="Black" Opacity=".5"/>
+                    </Label.Background>
+                </Label>
+                <Label x:Name="Player_6_Damage" Grid.Column="3" Foreground="White" FontSize="15" Style="{StaticResource CustomFont}" Margin=".5 .5 .5 .5" HorizontalContentAlignment="Center">
+                    <Label.Background>
+                        <SolidColorBrush Color="Black" Opacity=".5"/>
+                    </Label.Background>
+                </Label>
+                <Image Grid.ColumnSpan="4" Visibility="Visible" x:Name="Player_6_LoadGif" gif:ImageBehavior.AnimatedSource="/Assets/Images/loadwinter.gif"/>
+            </Grid>
+            <Grid Grid.Row="6" Grid.Column="0" Margin="408 0 0 0" HorizontalAlignment="Left">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="100"/>
+                    <ColumnDefinition Width="65"/>
+                    <ColumnDefinition Width="50"/>
+                    <ColumnDefinition Width="45"/>
+                </Grid.ColumnDefinitions>
+
+                <Label x:Name="Player_7_Nick" Grid.Column="0" Foreground="White" FontSize="15" Style="{StaticResource CustomFont}" Margin=".5 .5 .5 .5">
+                    <Label.Background>
+                        <SolidColorBrush Color="Black" Opacity=".5"/>
+                    </Label.Background>
+                </Label>
+                <Label x:Name="Player_7_WR" Grid.Column="1" Foreground="White" FontSize="15" Style="{StaticResource CustomFont}"  Margin=".5 .5 .5 .5" HorizontalContentAlignment="Center">
+                    <Label.Background>
+                        <SolidColorBrush Color="Black" Opacity=".5"/>
+                    </Label.Background>
+                </Label>
+                <Label x:Name="Player_7_Battle" Grid.Column="2" Foreground="White" FontSize="15" Style="{StaticResource CustomFont}" Margin=".5 .5 .5 .5" HorizontalContentAlignment="Center">
+                    <Label.Background>
+                        <SolidColorBrush Color="Black" Opacity=".5"/>
+                    </Label.Background>
+                </Label>
+                <Label x:Name="Player_7_Damage" Grid.Column="3" Foreground="White" FontSize="15" Style="{StaticResource CustomFont}" Margin=".5 .5 .5 .5" HorizontalContentAlignment="Center">
+                    <Label.Background>
+                        <SolidColorBrush Color="Black" Opacity=".5"/>
+                    </Label.Background>
+                </Label>
+                <Image Grid.ColumnSpan="4" Visibility="Visible" x:Name="Player_7_LoadGif" gif:ImageBehavior.AnimatedSource="/Assets/Images/loadwinter.gif"/>
+            </Grid>
+
+            <Grid Grid.Row="0" Grid.Column="1" Margin="0 0 408 0" HorizontalAlignment="Right">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="45"/>
+                    <ColumnDefinition Width="50"/>
+                    <ColumnDefinition Width="65"/>
+                    <ColumnDefinition Width="100"/>
+                </Grid.ColumnDefinitions>
+
+                <Label x:Name="Player_8_Nick" Grid.Column="3" Foreground="White" FontSize="15" Style="{StaticResource CustomFont}" Margin=".5 .5 .5 .5">
+                    <Label.Background>
+                        <SolidColorBrush Color="Black" Opacity=".5"/>
+                    </Label.Background>
+                </Label>
+                <Label x:Name="Player_8_WR" Grid.Column="2" Foreground="White" FontSize="15" Style="{StaticResource CustomFont}"  Margin=".5 .5 .5 .5" HorizontalContentAlignment="Center">
+                    <Label.Background>
+                        <SolidColorBrush Color="Black" Opacity=".5"/>
+                    </Label.Background>
+                </Label>
+                <Label x:Name="Player_8_Battle" Grid.Column="1" Foreground="White" FontSize="15" Style="{StaticResource CustomFont}" Margin=".5 .5 .5 .5" HorizontalContentAlignment="Center">
+                    <Label.Background>
+                        <SolidColorBrush Color="Black" Opacity=".5"/>
+                    </Label.Background>
+                </Label>
+                <Label x:Name="Player_8_Damage" Grid.Column="0" Foreground="White" FontSize="15" Style="{StaticResource CustomFont}" Margin=".5 .5 .5 .5" HorizontalContentAlignment="Center">
+                    <Label.Background>
+                        <SolidColorBrush Color="Black" Opacity=".5"/>
+                    </Label.Background>
+                </Label>
+                <Image Grid.ColumnSpan="4" Visibility="Visible" x:Name="Player_8_LoadGif" gif:ImageBehavior.AnimatedSource="/Assets/Images/loadwinter.gif"/>
+            </Grid>
+            <Grid Grid.Row="1" Grid.Column="1" Margin="0 0 408 0" HorizontalAlignment="Right">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="45"/>
+                    <ColumnDefinition Width="50"/>
+                    <ColumnDefinition Width="65"/>
+                    <ColumnDefinition Width="100"/>
+                </Grid.ColumnDefinitions>
+
+                <Label x:Name="Player_9_Nick" Grid.Column="3" Foreground="White" FontSize="15" Style="{StaticResource CustomFont}" Margin=".5 .5 .5 .5">
+                    <Label.Background>
+                        <SolidColorBrush Color="Black" Opacity=".5"/>
+                    </Label.Background>
+                </Label>
+                <Label x:Name="Player_9_WR" Grid.Column="2" Foreground="White" FontSize="15" Style="{StaticResource CustomFont}"  Margin=".5 .5 .5 .5" HorizontalContentAlignment="Center">
+                    <Label.Background>
+                        <SolidColorBrush Color="Black" Opacity=".5"/>
+                    </Label.Background>
+                </Label>
+                <Label x:Name="Player_9_Battle" Grid.Column="1" Foreground="White" FontSize="15" Style="{StaticResource CustomFont}" Margin=".5 .5 .5 .5" HorizontalContentAlignment="Center">
+                    <Label.Background>
+                        <SolidColorBrush Color="Black" Opacity=".5"/>
+                    </Label.Background>
+                </Label>
+                <Label x:Name="Player_9_Damage" Grid.Column="0" Foreground="White" FontSize="15" Style="{StaticResource CustomFont}" Margin=".5 .5 .5 .5" HorizontalContentAlignment="Center">
+                    <Label.Background>
+                        <SolidColorBrush Color="Black" Opacity=".5"/>
+                    </Label.Background>
+                </Label>
+                <Image Grid.ColumnSpan="4" Visibility="Visible" x:Name="Player_9_LoadGif" gif:ImageBehavior.AnimatedSource="/Assets/Images/loadwinter.gif"/>
+            </Grid>
+            <Grid Grid.Row="2" Grid.Column="2" Margin="0 0 408 0" HorizontalAlignment="Right">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="45"/>
+                    <ColumnDefinition Width="50"/>
+                    <ColumnDefinition Width="65"/>
+                    <ColumnDefinition Width="100"/>
+                </Grid.ColumnDefinitions>
+
+                <Label x:Name="Player_10_Nick" Grid.Column="3" Foreground="White" FontSize="15" Style="{StaticResource CustomFont}" Margin=".5 .5 .5 .5">
+                    <Label.Background>
+                        <SolidColorBrush Color="Black" Opacity=".5"/>
+                    </Label.Background>
+                </Label>
+                <Label x:Name="Player_10_WR" Grid.Column="2" Foreground="White" FontSize="15" Style="{StaticResource CustomFont}"  Margin=".5 .5 .5 .5" HorizontalContentAlignment="Center">
+                    <Label.Background>
+                        <SolidColorBrush Color="Black" Opacity=".5"/>
+                    </Label.Background>
+                </Label>
+                <Label x:Name="Player_10_Battle" Grid.Column="1" Foreground="White" FontSize="15" Style="{StaticResource CustomFont}" Margin=".5 .5 .5 .5" HorizontalContentAlignment="Center">
+                    <Label.Background>
+                        <SolidColorBrush Color="Black" Opacity=".5"/>
+                    </Label.Background>
+                </Label>
+                <Label x:Name="Player_10_Damage" Grid.Column="0" Foreground="White" FontSize="15" Style="{StaticResource CustomFont}" Margin=".5 .5 .5 .5" HorizontalContentAlignment="Center">
+                    <Label.Background>
+                        <SolidColorBrush Color="Black" Opacity=".5"/>
+                    </Label.Background>
+                </Label>
+                <Image Grid.ColumnSpan="4" Visibility="Visible" x:Name="Player_10_LoadGif" gif:ImageBehavior.AnimatedSource="/Assets/Images/loadwinter.gif"/>
+            </Grid>
+            <Grid Grid.Row="3" Grid.Column="3" Margin="0 0 408 0" HorizontalAlignment="Right">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="45"/>
+                    <ColumnDefinition Width="50"/>
+                    <ColumnDefinition Width="65"/>
+                    <ColumnDefinition Width="100"/>
+                </Grid.ColumnDefinitions>
+
+                <Label x:Name="Player_11_Nick" Grid.Column="3" Foreground="White" FontSize="15" Style="{StaticResource CustomFont}" Margin=".5 .5 .5 .5">
+                    <Label.Background>
+                        <SolidColorBrush Color="Black" Opacity=".5"/>
+                    </Label.Background>
+                </Label>
+                <Label x:Name="Player_11_WR" Grid.Column="2" Foreground="White" FontSize="15" Style="{StaticResource CustomFont}"  Margin=".5 .5 .5 .5" HorizontalContentAlignment="Center">
+                    <Label.Background>
+                        <SolidColorBrush Color="Black" Opacity=".5"/>
+                    </Label.Background>
+                </Label>
+                <Label x:Name="Player_11_Battle" Grid.Column="1" Foreground="White" FontSize="15" Style="{StaticResource CustomFont}" Margin=".5 .5 .5 .5" HorizontalContentAlignment="Center">
+                    <Label.Background>
+                        <SolidColorBrush Color="Black" Opacity=".5"/>
+                    </Label.Background>
+                </Label>
+                <Label x:Name="Player_11_Damage" Grid.Column="0" Foreground="White" FontSize="15" Style="{StaticResource CustomFont}" Margin=".5 .5 .5 .5" HorizontalContentAlignment="Center">
+                    <Label.Background>
+                        <SolidColorBrush Color="Black" Opacity=".5"/>
+                    </Label.Background>
+                </Label>
+                <Image Grid.ColumnSpan="4" Visibility="Visible" x:Name="Player_11_LoadGif" gif:ImageBehavior.AnimatedSource="/Assets/Images/loadwinter.gif"/>
+            </Grid>
+            <Grid Grid.Row="4" Grid.Column="4" Margin="0 0 408 0" HorizontalAlignment="Right">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="45"/>
+                    <ColumnDefinition Width="50"/>
+                    <ColumnDefinition Width="65"/>
+                    <ColumnDefinition Width="100"/>
+                </Grid.ColumnDefinitions>
+
+                <Label x:Name="Player_12_Nick" Grid.Column="3" Foreground="White" FontSize="15" Style="{StaticResource CustomFont}" Margin=".5 .5 .5 .5">
+                    <Label.Background>
+                        <SolidColorBrush Color="Black" Opacity=".5"/>
+                    </Label.Background>
+                </Label>
+                <Label x:Name="Player_12_WR" Grid.Column="2" Foreground="White" FontSize="15" Style="{StaticResource CustomFont}"  Margin=".5 .5 .5 .5" HorizontalContentAlignment="Center">
+                    <Label.Background>
+                        <SolidColorBrush Color="Black" Opacity=".5"/>
+                    </Label.Background>
+                </Label>
+                <Label x:Name="Player_12_Battle" Grid.Column="1" Foreground="White" FontSize="15" Style="{StaticResource CustomFont}" Margin=".5 .5 .5 .5" HorizontalContentAlignment="Center">
+                    <Label.Background>
+                        <SolidColorBrush Color="Black" Opacity=".5"/>
+                    </Label.Background>
+                </Label>
+                <Label x:Name="Player_12_Damage" Grid.Column="0" Foreground="White" FontSize="15" Style="{StaticResource CustomFont}" Margin=".5 .5 .5 .5" HorizontalContentAlignment="Center">
+                    <Label.Background>
+                        <SolidColorBrush Color="Black" Opacity=".5"/>
+                    </Label.Background>
+                </Label>
+                <Image Grid.ColumnSpan="4" Visibility="Visible" x:Name="Player_12_LoadGif" gif:ImageBehavior.AnimatedSource="/Assets/Images/loadwinter.gif"/>
+            </Grid>
+            <Grid Grid.Row="5" Grid.Column="5" Margin="0 0 408 0" HorizontalAlignment="Right">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="45"/>
+                    <ColumnDefinition Width="50"/>
+                    <ColumnDefinition Width="65"/>
+                    <ColumnDefinition Width="100"/>
+                </Grid.ColumnDefinitions>
+
+                <Label x:Name="Player_13_Nick" Grid.Column="3" Foreground="White" FontSize="15" Style="{StaticResource CustomFont}" Margin=".5 .5 .5 .5">
+                    <Label.Background>
+                        <SolidColorBrush Color="Black" Opacity=".5"/>
+                    </Label.Background>
+                </Label>
+                <Label x:Name="Player_13_WR" Grid.Column="2" Foreground="White" FontSize="15" Style="{StaticResource CustomFont}"  Margin=".5 .5 .5 .5" HorizontalContentAlignment="Center">
+                    <Label.Background>
+                        <SolidColorBrush Color="Black" Opacity=".5"/>
+                    </Label.Background>
+                </Label>
+                <Label x:Name="Player_13_Battle" Grid.Column="1" Foreground="White" FontSize="15" Style="{StaticResource CustomFont}" Margin=".5 .5 .5 .5" HorizontalContentAlignment="Center">
+                    <Label.Background>
+                        <SolidColorBrush Color="Black" Opacity=".5"/>
+                    </Label.Background>
+                </Label>
+                <Label x:Name="Player_13_Damage" Grid.Column="0" Foreground="White" FontSize="15" Style="{StaticResource CustomFont}" Margin=".5 .5 .5 .5" HorizontalContentAlignment="Center">
+                    <Label.Background>
+                        <SolidColorBrush Color="Black" Opacity=".5"/>
+                    </Label.Background>
+                </Label>
+                <Image Grid.ColumnSpan="4" Visibility="Visible" x:Name="Player_13_LoadGif" gif:ImageBehavior.AnimatedSource="/Assets/Images/loadwinter.gif"/>
+            </Grid>
+            <Grid Grid.Row="6" Grid.Column="7" Margin="0 0 408 0" HorizontalAlignment="Right">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="45"/>
+                    <ColumnDefinition Width="50"/>
+                    <ColumnDefinition Width="65"/>
+                    <ColumnDefinition Width="100"/>
+                </Grid.ColumnDefinitions>
+
+                <Label x:Name="Player_14_Nick" Grid.Column="3" Foreground="White" FontSize="15" Style="{StaticResource CustomFont}" Margin=".5 .5 .5 .5">
+                    <Label.Background>
+                        <SolidColorBrush Color="Black" Opacity=".5"/>
+                    </Label.Background>
+                </Label>
+                <Label x:Name="Player_14_WR" Grid.Column="2" Foreground="White" FontSize="15" Style="{StaticResource CustomFont}"  Margin=".5 .5 .5 .5" HorizontalContentAlignment="Center">
+                    <Label.Background>
+                        <SolidColorBrush Color="Black" Opacity=".5"/>
+                    </Label.Background>
+                </Label>
+                <Label x:Name="Player_14_Battle" Grid.Column="1" Foreground="White" FontSize="15" Style="{StaticResource CustomFont}" Margin=".5 .5 .5 .5" HorizontalContentAlignment="Center">
+                    <Label.Background>
+                        <SolidColorBrush Color="Black" Opacity=".5"/>
+                    </Label.Background>
+                </Label>
+                <Label x:Name="Player_14_Damage" Grid.Column="0" Foreground="White" FontSize="15" Style="{StaticResource CustomFont}" Margin=".5 .5 .5 .5" HorizontalContentAlignment="Center">
+                    <Label.Background>
+                        <SolidColorBrush Color="Black" Opacity=".5"/>
+                    </Label.Background>
+                </Label>
+                <Image Grid.ColumnSpan="4" Visibility="Visible" x:Name="Player_14_LoadGif" gif:ImageBehavior.AnimatedSource="/Assets/Images/loadwinter.gif"/>
+            </Grid>            
         </Grid>
 
-        <!-- Контейнер для плашки нанесенного/заблокированного урона -->
+        <!-- Контейнер для плашки хп/нанесенного/заблокированного урона -->
         <Grid x:Name="GridDamagePanel" Grid.Row="1">
-            <Image x:Name="imgAssistant" Grid.Column="1" Grid.Row="1"  Source="/Assets/Images/UI WOTB Assistant.png" Width="140" Height="90" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0 10 0 0" Opacity=".9"/>
-<Label x:Name="DamageLabel" Content="unknown" Style="{StaticResource CustomFont}" Foreground="White" FontSize="18" FontWeight="Bold" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="30 9 0 0" Opacity=".9"/>
-            <Label x:Name="BlockedLabel" Content="unknown" Style="{StaticResource CustomFont}" Foreground="White" FontSize="18" FontWeight="Bold" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="30 33 0 0" Opacity=".9"/>
+            <!--<Image x:Name="imgAssistant" Grid.Column="1" Grid.Row="1"  Source="/Assets/Images/UI WOTB Assistant.png" Width="140" Height="90" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0 10 0 0" Opacity=".9"/>
+            <Label x:Name="DamageLabel" Content="unknown" Style="{StaticResource CustomFont}" Foreground="White" FontSize="18" FontWeight="Bold" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="30 9 0 0" Opacity=".9"/>
+            <Label x:Name="BlockedLabel" Content="unknown" Style="{StaticResource CustomFont}" Foreground="White" FontSize="18" FontWeight="Bold" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="30 33 0 0" Opacity=".9"/>-->
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
 
-            <Image gif:ImageBehavior.AnimatedSource="/Assets/Images/loadwinter.gif" Width="30" Height="39"/>
+                <StackPanel x:Name="StackPanelDamage" Grid.Row="0" Grid.Column="0" Margin="10 15 0 0">
 
+                    <Grid x:Name="GridDamage">
+                        <Image x:Name="ImgDamage" Grid.Column="1"  Source="/Assets/Images/Damage.png" Width="85" Height="18" HorizontalAlignment="Left" Opacity=".9"/>
+                        <TextBlock x:Name="DamageText" Text="unknown" Style="{StaticResource CustomFont}" Foreground="White" FontSize="18" FontWeight="Bold" Margin="25 0 0 0" Opacity=".9"/>
+                    </Grid>
+
+                    <Grid x:Name="GridBlocked">
+                        <Image x:Name="ImgBlocked" Grid.Column="1"  Source="/Assets/Images/Blocked.png" Width="85" Height="18" HorizontalAlignment="Left" Opacity=".9"/>
+                        <TextBlock x:Name="BlockedText" Text="unknown" Style="{StaticResource CustomFont}" Foreground="White" FontSize="18" FontWeight="Bold" Margin="25 0 0 0" Opacity=".9"/>
+                    </Grid>
+
+                    <Grid x:Name="GridHealth">
+                        <Image x:Name="ImgHealth" Grid.Column="1" Source="/Assets/Images/Health.png" Width="85" Height="18" HorizontalAlignment="Left" Opacity=".9"/>
+                        <TextBlock x:Name="HealthText" Text="unknown" Style="{StaticResource CustomFont}" Foreground="White" FontSize="18" FontWeight="Bold" Margin="25 0 0 0" Opacity=".9"/>
+                    </Grid>
+                    
+                </StackPanel>
+            </Grid>
         </Grid>
 
         <!-- Контейнер для послебоевой статистики -->
@@ -308,14 +738,84 @@
                         <Button x:Name="BtnLoadStats" Style="{StaticResource CmbBtn}" Click="BtnLoadStats_Click">
                             <TextBlock Text="Загрузить статистику"/>
                         </Button>
-                        <Button Style="{StaticResource CmbBtn}" x:Name="TestEvent" Click="TestEvent_Click">
+                        <Button Style="{StaticResource CmbBtn}">
                             <TextBlock Text="О Программе"/>
                         </Button>
                         <Polygon Fill="White" Points="0,3,310,3" StrokeThickness="1" Stroke="#FF40454E"/>
-                        <Button Style="{StaticResource CmbBtn}" Margin="0 3 0 0">
-                            <Grid Width="299" Margin="-30 0 0 0">
-                                <TextBlock Text="Урон/Блок" Margin="30 0 0 0" VerticalAlignment="Center"/>
-                                <ToggleButton x:Name="toggleButton" IsChecked="True"
+                        <!--Урон-->
+                        <StackPanel Orientation="Horizontal">
+                            <Button Style="{StaticResource CmbBtn}" Margin="0 3 0 0">
+                                <Grid Width="99" Margin="-30 0 0 0">
+                                    <TextBlock Text="Урон" Margin="30 0 0 0" VerticalAlignment="Center"/>
+                                    <ToggleButton x:Name="toggleButtonDamage" IsChecked="True"
+                                      Grid.Row="2" 
+                                      Height="30" 
+                                      Width="20" 
+                                      HorizontalAlignment="Left" 
+                                      VerticalAlignment="Center" 
+                                      Margin="5 0 0 0"
+                                      Foreground="#FFACB3BF" Click="toggleButton_Click">
+                                        <ToggleButton.Template>
+                                            <ControlTemplate TargetType="{x:Type ToggleButton}">
+                                                <StackPanel Orientation="Horizontal">
+                                                    <Border Background="Black" HorizontalAlignment="Left"
+                                                    BorderThickness="1"
+                                                    CornerRadius="2" 
+                                                    Height="20" 
+                                                    Width="20">
+                                                        <Border.Style>
+                                                            <Style TargetType="{x:Type Border}">
+                                                                <Setter Property="BorderBrush" Value="#FF333842"/>
+                                                                <Style.Triggers>
+                                                                    <Trigger Property="IsMouseOver" Value="True">
+                                                                        <Setter Property="BorderBrush" Value="#FF51555C"/>
+                                                                    </Trigger>
+                                                                    <EventTrigger RoutedEvent="PreviewMouseDown">
+                                                                        <BeginStoryboard>
+                                                                            <Storyboard>
+                                                                                <ColorAnimation Storyboard.TargetProperty="BorderBrush.Color"
+                                                                                Duration="0:0:0.100" To="#FF333842"/>
+                                                                            </Storyboard>
+                                                                        </BeginStoryboard>
+                                                                    </EventTrigger>
+                                                                    <EventTrigger RoutedEvent="PreviewMouseUp">
+                                                                        <BeginStoryboard>
+                                                                            <Storyboard>
+                                                                                <ColorAnimation Storyboard.TargetProperty="BorderBrush.Color"
+                                                                                Duration="0:0:0.100" To="#FF51555C"/>
+                                                                            </Storyboard>
+                                                                        </BeginStoryboard>
+                                                                    </EventTrigger>
+                                                                </Style.Triggers>
+                                                            </Style>
+                                                        </Border.Style>
+                                                        <Image Margin="4" Opacity=".3">
+                                                            <Image.Style>
+                                                                <Style>
+                                                                    <Style.Triggers>
+                                                                        <DataTrigger Binding="{Binding IsChecked, 
+                                                                         RelativeSource = {RelativeSource AncestorType = {x:Type ToggleButton}}}" 
+                                                                         Value = "true">
+                                                                            <Setter Property="Image.Source" Value="/Assets/Images/Check.png"/>
+                                                                        </DataTrigger>
+                                                                    </Style.Triggers>
+                                                                </Style>
+                                                            </Image.Style>
+                                                        </Image>
+                                                    </Border>
+                                                    <ContentPresenter Content="{TemplateBinding Content}" Margin="10 0 0 0" 
+                                                  VerticalAlignment="Center" HorizontalAlignment="Left"/>
+                                                </StackPanel>
+                                            </ControlTemplate>
+                                        </ToggleButton.Template>
+                                    </ToggleButton>
+                                </Grid>
+                            </Button>
+                            <!--Блок-->
+                            <Button Style="{StaticResource CmbBtn}" Margin="0 3 0 0">
+                                <Grid Width="99" Margin="-30 0 0 0">
+                                    <TextBlock Text="Блок" Margin="30 0 0 0" VerticalAlignment="Center"/>
+                                    <ToggleButton x:Name="toggleButtonBlocked" IsChecked="True"
                                   Grid.Row="2" 
                                   Height="30" 
                                   Width="20" 
@@ -323,62 +823,131 @@
                                   VerticalAlignment="Center" 
                                   Margin="5 0 0 0"
                                   Foreground="#FFACB3BF" Click="toggleButton_Click">
-                                    <ToggleButton.Template>
-                                        <ControlTemplate TargetType="{x:Type ToggleButton}">
-                                            <StackPanel Orientation="Horizontal">
-                                                <Border Background="Black" HorizontalAlignment="Left"
+                                        <ToggleButton.Template>
+                                            <ControlTemplate TargetType="{x:Type ToggleButton}">
+                                                <StackPanel Orientation="Horizontal">
+                                                    <Border Background="Black" HorizontalAlignment="Left"
                                                     BorderThickness="1"
                                                     CornerRadius="2" 
                                                     Height="20" 
                                                     Width="20">
-                                                    <Border.Style>
-                                                        <Style TargetType="{x:Type Border}">
-                                                            <Setter Property="BorderBrush" Value="#FF333842"/>
-                                                            <Style.Triggers>
-                                                                <Trigger Property="IsMouseOver" Value="True">
-                                                                    <Setter Property="BorderBrush" Value="#FF51555C"/>
-                                                                </Trigger>
-                                                                <EventTrigger RoutedEvent="PreviewMouseDown">
-                                                                    <BeginStoryboard>
-                                                                        <Storyboard>
-                                                                            <ColorAnimation Storyboard.TargetProperty="BorderBrush.Color"
-                                                                                Duration="0:0:0.100" To="#FF333842"/>
-                                                                        </Storyboard>
-                                                                    </BeginStoryboard>
-                                                                </EventTrigger>
-                                                                <EventTrigger RoutedEvent="PreviewMouseUp">
-                                                                    <BeginStoryboard>
-                                                                        <Storyboard>
-                                                                            <ColorAnimation Storyboard.TargetProperty="BorderBrush.Color"
-                                                                                Duration="0:0:0.100" To="#FF51555C"/>
-                                                                        </Storyboard>
-                                                                    </BeginStoryboard>
-                                                                </EventTrigger>
-                                                            </Style.Triggers>
-                                                        </Style>
-                                                    </Border.Style>
-                                                    <Image Margin="4" Opacity=".3">
-                                                        <Image.Style>
-                                                            <Style>
+                                                        <Border.Style>
+                                                            <Style TargetType="{x:Type Border}">
+                                                                <Setter Property="BorderBrush" Value="#FF333842"/>
                                                                 <Style.Triggers>
-                                                                    <DataTrigger Binding="{Binding IsChecked, 
-                                                                         RelativeSource = {RelativeSource AncestorType = {x:Type ToggleButton}}}" 
-                                                                         Value = "true">
-                                                                        <Setter Property="Image.Source" Value="/Assets/Images/Check.png"/>
-                                                                    </DataTrigger>
+                                                                    <Trigger Property="IsMouseOver" Value="True">
+                                                                        <Setter Property="BorderBrush" Value="#FF51555C"/>
+                                                                    </Trigger>
+                                                                    <EventTrigger RoutedEvent="PreviewMouseDown">
+                                                                        <BeginStoryboard>
+                                                                            <Storyboard>
+                                                                                <ColorAnimation Storyboard.TargetProperty="BorderBrush.Color"
+                                                                                Duration="0:0:0.100" To="#FF333842"/>
+                                                                            </Storyboard>
+                                                                        </BeginStoryboard>
+                                                                    </EventTrigger>
+                                                                    <EventTrigger RoutedEvent="PreviewMouseUp">
+                                                                        <BeginStoryboard>
+                                                                            <Storyboard>
+                                                                                <ColorAnimation Storyboard.TargetProperty="BorderBrush.Color"
+                                                                                Duration="0:0:0.100" To="#FF51555C"/>
+                                                                            </Storyboard>
+                                                                        </BeginStoryboard>
+                                                                    </EventTrigger>
                                                                 </Style.Triggers>
                                                             </Style>
-                                                        </Image.Style>
-                                                    </Image>
-                                                </Border>
-                                                <ContentPresenter Content="{TemplateBinding Content}" Margin="10 0 0 0" 
+                                                        </Border.Style>
+                                                        <Image Margin="4" Opacity=".3">
+                                                            <Image.Style>
+                                                                <Style>
+                                                                    <Style.Triggers>
+                                                                        <DataTrigger Binding="{Binding IsChecked, 
+                                                                         RelativeSource = {RelativeSource AncestorType = {x:Type ToggleButton}}}" 
+                                                                         Value = "true">
+                                                                            <Setter Property="Image.Source" Value="/Assets/Images/Check.png"/>
+                                                                        </DataTrigger>
+                                                                    </Style.Triggers>
+                                                                </Style>
+                                                            </Image.Style>
+                                                        </Image>
+                                                    </Border>
+                                                    <ContentPresenter Content="{TemplateBinding Content}" Margin="10 0 0 0" 
                                                   VerticalAlignment="Center" HorizontalAlignment="Left"/>
-                                            </StackPanel>
-                                        </ControlTemplate>
-                                    </ToggleButton.Template>
-                                </ToggleButton>
-                            </Grid>
-                        </Button>
+                                                </StackPanel>
+                                            </ControlTemplate>
+                                        </ToggleButton.Template>
+                                    </ToggleButton>
+                                </Grid>
+                            </Button>
+                            <!--Блок-->
+                            <Button Style="{StaticResource CmbBtn}" Margin="0 3 0 0">
+                                <Grid Width="99" Margin="-30 0 0 0">
+                                    <TextBlock Text="Прочность" Margin="30 0 0 0" VerticalAlignment="Center"/>
+                                    <ToggleButton x:Name="toggleButtonHealth" IsChecked="True"
+                                  Grid.Row="2" 
+                                  Height="30" 
+                                  Width="20" 
+                                  HorizontalAlignment="Left" 
+                                  VerticalAlignment="Center" 
+                                  Margin="5 0 0 0"
+                                  Foreground="#FFACB3BF" Click="toggleButton_Click">
+                                        <ToggleButton.Template>
+                                            <ControlTemplate TargetType="{x:Type ToggleButton}">
+                                                <StackPanel Orientation="Horizontal">
+                                                    <Border Background="Black" HorizontalAlignment="Left"
+                                                    BorderThickness="1"
+                                                    CornerRadius="2" 
+                                                    Height="20" 
+                                                    Width="20">
+                                                        <Border.Style>
+                                                            <Style TargetType="{x:Type Border}">
+                                                                <Setter Property="BorderBrush" Value="#FF333842"/>
+                                                                <Style.Triggers>
+                                                                    <Trigger Property="IsMouseOver" Value="True">
+                                                                        <Setter Property="BorderBrush" Value="#FF51555C"/>
+                                                                    </Trigger>
+                                                                    <EventTrigger RoutedEvent="PreviewMouseDown">
+                                                                        <BeginStoryboard>
+                                                                            <Storyboard>
+                                                                                <ColorAnimation Storyboard.TargetProperty="BorderBrush.Color"
+                                                                                Duration="0:0:0.100" To="#FF333842"/>
+                                                                            </Storyboard>
+                                                                        </BeginStoryboard>
+                                                                    </EventTrigger>
+                                                                    <EventTrigger RoutedEvent="PreviewMouseUp">
+                                                                        <BeginStoryboard>
+                                                                            <Storyboard>
+                                                                                <ColorAnimation Storyboard.TargetProperty="BorderBrush.Color"
+                                                                                Duration="0:0:0.100" To="#FF51555C"/>
+                                                                            </Storyboard>
+                                                                        </BeginStoryboard>
+                                                                    </EventTrigger>
+                                                                </Style.Triggers>
+                                                            </Style>
+                                                        </Border.Style>
+                                                        <Image Margin="4" Opacity=".3">
+                                                            <Image.Style>
+                                                                <Style>
+                                                                    <Style.Triggers>
+                                                                        <DataTrigger Binding="{Binding IsChecked, 
+                                                                         RelativeSource = {RelativeSource AncestorType = {x:Type ToggleButton}}}" 
+                                                                         Value = "true">
+                                                                            <Setter Property="Image.Source" Value="/Assets/Images/Check.png"/>
+                                                                        </DataTrigger>
+                                                                    </Style.Triggers>
+                                                                </Style>
+                                                            </Image.Style>
+                                                        </Image>
+                                                    </Border>
+                                                    <ContentPresenter Content="{TemplateBinding Content}" Margin="10 0 0 0" 
+                                                  VerticalAlignment="Center" HorizontalAlignment="Left"/>
+                                                </StackPanel>
+                                            </ControlTemplate>
+                                        </ToggleButton.Template>
+                                    </ToggleButton>
+                                </Grid>
+                            </Button>
+                        </StackPanel>
                         <Button x:Name="BtnCloseOverlay" Style="{StaticResource CmbBtn}" Margin="0 3 0 0" Click="BtnCloseOverlay_Click">
                             <Grid Width="299" Margin="-30 0 0 0">
                                 <TextBlock Text="Закрыть" Margin="30 0 0 0"/>
@@ -398,7 +967,7 @@
 
         <!-- Контейнер для скрывающего блока -->
         <Grid Grid.RowSpan="3" x:Name="GridInvisibleBlock" Visibility="Hidden">
-            <Image Source="/Assets/Images/block.png" Width="160" Height="286" Margin="60 0 0 60" Opacity="1"/>
+            <Image Source="/Assets/Images/WhiteBlock.png" Width="160" Height="286" Margin="60 0 0 60"/>
         </Grid>
     </Grid>
 

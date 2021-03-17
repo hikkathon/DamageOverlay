@@ -101,7 +101,7 @@ namespace WpfAppDPO.Models
 
             // Health
             Int32 HealthAddr = BA + 0x02F83B08; // 1 базовый адрес 2 смещение
-            Int32[] HealthOffsets = { 0x9C, 0x0, 0x10, 0xBC, 0x64, 0x148, 0x148 };
+            Int32[] HealthOffsets = { 0x24, 0x34, 0x60, 0x10, 0xF8, 0x174};
             Health = BitConverter.ToInt32(ReadMemory((IntPtr)ReadPointer(HealthAddr, HealthOffsets), (uint)4), 0);
 
             // WG ID

@@ -32,6 +32,8 @@ namespace WpfAppDPO
 
         public static Account DefaultJson = JsonConvert.DeserializeObject<Account>(File.ReadAllText("Default.json"));
 
+        public static string[] test_temp;
+
         public static Root response;
         public static AnswerServer response2;
     }
